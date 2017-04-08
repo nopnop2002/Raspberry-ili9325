@@ -26,7 +26,7 @@ LCD_D7  Pin#38
 ----
 
 build   
-cc -o demo demo.c ili9325,c -lwiringPi   
+cc -o demo demo.c ili9325.c -lwiringPi   
 
 ---
 
