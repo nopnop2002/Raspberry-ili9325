@@ -1,5 +1,5 @@
 # ili9325_rpi
-ILI9325 TFT Shield Demo Code for Raspberry
+ILI9325 TFT Shield Demo Code
 
 
 This program is example code for RaspberryPi/OrangePi.   
