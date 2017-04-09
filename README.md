@@ -68,3 +68,7 @@ cc -o demo demo.c ili9325-sr595.c -lwiringPi
 
 ![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24833930/4cee55a2-1d12-11e7-9806-0de6a33d81a4.JPG)
 
+![ili9325-para3](https://cloud.githubusercontent.com/assets/6020549/24833940/c58dc0ec-1d12-11e7-85b6-7f57a80b5e66.JPG)
+
+![ili9325-para4](https://cloud.githubusercontent.com/assets/6020549/24833950/f48f0e6e-1d12-11e7-95a5-28ef894ea311.JPG)
+
