@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <wiringPi.h>
+#include <wiringShift.h>
 #include "ili9325.h"
 
 #define LCD_RST 7
@@ -10,30 +11,35 @@
 #define LCD_WR 10
 #define LCD_RD 11
 
-#define LCD_D0 21
-#define LCD_D1 22
-#define LCD_D2 23
-#define LCD_D3 24
-#define LCD_D4 25
-#define LCD_D5 26
-#define LCD_D6 27
-#define LCD_D7 28
+#define SR595_DATA  4
+#define SR595_CLOCK 5
+#define SR595_LATCH  6
+#define ORDER LSBFIRST
 
 #define XMAX    240
 #define YMAX    320
 
 void lcdWrite8(uint16_t data) {
-  digitalWrite(LCD_D0, data & 1);
-  digitalWrite(LCD_D1, (data & 2) >> 1);
-  digitalWrite(LCD_D2, (data & 4) >> 2);
-  digitalWrite(LCD_D3, (data & 8) >> 3);
-  digitalWrite(LCD_D4, (data & 16) >> 4); 
-  digitalWrite(LCD_D5, (data & 32) >> 5);
-  digitalWrite(LCD_D6, (data & 64) >> 6);
-  digitalWrite(LCD_D7, (data & 128) >> 7);  
+  int  bit;
+  digitalWrite (SR595_LATCH, LOW) ;
+  if (ORDER == LSBFIRST) {
+    for (bit = 8 - 1 ; bit >= 0 ; --bit) {
+      digitalWrite (SR595_DATA, data & (1 << bit)) ;
+      digitalWrite (SR595_CLOCK, HIGH) ;
+      digitalWrite (SR595_CLOCK, LOW) ;
+    }
+  } else {
+    for (bit = 0 ; bit < 8 ; bit++) {
+      digitalWrite (SR595_DATA, data & (1 << bit)) ;
+      digitalWrite (SR595_CLOCK, HIGH) ;
+      digitalWrite (SR595_CLOCK, LOW) ;
+    }
+  }
+  digitalWrite (SR595_LATCH, HIGH) ;
 }
 
 void lcdWriteData(uint16_t data) {
+//  lcdSetWriteDir();
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, HIGH);
   digitalWrite(LCD_RD, HIGH);
@@ -55,6 +61,7 @@ void lcdWriteData(uint16_t data) {
 }
 
 void lcdWriteCommand(uint16_t command) {
+//  lcdSetWriteDir(); 
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, LOW);
   digitalWrite(LCD_RD, HIGH);
@@ -89,14 +96,10 @@ void lcdInit(void) {
   pinMode(LCD_RST, OUTPUT);
   digitalWrite(LCD_RST, HIGH);  
 
-  pinMode(LCD_D0, OUTPUT);
-  pinMode(LCD_D1, OUTPUT);
-  pinMode(LCD_D2, OUTPUT);
-  pinMode(LCD_D3, OUTPUT);  
-  pinMode(LCD_D4, OUTPUT);  
-  pinMode(LCD_D5, OUTPUT);
-  pinMode(LCD_D6, OUTPUT);
-  pinMode(LCD_D7, OUTPUT);  
+  pinMode(SR595_DATA,OUTPUT);
+  pinMode(SR595_CLOCK,OUTPUT);
+  pinMode(SR595_LATCH,OUTPUT);
+
 }
 
 void lcdReset(void) {

@@ -8,7 +8,6 @@
 #define CYAN            0x07FF
 #define PURPLE          0xF81F
 
-void lcdSetWriteDir(void);
 void lcdWrite8(uint16_t data);
 void lcdWriteData(uint16_t data);
 void lcdWriteCommand(uint16_t command);

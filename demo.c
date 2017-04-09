@@ -6,6 +6,15 @@
 #define XMAX    240
 #define YMAX    320
 
+#define _DEBUG_ 0
+
+void inputKey() {
+  char ch;
+  printf("Hit any key");
+  scanf("%c",&ch);
+}
+
+
 int main()
 {
   int i,j;
@@ -20,7 +29,6 @@ int main()
     return 1;
   }
 
-  lcdSetWriteDir();
   lcdInit();
   lcdReset();
   delay(500);
@@ -44,6 +52,7 @@ int main()
    }
   }
   sleep(1);
+if(_DEBUG_)inputKey();
 
   //coner angle
   lcdFillScreen(WHITE);
@@ -52,6 +61,7 @@ int main()
   lcdDrawAngle(0,YMAX-20,19,YMAX,BLUE);
   lcdDrawAngle(XMAX-20,YMAX-20,XMAX,YMAX,CYAN);
   sleep(1);
+if(_DEBUG_)inputKey();
 
   //drawLine
   color=RED;
@@ -64,6 +74,7 @@ int main()
     lcdDrawLine(xpos,0,xpos,YMAX,color);
   }
   sleep(1);
+if(_DEBUG_)inputKey();
 
   //drawRect
   color=BLUE;
@@ -72,6 +83,7 @@ int main()
     lcdDrawRect(i,i,XMAX-i,YMAX-i,color);
   }
   sleep(1);
+if(_DEBUG_)inputKey();
 
   //drawCircle
   color=GRAY;
@@ -81,6 +93,8 @@ int main()
   for(i=10;i<220;i=i+10) {
     lcdDrawCircle(xpos,ypos,i,color);
   }
+  sleep(1);
+if(_DEBUG_)inputKey();
 
   //drawRoundRect
   color=BLUE;
@@ -88,6 +102,8 @@ int main()
   for(i=10;i<120;i=i+10) {
     lcdDrawRoundRect(i,i,XMAX-i,YMAX-i,10,color);
   }
+  sleep(1);
+if(_DEBUG_)inputKey();
 
   //drawFillRect
   uint16_t red;
