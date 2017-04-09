@@ -34,23 +34,23 @@ cc -o demo demo.c ili9325.c -lwiringPi
 
 Wirering(With SR595)   
 
-TFT     Rpi/Opi   SR595   
+TFT ----- Rpi/Opi -- SR595   
 LCD_RST - Pin#7   
 LCD_CS -- Pin#3   
 LCD_RS -- Pin#5   
 LCD_WR -- Pin#24   
 LCD_RD -- Pin#26   
---------- Pin#16 -- DATA   
---------- Pin#18 -- CLOCK   
---------- Pin#22 -- LATCH   
-LCD_D0 ------------ QA   
-LCD_D1 ------------ QB   
-LCD_D2 ------------ QC   
-LCD_D3 ------------ QD   
-LCD_D4 ------------ QE   
-LCD_D5 ------------ QF   
-LCD_D6 ------------ QG   
-LCD_D7 ------------ QH   
+--------- Pin#16 --- DATA   
+--------- Pin#18 --- CLOCK   
+--------- Pin#22 --- LATCH   
+LCD_D0 ------------- QA   
+LCD_D1 ------------- QB   
+LCD_D2 ------------- QC   
+LCD_D3 ------------- QD   
+LCD_D4 ------------- QE   
+LCD_D5 ------------- QF   
+LCD_D6 ------------- QG   
+LCD_D7 ------------- QH   
 5V ------ 5V   
 GND ----- GND   
 
