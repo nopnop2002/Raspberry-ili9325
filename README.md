@@ -45,8 +45,8 @@ Wirering(With 74x595)
 |||Pin#16|--|DATA|
 |||Pin#18|--|CLOCK|
 |||Pin#22|--|LATCH|
-LCD_D0 ------------- QA   
-LCD_D1 ------------- QB   
+|LCD_D0|--||--|QA|
+|LCD_D1|--||--|QB
 LCD_D2 ------------- QC   
 LCD_D3 ------------- QD   
 LCD_D4 ------------- QE   
