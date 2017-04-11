@@ -29,7 +29,7 @@ Wirering(Without 74x595)
 |GND|--|GND|
 
 build   
-cc -o demo demo.c ili9325.c -lwiringPi   
+cc -o demo demo.c fontx.c ili9325.c -lwiringPi -lm   
 
 ----
 
@@ -57,7 +57,7 @@ Wirering(With 74x595)
 |GND|--|GND|||
 
 build   
-cc -o demo demo.c ili9325-sr595.c -lwiringPi   
+cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595   
 
 ---
 
