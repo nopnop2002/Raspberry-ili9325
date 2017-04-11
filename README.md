@@ -8,10 +8,11 @@ Primarily, this TFT Shiled is the one for Arduino.
 
 ----
 
-Wirering(Without SR595)   
+Wirering(Without 74x595)   
 
-TFT ----- Rpi/Opi   
-LCD_RST - Pin#7   
+|TFT|-----|Rpi/Opi|
+|:-:|:-:|:-:|
+|LCD_RST|-|Pin#7|
 LCD_CS -- Pin#3   
 LCD_RS -- Pin#5   
 LCD_WR -- Pin#24   
@@ -32,7 +33,7 @@ cc -o demo demo.c ili9325.c -lwiringPi
 
 ----
 
-Wirering(With SR595)   
+Wirering(With 74x595)   
 
 TFT ----- Rpi/Opi -- SR595   
 LCD_RST - Pin#7   
