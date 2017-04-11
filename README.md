@@ -47,14 +47,14 @@ Wirering(With 74x595)
 |||Pin#22|--|LATCH|
 |LCD_D0|--||--|QA|
 |LCD_D1|--||--|QB
-LCD_D2 ------------- QC   
-LCD_D3 ------------- QD   
-LCD_D4 ------------- QE   
-LCD_D5 ------------- QF   
-LCD_D6 ------------- QG   
-LCD_D7 ------------- QH   
-5V ------ 5V   
-GND ----- GND   
+|LCD_D2|--||--|QC|
+|LCD_D3|--||--|QD|
+|LCD_D4|--||--|QE|
+|LCD_D5|--||--|QF|
+|LCD_D6|--||--|QG|
+|LCD_D7|--||--|QH|
+|5V|--|5V|||
+|GND|--|GND|||
 
 build   
 cc -o demo demo.c ili9325-sr595.c -lwiringPi   
