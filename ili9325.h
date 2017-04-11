@@ -1,3 +1,5 @@
+#include "fontx.h"
+
 #define RED             0xf800
 #define GREEN           0x07e0
 #define BLUE            0x001f
@@ -8,7 +10,12 @@
 #define CYAN            0x07FF
 #define PURPLE          0xF81F
 
-void lcdWrite8(uint16_t data);
+#define DIRECTION0      0
+#define DIRECTION90     1
+#define DIRECTION180    2
+#define DIRECTION270    3
+
+void lcdWrite8(uint8_t data);
 void lcdWriteData(uint16_t data);
 void lcdWriteCommand(uint16_t command);
 void lcdInit(void);
@@ -23,4 +30,14 @@ void lcdDrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t co
 void lcdDrawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
 void lcdDrawFillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
 void lcdDrawRoundRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t r, uint16_t color);
+void lcdDrawArrow(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t w,uint16_t color);
+void lcdDrawFillArrow(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t w,uint16_t color);
 unsigned int rgb565_conv(uint16_t r,uint16_t g,uint16_t b);
+int lcdDrawSJISChar(FontxFile *fx, uint16_t x,uint16_t y,uint16_t sjis,uint16_t color);
+int lcdDrawUTF8Char(FontxFile *fx, uint16_t x,uint16_t y,uint8_t *utf8,uint16_t color);
+int lcdDrawUTF8String(FontxFile *fx, uint16_t x,uint16_t y,uint8_t *utfs,uint16_t color);
+void lcdSetFontDirection(uint16_t);
+void lcdSetFontFill(uint16_t color);
+void lcdUnsetFontFill(void);
+void lcdSetFontUnderLine(uint16_t color);
+void lcdUnsetFontUnderLine(void);
