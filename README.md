@@ -61,13 +61,13 @@ cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595
 
 ---
 
-![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24932530/df3273a8-1f4c-11e7-96b2-bb1281adbae1.JPG)
+![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
 
-![2 4tft-3](https://cloud.githubusercontent.com/assets/6020549/24829868/4290e0a0-1cb5-11e7-9b52-c97fc201dabb.JPG)
+![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
 
 ![ili9325-para1](https://cloud.githubusercontent.com/assets/6020549/24833926/38353b08-1d12-11e7-8d0d-5dae59c3499b.JPG)
 
-![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24833930/4cee55a2-1d12-11e7-9806-0de6a33d81a4.JPG)
+![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24932530/df3273a8-1f4c-11e7-96b2-bb1281adbae1.JPG)
 
 ![ili9325-para3](https://cloud.githubusercontent.com/assets/6020549/24833940/c58dc0ec-1d12-11e7-85b6-7f57a80b5e66.JPG)
 
