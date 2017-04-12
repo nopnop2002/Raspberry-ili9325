@@ -74,3 +74,6 @@ cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595
 ![ili9325-para4](https://cloud.githubusercontent.com/assets/6020549/24833950/f48f0e6e-1d12-11e7-95a5-28ef894ea311.JPG)
 
 ![ili9325-para7](https://cloud.githubusercontent.com/assets/6020549/24932578/0c0319fa-1f4d-11e7-8da8-901a94e89e28.JPG)
+
+![ili9325-para8](https://cloud.githubusercontent.com/assets/6020549/24981286/0633449e-2017-11e7-908b-cf5cc3cf94b0.JPG)
+
