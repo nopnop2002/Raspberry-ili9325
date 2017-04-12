@@ -225,6 +225,8 @@ void lcdRegister9325(void) {
 // y:Y coordinate
 // color:color
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
+  if (x < 0 || x >= XMAX) return;
+  if (y < 0 || y >= YMAX) return;
   lcdWriteRegister(0x0020, x); // RAM Address Set 1
   lcdWriteRegister(0x0021, y); // RAM Address Set 2
   lcdWriteRegister(0x0022, color); // Write Data to GRAM
@@ -531,7 +533,7 @@ void lcdDrawFillArrow(uint16_t x0,uint16_t y0,uint16_t x1,uint16_t y1,uint16_t w
 // RGB565 conversion
 // RGB565 is R(5)+G(6)+B(5)=16bit color format.
 // Bit image "RRRRRGGGGGGBBBBB"
-unsigned int rgb565_conv(uint16_t r,uint16_t g,uint16_t b)
+uint16_t rgb565_conv(uint16_t r,uint16_t g,uint16_t b)
 {
    unsigned int RR,GG,BB;
    RR = (r * 31 / 255) << 11;
@@ -609,6 +611,7 @@ if(_DEBUG_)printf("GetFontx rc=%d pw=%d ph=%d\n",rc,pw,ph);
     next = y + pw;
   }
 
+  int bits;
 if(_DEBUG_)printf("xss=%d yss=%d\n",xss,yss);
   ofs = 0;
   yy = yss;
@@ -616,9 +619,13 @@ if(_DEBUG_)printf("xss=%d yss=%d\n",xss,yss);
   for(h=0;h<ph;h++) {
     if(xsd) xx = xss;
     if(ysd) yy = yss;
-    for(w=0;w<(pw/8);w++) {
+//    for(w=0;w<(pw/8);w++) {
+    bits = pw;
+    for(w=0;w<((pw+4)/8);w++) {
       mask = 0x80;
       for(bit=0;bit<8;bit++) {
+        bits--;
+        if (bits < 0) continue;
 //if(_DEBUG_)printf("xx=%d yy=%d mask=%02x fonts[%d]=%02x\n",xx,yy,mask,ofs,fonts[ofs]);
         if (fonts[ofs] & mask) {
           lcdDrawPixel(xx,yy,color);
@@ -716,3 +723,14 @@ void lcdSetFontUnderLine(uint16_t color) {
 void lcdUnsetFontUnderLine(void) {
   _FONT_UNDER_LINE_ = false;
 }
+
+// Display off
+void lcdDisplayOff(void) {
+  lcdWriteRegister(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
+}
+
+// Display on
+void lcdDisplayOn(void) {
+  lcdWriteRegister(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
+}
+
