@@ -1,5 +1,5 @@
 # ili9325_rpi
-ILI9325 TFT Shield Library for Raspberry
+ILI9325 TFT Library for Raspberry
 
 
 This is library for RaspberryPi/OrangePi.   
