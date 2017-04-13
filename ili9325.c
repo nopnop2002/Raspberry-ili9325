@@ -310,15 +310,15 @@ void lcdDrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t co
   int sx,sy;
   int E;
 
-  /* 二点間の距離 */
+  /* distance between two points */
   dx = ( x2 > x1 ) ? x2 - x1 : x1 - x2;
   dy = ( y2 > y1 ) ? y2 - y1 : y1 - y2;
 
-  /* 二点の方向 */
+  /* direction of two point */
   sx = ( x2 > x1 ) ? 1 : -1;
   sy = ( y2 > y1 ) ? 1 : -1;
 
-  /* 傾きが1より小さい場合 */
+  /* inclination < 1 */
   if ( dx > dy ) {
     E = -dx;
     for ( i = 0 ; i <= dx ; i++ ) {
@@ -330,7 +330,7 @@ void lcdDrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t co
         E -= 2 * dx;
       }
     }
-  /* 傾きが1以上の場合 */
+  /* inclination >= 1 */
   } else {
     E = -dy;
     for ( i = 0 ; i <= dy ; i++ ) {
@@ -561,7 +561,7 @@ if(_DEBUG_)printf("_FONT_DIRECTION_=%d\n",_FONT_DIRECTION_);
 //  sjis = UTF2SJIS(utf8);
 //if(_DEBUG_)printf("sjis=%04x\n",sjis);
 
-  rc = GetFontx(fx, sjis, fonts, &pw, &ph); // SJIS -> Fontパターン
+  rc = GetFontx(fx, sjis, fonts, &pw, &ph); // SJIS -> Font pattern
 if(_DEBUG_)printf("GetFontx rc=%d pw=%d ph=%d\n",rc,pw,ph);
   if (!rc) return;
 
