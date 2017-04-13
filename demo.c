@@ -8,8 +8,8 @@
 #define XMAX    240
 #define YMAX    320
 
-#define XMAX2    239
-#define YMAX2    319
+#define XMAX2   239
+#define YMAX2   319
 
 FontxFile fxG32[2];
 FontxFile fxM32[2];
@@ -43,17 +43,16 @@ int main()
   // You can change font file
   // 32Dot Gothic
   Fontx_init(fxG32,"./fontx/ILGH32XB.FNT","./fontx/ILGZ32XB.FNT");
-  // 32Dot Mincyo
-  Fontx_init(fxM32,"./fontx/ILMH32XF.FNT","./fontx/ILMZ3FXB.FNT");
+  // 32Dot Mincho
+  Fontx_init(fxM32,"./fontx/ILMH32XF.FNT","./fontx/ILMZ32XF.FNT");
   // 24Dot Gothic
   Fontx_init(fxG24,"./fontx/ILGH24XB.FNT","./fontx/ILGZ24XB.FNT");
-  // 24Dot Mincyo
+  // 24Dot Mincho
   Fontx_init(fxM24,"./fontx/ILMH24XF.FNT","./fontx/ILMZ24XF.FNT");
 
   lcdInit();
   lcdReset();
-  delay(500);
-  lcdRegister9325();
+  lcdSetup();
 
   //color bar
   X1=XMAX/3;
@@ -245,7 +244,7 @@ if(_DEBUG_)inputKey();
 
   xpos = XMAX2-(32*3);
   ypos = YMAX2;
-  strcpy(utf,"32Dot Mincyo");
+  strcpy(utf,"32Dot Mincho");
   xpos = lcdDrawUTF8String(fxM32, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*4);
@@ -263,7 +262,7 @@ if(_DEBUG_)inputKey();
 
   xpos = XMAX2-(32*5)-(24*2);
   ypos = YMAX2;
-  strcpy(utf,"24Dot Mincyo");
+  strcpy(utf,"24Dot Mincho");
   xpos = lcdDrawUTF8String(fxM24, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*5)-(24*3);

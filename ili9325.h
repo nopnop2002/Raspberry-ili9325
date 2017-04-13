@@ -15,13 +15,13 @@
 #define DIRECTION180    2
 #define DIRECTION270    3
 
-void lcdWrite8(uint8_t data);
+void lcdWriteByte(uint8_t data);
 void lcdWriteData(uint16_t data);
 void lcdWriteCommand(uint16_t command);
+void lcdWriteRegister(uint16_t addr, uint16_t data);
 void lcdInit(void);
 void lcdReset(void);
-void lcdWriteRegister(uint16_t addr, uint16_t data);
-void lcdRegister9325(void);
+void lcdSetup(void);
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color);
 void lcdDrawAngle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 void lcdFillScreen(uint16_t color);

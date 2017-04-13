@@ -42,7 +42,7 @@ uint16_t _FONT_UNDER_LINE_;
 uint16_t _FONT_UNDER_LINE_COLOR_;
 
 #ifndef SR595
-void lcdWrite8(uint8_t data) {
+void lcdWriteByte(uint8_t data) {
   digitalWrite(LCD_D0, data & 1);
   digitalWrite(LCD_D1, (data & 2) >> 1);
   digitalWrite(LCD_D2, (data & 4) >> 2);
@@ -55,7 +55,7 @@ void lcdWrite8(uint8_t data) {
 #endif
 
 #ifdef SR595
-void lcdWrite8(uint8_t data) {
+void lcdWriteByte(uint8_t data) {
   int  bit;
   digitalWrite (SR595_LATCH, LOW) ;
   if (ORDER == LSBFIRST) {
@@ -81,13 +81,13 @@ void lcdWriteData(uint16_t data) {
   digitalWrite(LCD_RD, HIGH);
   digitalWrite(LCD_WR, HIGH);
   
-  lcdWrite8(data >> 8);
+  lcdWriteByte(data >> 8);
   
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
   digitalWrite(LCD_WR, HIGH);
   
-  lcdWrite8(data);
+  lcdWriteByte(data);
   
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
@@ -101,11 +101,11 @@ void lcdWriteCommand(uint16_t command) {
   digitalWrite(LCD_RS, LOW);
   digitalWrite(LCD_RD, HIGH);
   digitalWrite(LCD_WR, HIGH);  
-  lcdWrite8(command >> 8);
+  lcdWriteByte(command >> 8);
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
   digitalWrite(LCD_WR, HIGH);
-  lcdWrite8(command);
+  lcdWriteByte(command);
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
   digitalWrite(LCD_WR, HIGH);
@@ -161,10 +161,11 @@ void lcdReset(void) {
   lcdWriteData(0);
   lcdWriteData(0);
   lcdWriteData(0);
+  delay(500);
 }
 
 
-void lcdRegister9325(void) {
+void lcdSetup(void) {
   lcdWriteRegister(0x00e5,0x8000);
   lcdWriteRegister(0x0000,0x0001);
   lcdWriteRegister(0x0001,0x0100);
@@ -282,11 +283,11 @@ void lcdFillScreen(uint16_t color) {
   i *=240;
 
   while( i-- ) {
-    lcdWrite8(color >> 8);
+    lcdWriteByte(color >> 8);
     digitalWrite(LCD_WR, LOW);
     delayMicroseconds(10);
     digitalWrite(LCD_WR, HIGH); 
-    lcdWrite8(color);
+    lcdWriteByte(color);
     digitalWrite(LCD_WR, LOW);
     delayMicroseconds(10);
     digitalWrite(LCD_WR, HIGH); 
