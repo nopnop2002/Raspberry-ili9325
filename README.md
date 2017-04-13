@@ -1,8 +1,8 @@
 # ili9325_rpi
-ILI9325 TFT Shield Demo Code
+ILI9325 TFT Shield Library for Raspberry
 
 
-This program is example code for RaspberryPi/OrangePi.   
+This program is library for RaspberryPi/OrangePi.   
 This program can show a chart to ILI9325 TFT Shield.   
 Primarily, this TFT Shiled is the one for Arduino.   
 
