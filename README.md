@@ -67,7 +67,7 @@ cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595
 
 ![ili9325-para1](https://cloud.githubusercontent.com/assets/6020549/24833926/38353b08-1d12-11e7-8d0d-5dae59c3499b.JPG)
 
-![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24932530/df3273a8-1f4c-11e7-96b2-bb1281adbae1.JPG)
+![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24995032/3ee3292a-2068-11e7-9179-bf5a74ba2a38.JPG)
 
 ![ili9325-para3](https://cloud.githubusercontent.com/assets/6020549/24833940/c58dc0ec-1d12-11e7-85b6-7f57a80b5e66.JPG)
 
@@ -75,5 +75,4 @@ cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595
 
 ![ili9325-para7](https://cloud.githubusercontent.com/assets/6020549/24932578/0c0319fa-1f4d-11e7-8da8-901a94e89e28.JPG)
 
-![ili9325-para8](https://cloud.githubusercontent.com/assets/6020549/24981286/0633449e-2017-11e7-908b-cf5cc3cf94b0.JPG)
-
+![ili9325-para8](https://cloud.githubusercontent.com/assets/6020549/24995079/6043fb62-2068-11e7-974b-29e23126e38f.JPG)

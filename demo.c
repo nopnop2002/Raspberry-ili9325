@@ -16,7 +16,7 @@ FontxFile fxM32[2];
 FontxFile fxG24[2];
 FontxFile fxM24[2];
 
-#define _DEBUG_ 0
+#define _DEBUG_ 1
 
 void inputKey() {
   char ch;
@@ -88,7 +88,7 @@ if(_DEBUG_)inputKey();
   lcdDrawFillArrow(XMAX-30,30,XMAX-20,20,10,color);
   xpos = 130;
   ypos = 30;
-  strcpy(utf,"240,0");
+  strcpy(utf,"239,0");
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = BLUE;
@@ -96,7 +96,7 @@ if(_DEBUG_)inputKey();
   lcdDrawFillArrow(30,YMAX-30,20,YMAX-20,10,color);
   xpos = 30;
   ypos = 250;
-  strcpy(utf,"0,320");
+  strcpy(utf,"0,319");
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = PURPLE;
@@ -104,7 +104,7 @@ if(_DEBUG_)inputKey();
   lcdDrawFillArrow(XMAX-30,YMAX-30,XMAX-20,YMAX-20,10,color);
   xpos = 130;
   ypos = 250;
-  strcpy(utf,"240,320");
+  strcpy(utf,"239,319");
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   sleep(1);
