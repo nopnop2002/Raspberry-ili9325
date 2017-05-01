@@ -233,13 +233,13 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
   lcdWriteRegister(0x0022, color); // Write Data to GRAM
 }
 
-// Draw angle
+// Draw rectangule of filling
 // x1:Start X coordinate
 // y1:Start Y coordinate
 // x2:End X coordinate
 // y2:End Y coordinate
 // color:color
-void lcdDrawAngle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
+void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
   int i,j;
   if (x1 > XMAX) return;
   if (x1 < 0) x1=0;
