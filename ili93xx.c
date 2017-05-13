@@ -186,58 +186,58 @@ void lcdReset(void) {
 
 void lcdSetup(void) {
   if (_model == 0x9325) {
-   lcdWriteRegister(0x00e5,0x8000);
-   lcdWriteRegister(0x0000,0x0001);
-   lcdWriteRegister(0x0001,0x0100);
-//  lcdWriteRegister(0x0001,0x0000);
-   lcdWriteRegister(0x0002,0x0700);
-   lcdWriteRegister(0x0003,0x1030);
-   lcdWriteRegister(0x0004,0x0000);
-   lcdWriteRegister(0x0008,0x0202);
-   lcdWriteRegister(0x0009,0x0000);
-   lcdWriteRegister(0x000a,0x0000);
-   lcdWriteRegister(0x000c,0x0000);
-   lcdWriteRegister(0x000d,0x0000);
-   lcdWriteRegister(0x000f,0x0000);
-   lcdWriteRegister(0x0010,0x0000);
-   lcdWriteRegister(0x0011,0x0000);
-   lcdWriteRegister(0x0012,0x0000);
-   lcdWriteRegister(0x0013,0x0000);
-   lcdWriteRegister(0x0010,0x17b0);
-   lcdWriteRegister(0x0011,0x0037);
-   lcdWriteRegister(0x0012,0x0138);
-   lcdWriteRegister(0x0013,0x1700);
-   lcdWriteRegister(0x0029,0x000d);
-   lcdWriteRegister(0x0020,0x0000);
-   lcdWriteRegister(0x0021,0x0000);
-   lcdWriteRegister(0x0030,0x0001);
-   lcdWriteRegister(0x0031,0x0606);
-   lcdWriteRegister(0x0032,0x0304);
-   lcdWriteRegister(0x0033,0x0202);
-   lcdWriteRegister(0x0034,0x0202);
-   lcdWriteRegister(0x0035,0x0103);
-   lcdWriteRegister(0x0036,0x011d);
-   lcdWriteRegister(0x0037,0x0404);
-   lcdWriteRegister(0x0038,0x0404);
-   lcdWriteRegister(0x0039,0x0404);
-   lcdWriteRegister(0x003c,0x0700);
-   lcdWriteRegister(0x003d,0x0a1f);
-   lcdWriteRegister(0x0050,0x0000);
-   lcdWriteRegister(0x0051,0x00ef);
-   lcdWriteRegister(0x0052,0x0000);
-   lcdWriteRegister(0x0053,0x013f);
-   lcdWriteRegister(0x0060,0x2700);
-   lcdWriteRegister(0x0061,0x0001);
-   lcdWriteRegister(0x006a,0x0000);
-   lcdWriteRegister(0x0090,0x0010);
-   lcdWriteRegister(0x0092,0x0000);
-   lcdWriteRegister(0x0093,0x0003);
-   lcdWriteRegister(0x0095,0x0101);
-   lcdWriteRegister(0x0097,0x0000);
-   lcdWriteRegister(0x0098,0x0000);
-   lcdWriteRegister(0x0007,0x0021);
-   lcdWriteRegister(0x0007,0x0031);
-   lcdWriteRegister(0x0007,0x0173);
+   lcdWriteRegister(0xe5,0x8000);
+   lcdWriteRegister(0x00,0x0001);
+   lcdWriteRegister(0x01,0x0100);
+//  lcdWriteRegister(0x01,0x0000);
+   lcdWriteRegister(0x02,0x0700);
+   lcdWriteRegister(0x03,0x1030);
+   lcdWriteRegister(0x04,0x0000);
+   lcdWriteRegister(0x08,0x0202);
+   lcdWriteRegister(0x09,0x0000);
+   lcdWriteRegister(0x0a,0x0000);
+   lcdWriteRegister(0x0c,0x0000);
+   lcdWriteRegister(0x0d,0x0000);
+   lcdWriteRegister(0x0f,0x0000);
+   lcdWriteRegister(0x10,0x0000);
+   lcdWriteRegister(0x11,0x0000);
+   lcdWriteRegister(0x12,0x0000);
+   lcdWriteRegister(0x13,0x0000);
+   lcdWriteRegister(0x10,0x17b0);
+   lcdWriteRegister(0x11,0x0037);
+   lcdWriteRegister(0x12,0x0138);
+   lcdWriteRegister(0x13,0x1700);
+   lcdWriteRegister(0x29,0x000d);
+   lcdWriteRegister(0x20,0x0000);
+   lcdWriteRegister(0x21,0x0000);
+   lcdWriteRegister(0x30,0x0001);
+   lcdWriteRegister(0x31,0x0606);
+   lcdWriteRegister(0x32,0x0304);
+   lcdWriteRegister(0x33,0x0202);
+   lcdWriteRegister(0x34,0x0202);
+   lcdWriteRegister(0x35,0x0103);
+   lcdWriteRegister(0x36,0x011d);
+   lcdWriteRegister(0x37,0x0404);
+   lcdWriteRegister(0x38,0x0404);
+   lcdWriteRegister(0x39,0x0404);
+   lcdWriteRegister(0x3c,0x0700);
+   lcdWriteRegister(0x3d,0x0a1f);
+   lcdWriteRegister(0x50,0x0000);
+   lcdWriteRegister(0x51,0x00ef);
+   lcdWriteRegister(0x52,0x0000);
+   lcdWriteRegister(0x53,0x013f);
+   lcdWriteRegister(0x60,0x2700);
+   lcdWriteRegister(0x61,0x0001);
+   lcdWriteRegister(0x6a,0x0000);
+   lcdWriteRegister(0x90,0x0010);
+   lcdWriteRegister(0x92,0x0000);
+   lcdWriteRegister(0x93,0x0003);
+   lcdWriteRegister(0x95,0x0101);
+   lcdWriteRegister(0x97,0x0000);
+   lcdWriteRegister(0x98,0x0000);
+   lcdWriteRegister(0x07,0x0021);
+   lcdWriteRegister(0x07,0x0031);
+   lcdWriteRegister(0x07,0x0173);
   } else if (_model == 0x9341) {
    lcdWriteCommand(0xC0);    //Power control 
    lcdWriteDataByte(0x23);
@@ -326,9 +326,9 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
   if (y < 0 || y >= YMAX) return;
 
   if (_model == 0x9325) {
-   lcdWriteRegister(0x0020, x); // RAM Address Set 1
-   lcdWriteRegister(0x0021, y); // RAM Address Set 2
-   lcdWriteRegister(0x0022, color); // Write Data to GRAM
+   lcdWriteRegister(0x20, x); // RAM Address Set 1
+   lcdWriteRegister(0x21, y); // RAM Address Set 2
+   lcdWriteRegister(0x22, color); // Write Data to GRAM
   } else if (_model == 0x9341) {
    lcdWriteCommand(0x2A); // set column(x) address
    lcdWriteDataWord(x);
@@ -358,9 +358,9 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
 
   if (_model == 0x9325) {
    for(j=y1;j<y2+1;j++){
-    lcdWriteRegister(0x0020, x1); // RAM Address Set 1
-    lcdWriteRegister(0x0021, j); // RAM Address Set 2
-    lcdWriteCommand(0x0022); // Write Data to GRAM
+    lcdWriteRegister(0x20, x1); // RAM Address Set 1
+    lcdWriteRegister(0x21, j); // RAM Address Set 2
+    lcdWriteCommand(0x22); // Write Data to GRAM
     for(i=x1;i<x2+1;i++){
       lcdWriteDataWord(color); // Write Data to GRAM
     }
