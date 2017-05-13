@@ -5,7 +5,7 @@
 #include <math.h>
 #include <wiringPi.h>
 #include <wiringShift.h>
-#include "ili9325.h"
+#include "ili93xx.h"
 
 #define LCD_RST 7
 #define LCD_CS  8
@@ -41,6 +41,8 @@ uint16_t _FONT_FILL_COLOR_;
 uint16_t _FONT_UNDER_LINE_;
 uint16_t _FONT_UNDER_LINE_COLOR_;
 
+uint16_t _model;
+
 #ifndef SR595
 void lcdWriteByte(uint8_t data) {
   digitalWrite(LCD_D0, data & 1);
@@ -75,51 +77,72 @@ void lcdWriteByte(uint8_t data) {
 }
 #endif
 
-void lcdWriteData(uint16_t data) {
+void lcdWriteDataWord(uint16_t data) {
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, HIGH);
   digitalWrite(LCD_RD, HIGH);
+
   digitalWrite(LCD_WR, HIGH);
-  
   lcdWriteByte(data >> 8);
-  
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
+
   digitalWrite(LCD_WR, HIGH);
-  
   lcdWriteByte(data);
-  
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
+
   digitalWrite(LCD_WR, HIGH);
-  
   digitalWrite(LCD_CS, HIGH);  
 }
 
-void lcdWriteCommand(uint16_t command) {
+void lcdWriteDataByte(uint8_t data) {
+  digitalWrite(LCD_CS, LOW);
+  digitalWrite(LCD_RS, HIGH);
+  digitalWrite(LCD_RD, HIGH);
+#if 0
+  digitalWrite(LCD_WR, HIGH);
+  lcdWriteByte(data >> 8);
+  digitalWrite(LCD_WR, LOW);
+  delayMicroseconds(10);
+#endif
+  digitalWrite(LCD_WR, HIGH);
+  lcdWriteByte(data);
+  digitalWrite(LCD_WR, LOW);
+  delayMicroseconds(10);
+
+  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(LCD_CS, HIGH);  
+}
+
+void lcdWriteCommand(uint8_t command) {
   digitalWrite(LCD_CS, LOW);
   digitalWrite(LCD_RS, LOW);
   digitalWrite(LCD_RD, HIGH);
+#if 0
   digitalWrite(LCD_WR, HIGH);  
   lcdWriteByte(command >> 8);
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
+#endif
   digitalWrite(LCD_WR, HIGH);
   lcdWriteByte(command);
   digitalWrite(LCD_WR, LOW);
   delayMicroseconds(10);
+
   digitalWrite(LCD_WR, HIGH);
   digitalWrite(LCD_CS, HIGH);    
 }
 
 
-void lcdWriteRegister(uint16_t addr, uint16_t data) {
+void lcdWriteRegister(uint8_t addr, uint16_t data) {
   lcdWriteCommand(addr);
-  lcdWriteData(data);
+  lcdWriteDataWord(data);
 }
 
 
-void lcdInit(void) {
+void lcdInit(uint16_t model) {
+  _model = model;
   pinMode(LCD_CS, OUTPUT);
   digitalWrite(LCD_CS, HIGH);
   pinMode(LCD_RS, OUTPUT);
@@ -155,69 +178,142 @@ void lcdInit(void) {
 
 void lcdReset(void) {
   digitalWrite(LCD_RST, LOW);
-  delay(2); 
+  delay(100); 
   digitalWrite(LCD_RST, HIGH);
-  lcdWriteData(0);
-  lcdWriteData(0);
-  lcdWriteData(0);
-  lcdWriteData(0);
-  delay(500);
+  delay(100);
 }
 
 
 void lcdSetup(void) {
-  lcdWriteRegister(0x00e5,0x8000);
-  lcdWriteRegister(0x0000,0x0001);
-  lcdWriteRegister(0x0001,0x0100);
+  if (_model == 0x9325) {
+   lcdWriteRegister(0x00e5,0x8000);
+   lcdWriteRegister(0x0000,0x0001);
+   lcdWriteRegister(0x0001,0x0100);
 //  lcdWriteRegister(0x0001,0x0000);
-  lcdWriteRegister(0x0002,0x0700);
-  lcdWriteRegister(0x0003,0x1030);
-  lcdWriteRegister(0x0004,0x0000);
-  lcdWriteRegister(0x0008,0x0202);
-  lcdWriteRegister(0x0009,0x0000);
-  lcdWriteRegister(0x000a,0x0000);
-  lcdWriteRegister(0x000c,0x0000);
-  lcdWriteRegister(0x000d,0x0000);
-  lcdWriteRegister(0x000f,0x0000);
-  lcdWriteRegister(0x0010,0x0000);
-  lcdWriteRegister(0x0011,0x0000);
-  lcdWriteRegister(0x0012,0x0000);
-  lcdWriteRegister(0x0013,0x0000);
-  lcdWriteRegister(0x0010,0x17b0);
-  lcdWriteRegister(0x0011,0x0037);
-  lcdWriteRegister(0x0012,0x0138);
-  lcdWriteRegister(0x0013,0x1700);
-  lcdWriteRegister(0x0029,0x000d);
-  lcdWriteRegister(0x0020,0x0000);
-  lcdWriteRegister(0x0021,0x0000);
-  lcdWriteRegister(0x0030,0x0001);
-  lcdWriteRegister(0x0031,0x0606);
-  lcdWriteRegister(0x0032,0x0304);
-  lcdWriteRegister(0x0033,0x0202);
-  lcdWriteRegister(0x0034,0x0202);
-  lcdWriteRegister(0x0035,0x0103);
-  lcdWriteRegister(0x0036,0x011d);
-  lcdWriteRegister(0x0037,0x0404);
-  lcdWriteRegister(0x0038,0x0404);
-  lcdWriteRegister(0x0039,0x0404);
-  lcdWriteRegister(0x003c,0x0700);
-  lcdWriteRegister(0x003d,0x0a1f);
-  lcdWriteRegister(0x0050,0x0000);
-  lcdWriteRegister(0x0051,0x00ef);
-  lcdWriteRegister(0x0052,0x0000);
-  lcdWriteRegister(0x0053,0x013f);
-  lcdWriteRegister(0x0060,0x2700);
-  lcdWriteRegister(0x0061,0x0001);
-  lcdWriteRegister(0x006a,0x0000);
-  lcdWriteRegister(0x0090,0x0010);
-  lcdWriteRegister(0x0092,0x0000);
-  lcdWriteRegister(0x0093,0x0003);
-  lcdWriteRegister(0x0095,0x0101);
-  lcdWriteRegister(0x0097,0x0000);
-  lcdWriteRegister(0x0098,0x0000);
-  lcdWriteRegister(0x0007,0x0021);
-  lcdWriteRegister(0x0007,0x0031);
-  lcdWriteRegister(0x0007,0x0173);
+   lcdWriteRegister(0x0002,0x0700);
+   lcdWriteRegister(0x0003,0x1030);
+   lcdWriteRegister(0x0004,0x0000);
+   lcdWriteRegister(0x0008,0x0202);
+   lcdWriteRegister(0x0009,0x0000);
+   lcdWriteRegister(0x000a,0x0000);
+   lcdWriteRegister(0x000c,0x0000);
+   lcdWriteRegister(0x000d,0x0000);
+   lcdWriteRegister(0x000f,0x0000);
+   lcdWriteRegister(0x0010,0x0000);
+   lcdWriteRegister(0x0011,0x0000);
+   lcdWriteRegister(0x0012,0x0000);
+   lcdWriteRegister(0x0013,0x0000);
+   lcdWriteRegister(0x0010,0x17b0);
+   lcdWriteRegister(0x0011,0x0037);
+   lcdWriteRegister(0x0012,0x0138);
+   lcdWriteRegister(0x0013,0x1700);
+   lcdWriteRegister(0x0029,0x000d);
+   lcdWriteRegister(0x0020,0x0000);
+   lcdWriteRegister(0x0021,0x0000);
+   lcdWriteRegister(0x0030,0x0001);
+   lcdWriteRegister(0x0031,0x0606);
+   lcdWriteRegister(0x0032,0x0304);
+   lcdWriteRegister(0x0033,0x0202);
+   lcdWriteRegister(0x0034,0x0202);
+   lcdWriteRegister(0x0035,0x0103);
+   lcdWriteRegister(0x0036,0x011d);
+   lcdWriteRegister(0x0037,0x0404);
+   lcdWriteRegister(0x0038,0x0404);
+   lcdWriteRegister(0x0039,0x0404);
+   lcdWriteRegister(0x003c,0x0700);
+   lcdWriteRegister(0x003d,0x0a1f);
+   lcdWriteRegister(0x0050,0x0000);
+   lcdWriteRegister(0x0051,0x00ef);
+   lcdWriteRegister(0x0052,0x0000);
+   lcdWriteRegister(0x0053,0x013f);
+   lcdWriteRegister(0x0060,0x2700);
+   lcdWriteRegister(0x0061,0x0001);
+   lcdWriteRegister(0x006a,0x0000);
+   lcdWriteRegister(0x0090,0x0010);
+   lcdWriteRegister(0x0092,0x0000);
+   lcdWriteRegister(0x0093,0x0003);
+   lcdWriteRegister(0x0095,0x0101);
+   lcdWriteRegister(0x0097,0x0000);
+   lcdWriteRegister(0x0098,0x0000);
+   lcdWriteRegister(0x0007,0x0021);
+   lcdWriteRegister(0x0007,0x0031);
+   lcdWriteRegister(0x0007,0x0173);
+  } else if (_model == 0x9341) {
+   lcdWriteCommand(0xC0);    //Power control 
+   lcdWriteDataByte(0x23);
+
+   lcdWriteCommand(0xC1);    //Power control 
+   lcdWriteDataByte(0x10);
+
+   lcdWriteCommand(0xC5);    //VCM control 
+   lcdWriteDataByte(0x3e);
+   lcdWriteDataByte(0x28); 
+
+   lcdWriteCommand(0xC7);    //VCM control2 
+   lcdWriteDataByte(0x86);
+
+   lcdWriteCommand(0x36);    // Memory Access Control 
+   lcdWriteDataByte(0x98);
+
+   lcdWriteCommand(0x3A);    
+   lcdWriteDataByte(0x55); 
+ 
+   lcdWriteCommand(0xB1);    
+   lcdWriteDataByte(0x00);  
+   lcdWriteDataByte(0x18); 
+
+   lcdWriteCommand(0xB6);    // Display Function Control 
+//  lcdWriteDataByte(0x08); 
+   lcdWriteDataByte(0x82);
+   lcdWriteDataByte(0xA2);
+   lcdWriteDataByte(0x27);  
+
+   lcdWriteCommand(0xF2);    // 3Gamma Function Disable 
+   lcdWriteDataByte(0x00); 
+
+   lcdWriteCommand(0x26);    //Gamma curve selected 
+   lcdWriteDataByte(0x01); 
+
+   lcdWriteCommand(0xE0);    //Set Gamma 
+   lcdWriteDataByte(0x0F); 
+   lcdWriteDataByte(0x31); 
+   lcdWriteDataByte(0x2B); 
+   lcdWriteDataByte(0x0C); 
+   lcdWriteDataByte(0x0E); 
+   lcdWriteDataByte(0x08); 
+   lcdWriteDataByte(0x4E); 
+   lcdWriteDataByte(0xF1); 
+   lcdWriteDataByte(0x37); 
+   lcdWriteDataByte(0x07); 
+   lcdWriteDataByte(0x10); 
+   lcdWriteDataByte(0x03); 
+   lcdWriteDataByte(0x0E); 
+   lcdWriteDataByte(0x09); 
+   lcdWriteDataByte(0x00); 
+ 
+   lcdWriteCommand(0XE1);    //Set Gamma 
+   lcdWriteDataByte(0x00); 
+   lcdWriteDataByte(0x0E); 
+   lcdWriteDataByte(0x14); 
+   lcdWriteDataByte(0x03); 
+   lcdWriteDataByte(0x11); 
+   lcdWriteDataByte(0x07); 
+   lcdWriteDataByte(0x31); 
+   lcdWriteDataByte(0xC1); 
+   lcdWriteDataByte(0x48); 
+   lcdWriteDataByte(0x08); 
+   lcdWriteDataByte(0x0F); 
+   lcdWriteDataByte(0x0C); 
+   lcdWriteDataByte(0x31); 
+   lcdWriteDataByte(0x36); 
+   lcdWriteDataByte(0x0F); 
+
+   lcdWriteCommand(0x11);    //Exit Sleep 
+   delay(120); 
+  
+   lcdWriteCommand(0x29);    //Display on 
+//  lcdWriteCommand(0x2c);    //Memory Write
+  }
 }
 
 
@@ -228,9 +324,21 @@ void lcdSetup(void) {
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
   if (x < 0 || x >= XMAX) return;
   if (y < 0 || y >= YMAX) return;
-  lcdWriteRegister(0x0020, x); // RAM Address Set 1
-  lcdWriteRegister(0x0021, y); // RAM Address Set 2
-  lcdWriteRegister(0x0022, color); // Write Data to GRAM
+
+  if (_model == 0x9325) {
+   lcdWriteRegister(0x0020, x); // RAM Address Set 1
+   lcdWriteRegister(0x0021, y); // RAM Address Set 2
+   lcdWriteRegister(0x0022, color); // Write Data to GRAM
+  } else if (_model == 0x9341) {
+   lcdWriteCommand(0x2A); // set column(x) address
+   lcdWriteDataWord(x);
+   lcdWriteDataWord(x);
+   lcdWriteCommand(0x2B); // set Page(y) address
+   lcdWriteDataWord(y);
+   lcdWriteDataWord(y);
+   lcdWriteCommand(0x2C); // Memory Write
+   lcdWriteDataWord(color);
+  }
 }
 
 // Draw rectangule of filling
@@ -248,53 +356,36 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
   if (y1 < 0) y1=0;
   if (y2 > YMAX) y2=YMAX;
 
-#if 0
-  for(i=x1;i<x2+1;i++){
-    lcdWriteRegister(0x0020, i); // RAM Address Set 1
-    lcdWriteRegister(0x0021, y1); // RAM Address Set 2
+  if (_model == 0x9325) {
+   for(j=y1;j<y2+1;j++){
+    lcdWriteRegister(0x0020, x1); // RAM Address Set 1
+    lcdWriteRegister(0x0021, j); // RAM Address Set 2
     lcdWriteCommand(0x0022); // Write Data to GRAM
-    for(j=y1;j<y2+1;j++){
-      lcdWriteData(color); // Write Data to GRAM
+    for(i=x1;i<x2+1;i++){
+      lcdWriteDataWord(color); // Write Data to GRAM
     }
-  }
-#endif
-  for(i=x1;i<x2+1;i++){
+   }
+  } else if (_model == 0x9341) {
+   lcdWriteCommand(0x2A); // set column(x) address
+   lcdWriteDataWord(x1);
+   lcdWriteDataWord(x2);
+   lcdWriteCommand(0x2B); // set Page(y) address
+   lcdWriteDataWord(y1);
+   lcdWriteDataWord(y2);
+   lcdWriteCommand(0x2C); // Memory Write
+   for(i=x1;i<x2+1;i++){
     for(j=y1;j<y2+1;j++){
-      lcdWriteRegister(0x0020, i); // RAM Address Set 1
-      lcdWriteRegister(0x0021, j); // RAM Address Set 2
-      lcdWriteRegister(0x0022, color); // Write Data to GRAM
+      lcdWriteDataWord(color);
     }
+   }
   }
+
 }
 
 // Fill screen
 // color:color
 void lcdFillScreen(uint16_t color) {
-  lcdWriteRegister(0x0020, 0); // RAM Address Set 1
-  lcdWriteRegister(0x0021, 0); // RAM Address Set 2
-  lcdWriteCommand(0x0022); // Write Data to GRAM
-  
-  digitalWrite(LCD_CS, LOW);
-  digitalWrite(LCD_RS, HIGH);
-  digitalWrite(LCD_RD, HIGH);
-  digitalWrite(LCD_WR, HIGH);
-  
-  uint32_t i = 320;
-  i *=240;
-
-  while( i-- ) {
-    lcdWriteByte(color >> 8);
-    digitalWrite(LCD_WR, LOW);
-    delayMicroseconds(10);
-    digitalWrite(LCD_WR, HIGH); 
-    lcdWriteByte(color);
-    digitalWrite(LCD_WR, LOW);
-    delayMicroseconds(10);
-    digitalWrite(LCD_WR, HIGH); 
-  }
-  
-  digitalWrite(LCD_CS, HIGH); 
-  
+  lcdDrawFillRect(0, 0, XMAX-1, YMAX-1, color);
 }
 
 // Draw line

@@ -1,9 +1,9 @@
 # ili9325_rpi
-ILI9325 TFT Library for wiringPi
+ILI9325/9341 TFT Library for wiringPi
 
 
 This is library for RaspberryPi/OrangePi.   
-This library can show a chart to ILI9325 TFT Shield.   
+This library can show a chart to ILI9325/9431 TFT Shield.   
 Primarily, this TFT Shiled is the one for Arduino.   
 
 ----
@@ -29,7 +29,11 @@ Wirering(Without 74x595)
 |GND|--|GND|
 
 build   
-cc -o demo demo.c fontx.c ili9325.c -lwiringPi -lm   
+for ILI9325   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325   
+
+for ILI9341   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341   
 
 ----
 
@@ -57,7 +61,11 @@ Wirering(With 74x595)
 |GND|--|GND|||
 
 build   
-cc -o demo-sr595 demo.c fontx.c ili9325.c -lwiringPi -lm -DSR595   
+for ILI9325   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325 -DSR595   
+
+for ILI9341   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341 -DSR595   
 
 ---
 

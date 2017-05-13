@@ -16,10 +16,11 @@
 #define DIRECTION270    3
 
 void lcdWriteByte(uint8_t data);
-void lcdWriteData(uint16_t data);
-void lcdWriteCommand(uint16_t command);
-void lcdWriteRegister(uint16_t addr, uint16_t data);
-void lcdInit(void);
+void lcdWriteDataWord(uint16_t data);
+void lcdWriteDataByte(uint8_t data);
+void lcdWriteCommand(uint8_t command);
+void lcdWriteRegister(uint8_t addr, uint16_t data);
+void lcdInit(uint16_t model);
 void lcdReset(void);
 void lcdSetup(void);
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color);

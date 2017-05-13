@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <wiringPi.h>
-#include "ili9325.h"
+#include "ili93xx.h"
 
 #define XMAX    240
 #define YMAX    320
@@ -50,7 +50,19 @@ int main()
   // 24Dot Mincho
   Fontx_init(fxM24,"./fontx/ILMH24XF.FNT","./fontx/ILMZ24XF.FNT");
 
-  lcdInit();
+  char model[10];
+#ifdef ILI9325
+  strcpy(model,"ILI9325");
+  printf("mode:%s\n",model);
+  lcdInit(0x9325);
+#endif
+
+#ifdef ILI9341
+  strcpy(model,"ILI9341");
+  printf("mode:%s\n",model);
+  lcdInit(0x9341);
+#endif
+//  lcdInit();
   lcdReset();
   lcdSetup();
 
@@ -83,7 +95,7 @@ if(_DEBUG_)inputKey();
   strcpy(utf,"0,0");
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
-  color = GRAY;
+  color = GREEN;
   lcdDrawFillRect(XMAX-20,0,XMAX,20,color);
   lcdDrawFillArrow(XMAX-30,30,XMAX-20,20,10,color);
   xpos = 130;
@@ -134,7 +146,7 @@ if(_DEBUG_)inputKey();
 
   //drawCircle
   lcdFillScreen(WHITE);
-  color=GRAY;
+  color=BLUE;
   xpos=XMAX/2;
   ypos=YMAX/2;
   for(i=10;i<220;i=i+10) {
@@ -157,7 +169,8 @@ if(_DEBUG_)inputKey();
   xpos = 0;
   ypos = YMAX2-(32*1);
   color = BLACK;
-  strcpy(utf,"ILI9325");
+//  strcpy(utf,"ILI93XX");
+  strcpy(utf,model);
   xpos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   xpos = 0;
@@ -211,12 +224,12 @@ if(_DEBUG_)inputKey();
   lcdSetFontDirection(DIRECTION270);
   xpos = (32*1);
   ypos = 0;
-  color = GRAY;
+  color = GREEN;
   ypos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   xpos = (32*2);
   ypos = 0;
-  lcdSetFontFill(CYAN);
+  lcdSetFontFill(YELLOW);
   ypos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
   lcdUnsetFontFill();
 
