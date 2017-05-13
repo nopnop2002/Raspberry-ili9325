@@ -1,5 +1,5 @@
 # ili9325_rpi
-ILI9325/9341 TFT Library for wiringPi
+ILI9325/9341/9342 TFT Library for wiringPi
 
 
 This is library for RaspberryPi/OrangePi.   
