@@ -310,7 +310,82 @@ void lcdSetup(void) {
    delay(120); 
   
    lcdWriteCommand(0x29);    //Display on 
-//  lcdWriteCommand(0x2c);    //Memory Write
+  } else if (_model == 0x9342) {
+   lcdWriteCommand(0xC0);    //Power control
+   lcdWriteDataByte(0x26);
+   lcdWriteDataByte(0x09);
+
+   lcdWriteCommand(0xC1);    //Power control
+   lcdWriteDataByte(0x10);
+
+   lcdWriteCommand(0xC5);    //VCM control
+   lcdWriteDataByte(0x3e);
+   lcdWriteDataByte(0x28);
+
+   lcdWriteCommand(0xC7);    //VCM control2
+   lcdWriteDataByte(0x86);
+
+   lcdWriteCommand(0x36);
+   lcdWriteDataByte(0xE8);
+
+   lcdWriteCommand(0x3A);
+   lcdWriteDataByte(0x55);
+
+   lcdWriteCommand(0xB1);
+   lcdWriteDataByte(0x00);
+   lcdWriteDataByte(0x18);
+
+
+   lcdWriteCommand(0xB6);    // Display Function Control
+   lcdWriteDataByte(0x0A);
+//   lcdWriteDataByte(0x82);
+   lcdWriteDataByte(0xA2);
+   lcdWriteDataByte(0x27);
+   lcdWriteDataByte(0x04);
+
+   lcdWriteCommand(0x21);    //Display Inversion ON(I don't know Why need)
+
+   lcdWriteCommand(0x26);    //Gamma curve selected
+   lcdWriteDataByte(0x01);
+
+   lcdWriteCommand(0xE0);    //Set Gamma
+   lcdWriteDataByte(0x0F);
+   lcdWriteDataByte(0x31);
+   lcdWriteDataByte(0x2B);
+   lcdWriteDataByte(0x0C);
+   lcdWriteDataByte(0x0E);
+   lcdWriteDataByte(0x08);
+   lcdWriteDataByte(0x4E);
+   lcdWriteDataByte(0xF1);
+   lcdWriteDataByte(0x37);
+   lcdWriteDataByte(0x07);
+   lcdWriteDataByte(0x10);
+   lcdWriteDataByte(0x03);
+   lcdWriteDataByte(0x0E);
+   lcdWriteDataByte(0x09);
+   lcdWriteDataByte(0x00);
+
+   lcdWriteCommand(0XE1);    //Set Gamma
+   lcdWriteDataByte(0x00);
+   lcdWriteDataByte(0x0E);
+   lcdWriteDataByte(0x14);
+   lcdWriteDataByte(0x03);
+   lcdWriteDataByte(0x11);
+   lcdWriteDataByte(0x07);
+   lcdWriteDataByte(0x31);
+   lcdWriteDataByte(0xC1);
+   lcdWriteDataByte(0x48);
+   lcdWriteDataByte(0x08);
+   lcdWriteDataByte(0x0F);
+   lcdWriteDataByte(0x0C);
+   lcdWriteDataByte(0x31);
+   lcdWriteDataByte(0x36);
+   lcdWriteDataByte(0x0F);
+
+   lcdWriteCommand(0x11);    //Exit Sleep
+   delay(120);
+
+   lcdWriteCommand(0x29);    //Display on
   }
 }
 
@@ -327,7 +402,7 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
    lcdWriteRegister(0x20, x); // RAM Address Set 1
    lcdWriteRegister(0x21, y); // RAM Address Set 2
    lcdWriteRegister(0x22, color); // Write Data to GRAM
-  } else if (_model == 0x9341) {
+  } else if (_model == 0x9341 || _model == 0x9342) {
    lcdWriteCommand(0x2A); // set column(x) address
    lcdWriteDataWord(x);
    lcdWriteDataWord(x);
@@ -363,7 +438,7 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
       lcdWriteDataWord(color); // Write Data to GRAM
     }
    }
-  } else if (_model == 0x9341) {
+  } else if (_model == 0x9341 || _model == 0x9342) {
    lcdWriteCommand(0x2A); // set column(x) address
    lcdWriteDataWord(x1);
    lcdWriteDataWord(x2);
