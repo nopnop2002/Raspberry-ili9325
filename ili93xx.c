@@ -263,13 +263,11 @@ void lcdSetup(void) {
    lcdWriteDataByte(0x18); 
 
    lcdWriteCommand(0xB6);    // Display Function Control 
-//  lcdWriteDataByte(0x08); 
-   lcdWriteDataByte(0x82);
+   lcdWriteDataByte(0x0A); 
+//   lcdWriteDataByte(0x82);
    lcdWriteDataByte(0xA2);
    lcdWriteDataByte(0x27);  
-
-   lcdWriteCommand(0xF2);    // 3Gamma Function Disable 
-   lcdWriteDataByte(0x00); 
+   lcdWriteDataByte(0x04);  
 
    lcdWriteCommand(0x26);    //Gamma curve selected 
    lcdWriteDataByte(0x01); 
