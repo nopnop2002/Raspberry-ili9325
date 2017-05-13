@@ -4,7 +4,7 @@ ILI9325/9341 TFT Library for wiringPi
 
 This is library for RaspberryPi/OrangePi.   
 You can use a shield for UNO R3 at this library.   
-This library can show a chart to ILI9325/9431 TFT Shield.   
+This library can show a chart to ILI9325/9431/9342 TFT Shield.   
 Primarily, this TFT Shiled is the one for Arduino.   
 
 ----
@@ -35,6 +35,9 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325
 
 for ILI9341   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341   
+
+for ILI9342   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342   
 
 ----
 
@@ -67,6 +70,9 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325 -DSR595
 
 for ILI9341   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341 -DSR595   
+
+for ILI9342   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342 -DSR595   
 
 ---
 
