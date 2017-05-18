@@ -31,8 +31,8 @@
 #define ORDER LSBFIRST
 #endif
 
-#define XMAX    240
-#define YMAX    320
+//#define _width    240
+//#define _height    320
 #define _DEBUG_ 0
 
 uint16_t _FONT_DIRECTION_;
@@ -42,6 +42,8 @@ uint16_t _FONT_UNDER_LINE_;
 uint16_t _FONT_UNDER_LINE_COLOR_;
 
 uint16_t _model;
+uint16_t _width;
+uint16_t _height;
 
 #ifndef SR595
 void lcdWriteByte(uint8_t data) {
@@ -141,8 +143,10 @@ void lcdWriteRegister(uint8_t addr, uint16_t data) {
 }
 
 
-void lcdInit(uint16_t model) {
+void lcdInit(uint16_t model, uint16_t width, uint16_t height) {
   _model = model;
+  _width = width;
+  _height = height;
   pinMode(LCD_CS, OUTPUT);
   digitalWrite(LCD_CS, HIGH);
   pinMode(LCD_RS, OUTPUT);
@@ -395,8 +399,8 @@ void lcdSetup(void) {
 // y:Y coordinate
 // color:color
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
-  if (x < 0 || x >= XMAX) return;
-  if (y < 0 || y >= YMAX) return;
+  if (x < 0 || x >= _width) return;
+  if (y < 0 || y >= _height) return;
 
   if (_model == 0x9325) {
    lcdWriteRegister(0x20, x); // RAM Address Set 1
@@ -422,19 +426,19 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
 // color:color
 void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
   int i,j;
-  if (x1 > XMAX) return;
+  if (x1 > _width) return;
   if (x1 < 0) x1=0;
-  if (x2 > XMAX) x2=XMAX;
-  if (y1 > YMAX) return;
+  if (x2 >= _width) x2=_width-1;
+  if (y1 > _height) return;
   if (y1 < 0) y1=0;
-  if (y2 > YMAX) y2=YMAX;
+  if (y2 >= _height) y2=_height-1;
 
   if (_model == 0x9325) {
-   for(j=y1;j<y2+1;j++){
+   for(j=y1;j<=y2;j++){
     lcdWriteRegister(0x20, x1); // RAM Address Set 1
     lcdWriteRegister(0x21, j); // RAM Address Set 2
     lcdWriteCommand(0x22); // Write Data to GRAM
-    for(i=x1;i<x2+1;i++){
+    for(i=x1;i<=x2;i++){
       lcdWriteDataWord(color); // Write Data to GRAM
     }
    }
@@ -458,7 +462,7 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
 // Fill screen
 // color:color
 void lcdFillScreen(uint16_t color) {
-  lcdDrawFillRect(0, 0, XMAX-1, YMAX-1, color);
+  lcdDrawFillRect(0, 0, _width-1, _height-1, color);
 }
 
 // Draw line

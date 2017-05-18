@@ -5,12 +5,6 @@
 #include <wiringPi.h>
 #include "ili93xx.h"
 
-#define XMAX    240
-#define YMAX    320
-
-#define XMAX2   239
-#define YMAX2   319
-
 FontxFile fxG32[2];
 FontxFile fxM32[2];
 FontxFile fxG24[2];
@@ -50,19 +44,31 @@ int main()
   // 24Dot Mincho
   Fontx_init(fxM24,"./fontx/ILMH24XF.FNT","./fontx/ILMZ24XF.FNT");
 
+  int XMAX,YMAX;
+  int XMAX2,YMAX2;
+  XMAX = 240;
+  XMAX2 = XMAX - 1;
+  YMAX = 320;
+  YMAX2 = YMAX - 1;
   char model[10];
 #ifdef ILI9325
   strcpy(model,"ILI9325");
   printf("mode:%s\n",model);
-  lcdInit(0x9325);
+  lcdInit(0x9325,XMAX,YMAX);
 #endif
 
 #ifdef ILI9341
   strcpy(model,"ILI9341");
   printf("mode:%s\n",model);
-  lcdInit(0x9341);
+  lcdInit(0x9341,XMAX,YMAX);
 #endif
-//  lcdInit();
+
+#ifdef ILI9342
+  strcpy(model,"ILI9342");
+  printf("mode:%s\n",model);
+  lcdInit(0x9342,XMAX,YMAX);
+#endif
+
   lcdReset();
   lcdSetup();
 
@@ -98,17 +104,21 @@ if(_DEBUG_)inputKey();
   color = GREEN;
   lcdDrawFillRect(XMAX-20,0,XMAX,20,color);
   lcdDrawFillArrow(XMAX-30,30,XMAX-20,20,10,color);
-  xpos = 130;
+//  xpos = 130;
+  xpos = XMAX-110;
   ypos = 30;
-  strcpy(utf,"239,0");
+//  strcpy(utf,"239,0");
+  sprintf(utf,"%d,0",XMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = BLUE;
   lcdDrawFillRect(0,YMAX-20,20,YMAX,color);
   lcdDrawFillArrow(30,YMAX-30,20,YMAX-20,10,color);
   xpos = 30;
-  ypos = 250;
-  strcpy(utf,"0,319");
+//  ypos = 250;
+  ypos = YMAX-70;
+//  strcpy(utf,"0,319");
+  sprintf(utf,"%d,0",YMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = PURPLE;
@@ -116,7 +126,8 @@ if(_DEBUG_)inputKey();
   lcdDrawFillArrow(XMAX-30,YMAX-30,XMAX-20,YMAX-20,10,color);
   xpos = 130;
   ypos = 250;
-  strcpy(utf,"239,319");
+//  strcpy(utf,"239,319");
+  sprintf(utf,"%d,%d",XMAX2,YMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   sleep(1);

@@ -20,7 +20,7 @@ void lcdWriteDataWord(uint16_t data);
 void lcdWriteDataByte(uint8_t data);
 void lcdWriteCommand(uint8_t command);
 void lcdWriteRegister(uint8_t addr, uint16_t data);
-void lcdInit(uint16_t model);
+void lcdInit(uint16_t model, uint16_t width, uint16_t height);
 void lcdReset(void);
 void lcdSetup(void);
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color);
