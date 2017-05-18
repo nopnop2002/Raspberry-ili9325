@@ -90,6 +90,15 @@ int main()
   }
   sleep(1);
 if(_DEBUG_)inputKey();
+  
+  for(i=0;i<2;i++) {
+    lcdDisplayOff();
+    sleep(1);
+    lcdDisplayOn();
+    sleep(1);
+  }
+  sleep(1);
+if(_DEBUG_)inputKey();
 
   //coner angle
   lcdFillScreen(WHITE);

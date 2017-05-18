@@ -893,13 +893,22 @@ void lcdUnsetFontUnderLine(void) {
   _FONT_UNDER_LINE_ = false;
 }
 
-// Display off
+// Display Off
 void lcdDisplayOff(void) {
-  lcdWriteRegister(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
+  if (_model == 0x9325) {
+   lcdWriteRegister(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
+  } else if (_model == 0x9341 || _model == 0x9342) {
+   lcdWriteCommand(0x28); 
+  }
 }
 
-// Display on
+// Display On
 void lcdDisplayOn(void) {
-  lcdWriteRegister(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
+  if (_model == 0x9325) {
+   lcdWriteRegister(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
+  } else if (_model == 0x9341 || _model == 0x9342) {
+   lcdWriteCommand(0x29); 
+  }
+
 }
 
