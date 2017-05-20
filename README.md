@@ -31,8 +31,14 @@ Wirering(Without 74x595)
 |LCD_D5|--|Pin#32|
 |LCD_D6|--|Pin#36|
 |LCD_D7|--|Pin#38|
-|5V|--|5V|
+|5V|--|5V(*)|
+|3.3V|--|3.3V(*)|
 |GND|--|GND|
+
+(*)When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
+(*)When a regulator is NOT mounted on the back, it's operated 3.3V.   
+
+----
 
 build   
 for ILI9325   
@@ -69,8 +75,14 @@ Wirering(With 74x595)
 |LCD_D5|--||--|QF|
 |LCD_D6|--||--|QG|
 |LCD_D7|--||--|QH|
-|5V|--|5V|||
+|5V|--|5V(*)|||
+|3.3V|--|3.3V(*)|||
 |GND|--|GND|||
+
+(*)When a regulator is mounted on the back, it's operated 5V.   
+(*)When a regulator is NOT mounted on the back, it's operated 3.3V.   
+
+----
 
 build   
 for ILI9325   
