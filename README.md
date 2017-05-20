@@ -1,6 +1,5 @@
 # ili9325_rpi
-ILI9325/9341/9342 TFT Library for wiringPi
-
+Parallel TFT Library for wiringPi
 
 This is library for RaspberryPi/OrangePi.   
 You can use a TFT Shield for UNO R3.   
@@ -9,6 +8,7 @@ Supported TFT controllers:
 ILI9325   
 ILI9341   
 ILI9342   
+S6D1121   
 Primarily, these TFT Shiled is the one for Arduino.   
 
 ----
@@ -42,6 +42,9 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341
 
 for ILI9342   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342   
+
+for S6D1121   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121   
 
 ----
 
