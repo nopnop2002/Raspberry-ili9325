@@ -94,6 +94,9 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341 -DSR595
 for ILI9342   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342 -DSR595   
 
+for S6D1121   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121 -DSR595   
+
 ---
 
 ![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
