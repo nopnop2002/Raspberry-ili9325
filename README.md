@@ -4,6 +4,7 @@ Parallel TFT Library for wiringPi
 This is library for RaspberryPi/OrangePi.   
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
+
 Supported TFT controllers:   
 ILI9325   
 ILI9341   
