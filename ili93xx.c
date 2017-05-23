@@ -505,11 +505,13 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
 // color:color
 void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
   int i,j;
-  if (x1 > _width) return;
+  if (x1 >= _width) return;
   if (x1 < 0) x1=0;
+  if (x2 < 0) return;
   if (x2 >= _width) x2=_width-1;
-  if (y1 > _height) return;
+  if (y1 >= _height) return;
   if (y1 < 0) y1=0;
+  if (y2 < 0) return;
   if (y2 >= _height) y2=_height-1;
 
   if (_model == 0x9325) {
@@ -529,8 +531,8 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
    lcdWriteDataWord(y1);
    lcdWriteDataWord(y2);
    lcdWriteCommandByte(0x2C); // Memory Write
-   for(i=x1;i<x2+1;i++){
-    for(j=y1;j<y2+1;j++){
+   for(i=x1;i<=x2;i++){
+    for(j=y1;j<=y2;j++){
       lcdWriteDataWord(color);
     }
    }
