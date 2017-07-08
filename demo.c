@@ -46,35 +46,50 @@ int main()
 
   int XMAX,YMAX;
   int XMAX2,YMAX2;
-  XMAX = 240;
-  XMAX2 = XMAX - 1;
-  YMAX = 320;
-  YMAX2 = YMAX - 1;
   char model[10];
 
 #ifdef ILI9325
+  XMAX = 240;
+  YMAX = 320;
   strcpy(model,"ILI9325");
   printf("mode:%s\n",model);
   lcdInit(0x9325,XMAX,YMAX);
 #endif
 
 #ifdef ILI9341
+  XMAX = 240;
+  YMAX = 320;
   strcpy(model,"ILI9341");
   printf("mode:%s\n",model);
   lcdInit(0x9341,XMAX,YMAX);
 #endif
 
 #ifdef ILI9342
+  XMAX = 240;
+  YMAX = 320;
   strcpy(model,"ILI9342");
   printf("mode:%s\n",model);
   lcdInit(0x9342,XMAX,YMAX);
 #endif
 
+#ifdef ILI9481
+  XMAX = 320;
+  YMAX = 480;
+  strcpy(model,"ILI9481");
+  printf("mode:%s\n",model);
+  lcdInit(0x9481,XMAX,YMAX);
+#endif
+
 #ifdef S6D1121
+  XMAX = 240;
+  YMAX = 320;
   strcpy(model,"S6D1121");
   printf("mode:%s\n",model);
   lcdInit(0x1121,XMAX,YMAX);
 #endif
+
+  XMAX2 = XMAX - 1;
+  YMAX2 = YMAX - 1;
 
   lcdReset();
   lcdSetup();
@@ -138,8 +153,10 @@ if(_DEBUG_)inputKey();
   color = PURPLE;
   lcdDrawFillRect(XMAX-20,YMAX-20,XMAX,YMAX,color);
   lcdDrawFillArrow(XMAX-30,YMAX-30,XMAX-20,YMAX-20,10,color);
-  xpos = 130;
-  ypos = 250;
+//  xpos = 130;
+  xpos = XMAX-110;
+//  ypos = 250;
+  ypos = YMAX-70;
 //  strcpy(utf,"239,319");
   sprintf(utf,"%d,%d",XMAX2,YMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
