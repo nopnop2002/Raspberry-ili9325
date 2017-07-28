@@ -59,7 +59,7 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121
 
 ----
 
-Wirering(With 74x595)   
+Wirering(With 74x595) Very Slow(It's hardly useful)   
 
 |TFT||Rpi/Opi||74x595|
 |:-:|:-:|:-:|:-:|:-:|
@@ -68,20 +68,25 @@ Wirering(With 74x595)
 |LCD_RS|--|Pin#5|||
 |LCD_WR|--|Pin#26|||
 |LCD_RD|--|Pin#28|||
-|||Pin#16|--|DATA|
-|||Pin#18|--|CLOCK|
-|||Pin#22|--|LATCH|
-|LCD_D0|--||--|QA|
-|LCD_D1|--||--|QB
-|LCD_D2|--||--|QC|
-|LCD_D3|--||--|QD|
-|LCD_D4|--||--|QE|
-|LCD_D5|--||--|QF|
-|LCD_D6|--||--|QG|
-|LCD_D7|--||--|QH|
 |5V|--|5V(**)|||
 |3.3V|--|3.3V(**)|||
 |GND|--|GND|||
+|LCD_D1|--||--|QB(Pin#1)
+|LCD_D2|--||--|QC(Pin#2)|
+|LCD_D3|--||--|QD(Pin#3)|
+|LCD_D4|--||--|QE(Pin#4)|
+|LCD_D5|--||--|QF(Pin#5)|
+|LCD_D6|--||--|QG(Pin#6)|
+|LCD_D7|--||--|QH(Pin#7)|
+|||GND|--|GND(Pin#8)|
+|||N/C|--|QH'(Pin#9)|
+|||3.3V|--|SRCLR(Pin#10)|
+|||Pin#18|--|SRCLK(Pin#11)|
+|||Pin#22|--|RCLK(Pin#12)|
+|||GND|--|OE(Pin#13)|
+|||Pin#16|--|SER(Pin#14)|
+|LCD_D0|--||--|QA(Pin#15)|
+|||3.3V|--|VCC(Pin#16)|
 
 **When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
 **When a regulator is NOT mounted on the back, it's operated 3.3V.   
