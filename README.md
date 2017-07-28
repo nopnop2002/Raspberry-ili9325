@@ -79,7 +79,7 @@ Wirering(With 74x595) Very Slow(It's hardly useful)
 |LCD_D6|--||--|QG(Pin#6)|
 |LCD_D7|--||--|QH(Pin#7)|
 |||GND|--|GND(Pin#8)|
-|||N/C|--|QH'(Pin#9)|
+|||(N/C)|--|QH'(Pin#9)|
 |||3.3V|--|SRCLR(Pin#10)|
 |||Pin#18|--|SRCLK(Pin#11)|
 |||Pin#22|--|RCLK(Pin#12)|
