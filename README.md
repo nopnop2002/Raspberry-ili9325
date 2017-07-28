@@ -59,7 +59,7 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121
 
 ----
 
-Wirering(With 74x595) Very Slow(It's hardly useful)   
+Wirering(With 74x595) It's very Slow(It's hardly useful)   
 
 |TFT||Rpi/Opi||74x595|
 |:-:|:-:|:-:|:-:|:-:|
