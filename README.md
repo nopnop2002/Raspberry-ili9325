@@ -39,23 +39,26 @@ Wirering(Without 74x595)
 \*When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
 \*When a regulator is NOT mounted on the back, it's operated 3.3V.   
 
+You can change any pin.   
+Pin define is "pin.conf".   
+
 ----
 
 build   
 for ILI9325   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
 
 for ILI9341   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
 
 for ILI9342   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342   
 
 for ILI9481   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9481   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
 
 for S6D1121   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
 
 ----
 
@@ -95,19 +98,19 @@ Wirering(With 74x595) It's very Slow(It's hardly useful)
 
 build   
 for ILI9325   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9325 -DSR595   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325 -DSR595   
 
 for ILI9341   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9341 -DSR595   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DSR595   
 
 for ILI9342   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9342 -DSR595   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342 -DSR595   
 
 for ILI9481   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DILI9481 -DSR595   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481 -DSR595   
 
 for S6D1121   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -DS6D1121 -DSR595   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121 -DSR595   
 
 ---
 

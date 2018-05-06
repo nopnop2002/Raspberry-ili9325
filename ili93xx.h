@@ -15,6 +15,22 @@
 #define DIRECTION180    2
 #define DIRECTION270    3
 
+typedef struct {
+  int rst;
+  int cs;
+  int rs;
+  int wr;
+  int rd;
+  int d0;
+  int d1;
+  int d2;
+  int d3;
+  int d4;
+  int d5;
+  int d6;
+  int d7;
+} TFTPin;
+
 void lcdWriteByte(uint8_t data);
 void lcdWriteDataWord(uint16_t data);
 void lcdWriteDataByte(uint8_t data);
@@ -46,3 +62,4 @@ void lcdSetFontFill(uint16_t color);
 void lcdUnsetFontFill(void);
 void lcdSetFontUnderLine(uint16_t color);
 void lcdUnsetFontUnderLine(void);
+int ReadPinConfig(TFTPin *pin, char *path);

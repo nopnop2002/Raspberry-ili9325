@@ -13,6 +13,10 @@ typedef struct {
   FILE *file;
 } FontxFile;
 
+void Fontx_addFont(FontxFile *fx, const char *path);
+void Fontx_init(FontxFile *fxs,const char *f0,const char *f1);
+bool Fontx_openFontxFile(FontxFile *fx);
+void Fontx_closeFontxFile(FontxFile *fx);
 bool GetFontx (FontxFile *fxs, uint32_t sjis , uint8_t *pGlyph,
                uint8_t *pw, uint8_t *ph);
 void Font2Bitmap(uint8_t *fonts, uint8_t *line, uint8_t w, uint8_t h,

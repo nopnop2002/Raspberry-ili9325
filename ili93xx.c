@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <unistd.h>
 #include <wiringPi.h>
 #include <wiringShift.h>
 #include "ili93xx.h"
@@ -51,6 +52,8 @@ uint16_t _FONT_UNDER_LINE_COLOR_;
 uint16_t _model;
 uint16_t _width;
 uint16_t _height;
+
+TFTPin pins;
 
 #ifndef SR595
 void lcdWriteByte(uint8_t data) {
@@ -178,6 +181,44 @@ void lcdInit(uint16_t model, uint16_t width, uint16_t height) {
   _model = model;
   _width = width;
   _height = height;
+
+  pins.rst = 7;
+  pins.cs  = 8;
+  pins.rs  = 9;
+  pins.wr  = 11;
+  pins.rd  = 31;
+  pins.d0  = 21;
+  pins.d1  = 22;
+  pins.d2  = 23;
+  pins.d3  = 24;
+  pins.d4  = 25;
+  pins.d5  = 26;
+  pins.d6  = 27;
+  pins.d7  = 28;
+
+  char dir[128];
+  char ppath[128];
+  int i;
+  getcwd(dir, sizeof(dir));
+if(_DEBUG_)  printf("dir=%s\n",dir);
+//  strcpy(dir, argv[0]);
+  for(i=strlen(dir);i>0;i--) {
+    if (dir[i-1] == '/') {
+      dir[i] = 0;
+      break;
+    }
+  }
+if(_DEBUG_)  printf("dir=%s\n",dir);
+  strcpy(ppath,dir);
+  strcat(ppath,"pin.conf");
+if(_DEBUG_)  printf("ppath=%s\n",ppath);
+
+  ReadPinConfig(&pins, ppath);
+if(_DEBUG_)printf("rst=%d cs=%d rs=%d wr=%d rd=%d\n",
+  pins.rst,pins.cs,pins.rs,pins.wr,pins.rd);
+if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
+  pins.d0,pins.d1,pins.d2,pins.d3,pins.d4,pins.d5,pins.d6,pins.d7);
+
   pinMode(LCD_CS, OUTPUT);
   digitalWrite(LCD_CS, HIGH);
   pinMode(LCD_RS, OUTPUT);
@@ -893,7 +934,7 @@ if(_DEBUG_)printf("_FONT_DIRECTION_=%d\n",_FONT_DIRECTION_);
 
   rc = GetFontx(fx, sjis, fonts, &pw, &ph); // SJIS -> Font pattern
 if(_DEBUG_)printf("GetFontx rc=%d pw=%d ph=%d\n",rc,pw,ph);
-  if (!rc) return;
+  if (!rc) return -1;
 
   uint16_t xd1, yd1;
   uint16_t xd2, yd2;
@@ -1056,3 +1097,51 @@ void lcdUnsetFontUnderLine(void) {
 }
 
 
+int ReadPinConfig(TFTPin *pin, char *path) {
+  FILE *fp;
+  char buff[128];
+  int wk;
+
+//  printf("path=%s\n",path);
+  fp = fopen(path,"r");
+  if(fp == NULL) return 0;
+  while (fgets(buff,128,fp) != NULL) {
+//    printf("buf=%s\n",buff);
+//    printf("buff[0]=%x\n",buff[0]);
+    if (buff[0] == '#') continue;
+    if (buff[0] == 0x0a) continue;
+    if (strncmp(buff,"RST=",4) == 0) {
+      sscanf(buff, "RST=%d", &(pin->rst));
+    } else if (strncmp(buff,"RS=",3) == 0) {
+      sscanf(buff, "RS=%d", &(pin->rs));
+    }
+
+    if (strncmp(buff,"CS=",3) == 0) {
+      sscanf(buff, "CS=%d", &(pin->cs));
+    } else if (strncmp(buff,"WR=",3) == 0) {
+      sscanf(buff, "WR=%d", &(pin->wr));
+    } else if (strncmp(buff,"RD=",3) == 0) {
+      sscanf(buff, "RD=%d", &(pin->rd));
+    } else if (strncmp(buff,"D0=",3) == 0) {
+      sscanf(buff, "D0=%d", &(pin->d0));
+    } else if (strncmp(buff,"D1=",3) == 0) {
+      sscanf(buff, "D1=%d", &(pin->d1));
+    } else if (strncmp(buff,"D2=",3) == 0) {
+      sscanf(buff, "D2=%d", &(pin->d2));
+    } else if (strncmp(buff,"D3=",3) == 0) {
+      sscanf(buff, "D3=%d", &(pin->d3));
+    } else if (strncmp(buff,"D4=",3) == 0) {
+      sscanf(buff, "D4=%d", &(pin->d4));
+    } else if (strncmp(buff,"D5=",3) == 0) {
+      sscanf(buff, "D5=%d", &(pin->d5));
+    } else if (strncmp(buff,"D6=",3) == 0) {
+      sscanf(buff, "D6=%d", &(pin->d6));
+    } else if (strncmp(buff,"D7=",3) == 0) {
+      sscanf(buff, "D7=%d", &(pin->d7));
+    }
+
+  }
+  fclose(fp);
+  return 1;
+
+}
