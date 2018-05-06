@@ -15,6 +15,7 @@
 #include <wiringShift.h>
 #include "ili93xx.h"
 
+#if 0
 #define LCD_RST 7
 #define LCD_CS  8
 #define LCD_RS  9
@@ -30,6 +31,7 @@
 #define LCD_D5 26
 #define LCD_D6 27
 #define LCD_D7 28
+#endif
 #endif
 
 #ifdef SR595
@@ -57,14 +59,14 @@ TFTPin pins;
 
 #ifndef SR595
 void lcdWriteByte(uint8_t data) {
-  digitalWrite(LCD_D0, data & 1);
-  digitalWrite(LCD_D1, (data & 2) >> 1);
-  digitalWrite(LCD_D2, (data & 4) >> 2);
-  digitalWrite(LCD_D3, (data & 8) >> 3);
-  digitalWrite(LCD_D4, (data & 16) >> 4); 
-  digitalWrite(LCD_D5, (data & 32) >> 5);
-  digitalWrite(LCD_D6, (data & 64) >> 6);
-  digitalWrite(LCD_D7, (data & 128) >> 7);  
+  digitalWrite(pins.d0, data & 1);
+  digitalWrite(pins.d1, (data & 2) >> 1);
+  digitalWrite(pins.d2, (data & 4) >> 2);
+  digitalWrite(pins.d3, (data & 8) >> 3);
+  digitalWrite(pins.d4, (data & 16) >> 4); 
+  digitalWrite(pins.d5, (data & 32) >> 5);
+  digitalWrite(pins.d6, (data & 64) >> 6);
+  digitalWrite(pins.d7, (data & 128) >> 7);  
 }
 #endif
 
@@ -90,79 +92,79 @@ void lcdWriteByte(uint8_t data) {
 #endif
 
 void lcdWriteDataWord(uint16_t data) {
-  digitalWrite(LCD_CS, LOW);
-  digitalWrite(LCD_RS, HIGH);
-  digitalWrite(LCD_RD, HIGH);
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, HIGH);
+  digitalWrite(pins.rd, HIGH);
 
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(data >> 8);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(data);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
-  digitalWrite(LCD_CS, HIGH);  
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);  
 }
 
 void lcdWriteDataByte(uint8_t data) {
-  digitalWrite(LCD_CS, LOW);
-  digitalWrite(LCD_RS, HIGH);
-  digitalWrite(LCD_RD, HIGH);
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, HIGH);
+  digitalWrite(pins.rd, HIGH);
 #if 0
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(data >> 8);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 #endif
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(data);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
-  digitalWrite(LCD_CS, HIGH);  
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);  
 }
 
 void lcdWriteCommandWord(uint16_t command) {
-  digitalWrite(LCD_CS, LOW);
-  digitalWrite(LCD_RS, LOW);
-  digitalWrite(LCD_RD, HIGH);
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, LOW);
+  digitalWrite(pins.rd, HIGH);
 
-  digitalWrite(LCD_WR, HIGH);  
+  digitalWrite(pins.wr, HIGH);  
   lcdWriteByte(command >> 8);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(command);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
-  digitalWrite(LCD_CS, HIGH);    
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);    
 }
 
 void lcdWriteCommandByte(uint8_t command) {
-  digitalWrite(LCD_CS, LOW);
-  digitalWrite(LCD_RS, LOW);
-  digitalWrite(LCD_RD, HIGH);
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, LOW);
+  digitalWrite(pins.rd, HIGH);
 #if 0
-  digitalWrite(LCD_WR, HIGH);  
+  digitalWrite(pins.wr, HIGH);  
   lcdWriteByte(command >> 8);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 #endif
-  digitalWrite(LCD_WR, HIGH);
+  digitalWrite(pins.wr, HIGH);
   lcdWriteByte(command);
-  digitalWrite(LCD_WR, LOW);
+  digitalWrite(pins.wr, LOW);
   delayMicroseconds(10);
 
-  digitalWrite(LCD_WR, HIGH);
-  digitalWrite(LCD_CS, HIGH);    
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);    
 }
 
 
@@ -219,26 +221,26 @@ if(_DEBUG_)printf("rst=%d cs=%d rs=%d wr=%d rd=%d\n",
 if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
   pins.d0,pins.d1,pins.d2,pins.d3,pins.d4,pins.d5,pins.d6,pins.d7);
 
-  pinMode(LCD_CS, OUTPUT);
-  digitalWrite(LCD_CS, HIGH);
-  pinMode(LCD_RS, OUTPUT);
-  digitalWrite(LCD_RS, HIGH);
-  pinMode(LCD_WR, OUTPUT);
-  digitalWrite(LCD_WR, HIGH);
-  pinMode(LCD_RD, OUTPUT);
-  digitalWrite(LCD_RD, HIGH);
-  pinMode(LCD_RST, OUTPUT);
-  digitalWrite(LCD_RST, HIGH);  
+  pinMode(pins.cs, OUTPUT);
+  digitalWrite(pins.cs, HIGH);
+  pinMode(pins.rs, OUTPUT);
+  digitalWrite(pins.rs, HIGH);
+  pinMode(pins.wr, OUTPUT);
+  digitalWrite(pins.wr, HIGH);
+  pinMode(pins.rd, OUTPUT);
+  digitalWrite(pins.rd, HIGH);
+  pinMode(pins.rst, OUTPUT);
+  digitalWrite(pins.rst, HIGH);  
 
 #ifndef SR595
-  pinMode(LCD_D0, OUTPUT);
-  pinMode(LCD_D1, OUTPUT);
-  pinMode(LCD_D2, OUTPUT);
-  pinMode(LCD_D3, OUTPUT);  
-  pinMode(LCD_D4, OUTPUT);  
-  pinMode(LCD_D5, OUTPUT);
-  pinMode(LCD_D6, OUTPUT);
-  pinMode(LCD_D7, OUTPUT);  
+  pinMode(pins.d0, OUTPUT);
+  pinMode(pins.d1, OUTPUT);
+  pinMode(pins.d2, OUTPUT);
+  pinMode(pins.d3, OUTPUT);  
+  pinMode(pins.d4, OUTPUT);  
+  pinMode(pins.d5, OUTPUT);
+  pinMode(pins.d6, OUTPUT);
+  pinMode(pins.d7, OUTPUT);  
 #endif
 
 #ifdef SR595
@@ -253,9 +255,9 @@ if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
 }
 
 void lcdReset(void) {
-  digitalWrite(LCD_RST, LOW);
+  digitalWrite(pins.rst, LOW);
   delay(100); 
-  digitalWrite(LCD_RST, HIGH);
+  digitalWrite(pins.rst, HIGH);
   delay(100);
 }
 
