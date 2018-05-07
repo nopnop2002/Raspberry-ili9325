@@ -14,7 +14,6 @@ void Fontx_dump(FontxFile *fxs)
 }
 
 // フォントファイルパスを構造体に保存
-//void Fontx_addFont(FontxFile *fx, const char *path)
 void Fontx_addFont(FontxFile *fx, char *path)
 {
   memset(fx,0,sizeof(FontxFile));
@@ -23,7 +22,6 @@ void Fontx_addFont(FontxFile *fx, char *path)
 }
 
 // フォント構造体を初期化
-//void Fontx_init(FontxFile *fxs, const char *f0, const char *f1)
 void Fontx_init(FontxFile *fxs, char *f0, char *f1)
 {
   Fontx_addFont(&fxs[0],f0);
