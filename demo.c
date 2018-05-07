@@ -22,8 +22,7 @@ void inputKey() {
 }
 
 
-int main()
-{
+int main(int argc, char **argv){
   int i,j;
   uint16_t Y1,Y2;
   uint16_t X1,X2;
@@ -51,12 +50,27 @@ int main()
   int XMAX2,YMAX2;
   char model[10];
 
+  char dir[128];
+  char ppath[128];
+  strcpy(dir, argv[0]);
+  for(i=strlen(dir);i>0;i--) {
+    if (dir[i-1] == '/') {
+      dir[i] = 0;
+      break;
+    }
+  }
+//if(_DEBUG_)  printf("dir=%s\n",dir);
+  strcpy(ppath,dir);
+  strcat(ppath,"pin.conf");
+//if(_DEBUG_)  printf("ppath=%s\n",ppath);
+
+
 #ifdef ILI9325
   XMAX = 240;
   YMAX = 320;
   strcpy(model,"ILI9325");
   printf("mode:%s\n",model);
-  lcdInit(0x9325,XMAX,YMAX);
+  lcdInit(0x9325,XMAX,YMAX,ppath);
 #endif
 
 #ifdef ILI9327
@@ -64,7 +78,7 @@ int main()
   YMAX = 400;
   strcpy(model,"ILI9327");
   printf("mode:%s\n",model);
-  lcdInit(0x9327,XMAX,YMAX);
+  lcdInit(0x9327,XMAX,YMAX,ppath);
 #endif
 
 #ifdef SPFD5408
@@ -72,7 +86,7 @@ int main()
   YMAX = 320;
   strcpy(model,"SPFD5408");
   printf("mode:%s\n",model);
-  lcdInit(0x5408,XMAX,YMAX);
+  lcdInit(0x5408,XMAX,YMAX,ppath);
 #endif
 
 #ifdef R61505U
@@ -80,7 +94,7 @@ int main()
   YMAX = 320;
   strcpy(model,"R61505U");
   printf("mode:%s\n",model);
-  lcdInit(0x1505,XMAX,YMAX);
+  lcdInit(0x1505,XMAX,YMAX,ppath);
 #endif
 
 #ifdef ILI9341
@@ -88,7 +102,7 @@ int main()
   YMAX = 320;
   strcpy(model,"ILI9341");
   printf("mode:%s\n",model);
-  lcdInit(0x9341,XMAX,YMAX);
+  lcdInit(0x9341,XMAX,YMAX,ppath);
 #endif
 
 #ifdef ILI9342
@@ -96,7 +110,7 @@ int main()
   YMAX = 320;
   strcpy(model,"ILI9342");
   printf("mode:%s\n",model);
-  lcdInit(0x9342,XMAX,YMAX);
+  lcdInit(0x9342,XMAX,YMAX,ppath);
 #endif
 
 #ifdef ILI9481
@@ -104,7 +118,7 @@ int main()
   YMAX = 480;
   strcpy(model,"ILI9481");
   printf("mode:%s\n",model);
-  lcdInit(0x9481,XMAX,YMAX);
+  lcdInit(0x9481,XMAX,YMAX,ppath);
 #endif
 
 #ifdef S6D1121
@@ -112,7 +126,7 @@ int main()
   YMAX = 320;
   strcpy(model,"S6D1121");
   printf("mode:%s\n",model);
-  lcdInit(0x1121,XMAX,YMAX);
+  lcdInit(0x1121,XMAX,YMAX,ppath);
 #endif
 
   XMAX2 = XMAX - 1;
