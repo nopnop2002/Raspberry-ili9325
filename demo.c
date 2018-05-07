@@ -17,7 +17,7 @@ FontxFile fxM24[2];
 
 void inputKey() {
   char ch;
-  printf("Hit any key");
+  printf("Push Enter");
   scanf("%c",&ch);
 }
 
