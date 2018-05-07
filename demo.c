@@ -59,6 +59,22 @@ int main()
   lcdInit(0x9325,XMAX,YMAX);
 #endif
 
+#ifdef SPFD5408
+  XMAX = 240;
+  YMAX = 320;
+  strcpy(model,"SPFD5408");
+  printf("mode:%s\n",model);
+  lcdInit(0x5408,XMAX,YMAX);
+#endif
+
+#ifdef R61505U
+  XMAX = 240;
+  YMAX = 320;
+  strcpy(model,"R61505U");
+  printf("mode:%s\n",model);
+  lcdInit(0x1505,XMAX,YMAX);
+#endif
+
 #ifdef ILI9341
   XMAX = 240;
   YMAX = 320;

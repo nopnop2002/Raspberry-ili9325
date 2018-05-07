@@ -1,16 +1,19 @@
 # ili9325_rpi
-Parallel TFT Library for WiringPi
+8Bit Parallel TFT Library for WiringPi
 
 This is library for RaspberryPi/OrangePi.   
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
 
 Supported TFT controllers:   
-ILI9325   
-ILI9341   
-ILI9342   
-ILI9481   
-S6D1121   
+8bit Parallel ILI9325   
+8bit Parallel ILI9341   
+8bit Parallel ILI9342   
+8bit Parallel ILI9481   
+8bit Parallel SPFD5408   
+8bit Parallel S6D1121   
+8bit Parallel R61505U   
+
 Primarily, these TFT Shiled is the one for Arduino.   
 
 ----
@@ -57,8 +60,15 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342
 for ILI9481   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
 
+for SPFD5408   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DSPFD5408   
+
 for S6D1121   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
+
+for R61505U   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
+
 
 ----
 
