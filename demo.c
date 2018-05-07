@@ -36,6 +36,16 @@ int main(int argc, char **argv){
     return 1;
   }
 
+  char base[128];
+  strcpy(base, argv[0]);
+  for(i=strlen(base);i>0;i--) {
+    if (base[i-1] == '/') {
+      base[i] = 0;
+      break;
+    }
+  }
+//printf("base=%s\n",base);
+
   // You can change font file
   // 32Dot Gothic
   Fontx_init(fxG32,"./fontx/ILGH32XB.FNT","./fontx/ILGZ32XB.FNT");
@@ -46,23 +56,21 @@ int main(int argc, char **argv){
   // 24Dot Mincho
   Fontx_init(fxM24,"./fontx/ILMH24XF.FNT","./fontx/ILMZ24XF.FNT");
 
+#if 0
+  Fontx_dump(fxG32);
+  Fontx_dump(fxG24);
+  Fontx_dump(fxM32);
+  Fontx_dump(fxM24);
+#endif
+
   int XMAX,YMAX;
   int XMAX2,YMAX2;
   char model[10];
-
-  char dir[128];
   char ppath[128];
-  strcpy(dir, argv[0]);
-  for(i=strlen(dir);i>0;i--) {
-    if (dir[i-1] == '/') {
-      dir[i] = 0;
-      break;
-    }
-  }
-//if(_DEBUG_)  printf("dir=%s\n",dir);
-  strcpy(ppath,dir);
+
+  strcpy(ppath,base);
   strcat(ppath,"pin.conf");
-//if(_DEBUG_)  printf("ppath=%s\n",ppath);
+//printf("ppath=%s\n",ppath);
 
 
 #ifdef ILI9325

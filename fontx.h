@@ -13,8 +13,10 @@ typedef struct {
   FILE *file;
 } FontxFile;
 
-void Fontx_addFont(FontxFile *fx, const char *path);
-void Fontx_init(FontxFile *fxs,const char *f0,const char *f1);
+//void Fontx_addFont(FontxFile *fx, const char *path);
+void Fontx_addFont(FontxFile *fx, char *path);
+//void Fontx_init(FontxFile *fxs, const char *f0, const char *f1);
+void Fontx_init(FontxFile *fxs, char *f0, char *f1);
 bool Fontx_openFontxFile(FontxFile *fx);
 void Fontx_closeFontxFile(FontxFile *fx);
 bool GetFontx (FontxFile *fxs, uint32_t sjis , uint8_t *pGlyph,

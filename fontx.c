@@ -7,8 +7,15 @@
 
 #define FontxDebug 0 // for Debug
 
+void Fontx_dump(FontxFile *fxs)
+{
+  printf("%s\n",fxs[0].path);
+  printf("%s\n",fxs[1].path);
+}
+
 // フォントファイルパスを構造体に保存
-void Fontx_addFont(FontxFile *fx, const char *path)
+//void Fontx_addFont(FontxFile *fx, const char *path)
+void Fontx_addFont(FontxFile *fx, char *path)
 {
   memset(fx,0,sizeof(FontxFile));
   fx->path = path;
@@ -16,7 +23,8 @@ void Fontx_addFont(FontxFile *fx, const char *path)
 }
 
 // フォント構造体を初期化
-void Fontx_init(FontxFile *fxs,const char *f0,const char *f1)
+//void Fontx_init(FontxFile *fxs, const char *f0, const char *f1)
+void Fontx_init(FontxFile *fxs, char *f0, char *f1)
 {
   Fontx_addFont(&fxs[0],f0);
   Fontx_addFont(&fxs[1],f1);
@@ -170,7 +178,7 @@ bool GetFontx(FontxFile *fxs, uint32_t sjis , uint8_t *pGlyph,
 if(FontxDebug)printf("[GetFontx]sjis=%x %d\n",sjis,sjis);
   for(i=0; i<2; i++){
     if(!Fontx_openFontxFile(&fxs[i])) continue;
-//    printf("openFontxFile[%d]\n",i);
+    //printf("openFontxFile[%d]\n",i);
     
     if(sjis < 0x100){
       if(fxs[i].is_ank){
