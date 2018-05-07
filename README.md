@@ -48,7 +48,8 @@ Pin define is "pin.conf".
 
 ----
 
-build   
+# Build   
+
 for ILI9325   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
 
@@ -110,7 +111,8 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 ----
 
-build   
+# Build   
+
 for ILI9325   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325 -DSR595   
 
