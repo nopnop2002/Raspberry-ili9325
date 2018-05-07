@@ -7,6 +7,7 @@ This library can show a chart to TFT Shield.
 
 Supported TFT controllers:   
 8bit Parallel ILI9325   
+8bit Parallel ILI9327   
 8bit Parallel ILI9341   
 8bit Parallel ILI9342   
 8bit Parallel ILI9481   
@@ -18,7 +19,7 @@ Primarily, these TFT Shiled is the one for Arduino.
 
 ----
 
-Wirering(Without 74x595)   
+# Wirering(Without 74x595)   
 
 |TFT||Rpi/Opi|
 |:-:|:-:|:-:|
@@ -51,6 +52,9 @@ build
 for ILI9325   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
 
+for ILI9327   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9327   
+
 for ILI9341   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
 
@@ -72,7 +76,7 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 ----
 
-Wirering(With 74x595) It's very Slow(It's hardly useful)   
+# Wirering(With 74x595) It's very Slow(It's hardly useful)   
 
 |TFT||Rpi/Opi||74x595|
 |:-:|:-:|:-:|:-:|:-:|

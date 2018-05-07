@@ -59,6 +59,14 @@ int main()
   lcdInit(0x9325,XMAX,YMAX);
 #endif
 
+#ifdef ILI9327
+  XMAX = 240;
+  YMAX = 400;
+  strcpy(model,"ILI9327");
+  printf("mode:%s\n",model);
+  lcdInit(0x9327,XMAX,YMAX);
+#endif
+
 #ifdef SPFD5408
   XMAX = 240;
   YMAX = 320;
