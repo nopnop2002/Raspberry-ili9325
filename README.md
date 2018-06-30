@@ -1,5 +1,4 @@
-# ili9325_rpi
-8Bit/16Bit Parallel TFT Library for WiringPi
+# 8Bit/16Bit Parallel TFT Library for WiringPi
 
 This is library for RaspberryPi/OrangePi.   
 You can use a TFT Shield for UNO R3.   
@@ -125,6 +124,9 @@ cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 \*When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
 \*When a regulator is NOT mounted on the back, it's operated 3.3V.   
+
+You can change any pin.   
+Pin define is "pin.conf".   
 
 ----
 
