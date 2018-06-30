@@ -107,7 +107,7 @@ int main(int argc, char **argv){
 
   int XMAX,YMAX;
   int XMAX2,YMAX2;
-  char model[10];
+  char model[20];
 
   char ppath[128];
   strcpy(ppath,base);
@@ -151,10 +151,11 @@ int main(int argc, char **argv){
   XMAX = 240;
   YMAX = 320;
   strcpy(model,"ILI9341");
-#ifdef P16BIT
-  strcpy(model,"ILI9341(16Bit)");
-#endif
+#ifndef P16BIT
   printf("mode:%s\n",model);
+#else
+  printf("mode:%s(16Bit Parallel)\n",model);
+#endif
   lcdInit(0x9341,XMAX,YMAX,ppath);
 #endif
 
@@ -370,7 +371,7 @@ if(_DEBUG_)inputKey();
   lcdUnsetFontUnderLine();
 if(_DEBUG_)inputKey();
 
-  //draw malti font
+  //draw multi font
   lcdFillScreen(WHITE);
   lcdSetFontDirection(DIRECTION90);
 

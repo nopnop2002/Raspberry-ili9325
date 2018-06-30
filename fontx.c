@@ -7,14 +7,8 @@
 
 #define FontxDebug 0 // for Debug
 
-void Fontx_dump(FontxFile *fxs)
-{
-  printf("%s\n",fxs[0].path);
-  printf("%s\n",fxs[1].path);
-}
-
 // フォントファイルパスを構造体に保存
-void Fontx_addFont(FontxFile *fx, char *path)
+void Fontx_addFont(FontxFile *fx, const char *path)
 {
   memset(fx,0,sizeof(FontxFile));
   fx->path = path;
@@ -22,7 +16,7 @@ void Fontx_addFont(FontxFile *fx, char *path)
 }
 
 // フォント構造体を初期化
-void Fontx_init(FontxFile *fxs, char *f0, char *f1)
+void Fontx_init(FontxFile *fxs,const char *f0,const char *f1)
 {
   Fontx_addFont(&fxs[0],f0);
   Fontx_addFont(&fxs[1],f1);
@@ -176,13 +170,13 @@ bool GetFontx(FontxFile *fxs, uint32_t sjis , uint8_t *pGlyph,
 if(FontxDebug)printf("[GetFontx]sjis=%x %d\n",sjis,sjis);
   for(i=0; i<2; i++){
     if(!Fontx_openFontxFile(&fxs[i])) continue;
-    //printf("openFontxFile[%d]\n",i);
+//    printf("openFontxFile[%d]\n",i);
     
     if(sjis < 0x100){
       if(fxs[i].is_ank){
 if(FontxDebug)printf("[GetFontx]fxs.is_ank fxs.fsz=%d\n",fxs[i].fsz);
 	offset = 17 + sjis * fxs[i].fsz;
-if(FontxDebug)printf("[GetFontx]offset=%ld\n",offset);
+if(FontxDebug)printf("[GetFontx]offset=%d\n",offset);
 	if(fseek(fxs[i].file, offset, SEEK_SET)) {
   	  printf("Fontx::fseek(18) failed.\n");
 	  return false;
@@ -217,7 +211,6 @@ if(FontxDebug)printf("[GetFontx]buf=%x %x\n",buf[0],buf[1]);
 	      printf("FsFontx::seek(%u) failed.\n",pos);
 	      return false;
 	    }
-if(FontxDebug)printf("[GetFontx]fxs.is_utf fxs.fsz=%d\n",fxs[i].fsz);
 	    if(fread(pGlyph, 1, fxs[i].fsz, fxs[i].file) != fxs[i].fsz){
 	      printf("Fontx::fread failed.\n");
 	      return false;
