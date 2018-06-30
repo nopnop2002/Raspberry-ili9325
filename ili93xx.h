@@ -29,10 +29,20 @@ typedef struct {
   int d5;
   int d6;
   int d7;
+  int d8;
+  int d9;
+  int d10;
+  int d11;
+  int d12;
+  int d13;
+  int d14;
+  int d15;
 } TFTPin;
 
 void lcdWriteByte(uint8_t data);
+void lcdWriteWord(uint16_t data);
 void lcdWriteDataWord(uint16_t data);
+void lcdWriteDataWord_16bit(uint16_t data);
 void lcdWriteDataByte(uint8_t data);
 void lcdWriteCommandWord(uint16_t command);
 void lcdWriteCommandByte(uint8_t command);

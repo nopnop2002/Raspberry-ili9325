@@ -42,6 +42,7 @@ uint16_t _height;
 TFTPin pins;
 
 #ifndef SR595
+
 void lcdWriteByte(uint8_t data) {
   digitalWrite(pins.d0, data & 1);
   digitalWrite(pins.d1, (data & 2) >> 1);
@@ -52,6 +53,26 @@ void lcdWriteByte(uint8_t data) {
   digitalWrite(pins.d6, (data & 64) >> 6);
   digitalWrite(pins.d7, (data & 128) >> 7);  
 }
+
+void lcdWriteWord(uint16_t data) {
+  digitalWrite(pins.d0, data & 1);
+  digitalWrite(pins.d1, (data & 2) >> 1);
+  digitalWrite(pins.d2, (data & 4) >> 2);
+  digitalWrite(pins.d3, (data & 8) >> 3);
+  digitalWrite(pins.d4, (data & 16) >> 4);
+  digitalWrite(pins.d5, (data & 32) >> 5);
+  digitalWrite(pins.d6, (data & 64) >> 6);
+  digitalWrite(pins.d7, (data & 128) >> 7);
+  digitalWrite(pins.d8, (data & 256) >> 8);
+  digitalWrite(pins.d9, (data & 512) >> 9);
+  digitalWrite(pins.d10, (data & 1024) >> 10);
+  digitalWrite(pins.d11, (data & 2048) >> 11);
+  digitalWrite(pins.d12, (data & 4096) >> 12);
+  digitalWrite(pins.d13, (data & 8192) >> 13);
+  digitalWrite(pins.d14, (data & 16384) >> 14);
+  digitalWrite(pins.d15, (data & 32768) >> 15);
+}
+
 #endif
 
 #ifdef SR595
@@ -94,6 +115,21 @@ void lcdWriteDataWord(uint16_t data) {
   digitalWrite(pins.cs, HIGH);  
 }
 
+// For 16bit parallel interface
+// It's effective only at color data.
+// Many thanks for myg3nx
+void lcdWriteDataWord_16bit(uint16_t data) {
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, HIGH);
+  digitalWrite(pins.rd, HIGH);
+  digitalWrite(pins.wr, HIGH);
+  lcdWriteWord(data);
+  digitalWrite(pins.wr, LOW);
+  delayMicroseconds(10);
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);
+}
+
 void lcdWriteDataByte(uint8_t data) {
   digitalWrite(pins.cs, LOW);
   digitalWrite(pins.rs, HIGH);
@@ -131,6 +167,22 @@ void lcdWriteCommandWord(uint16_t command) {
   digitalWrite(pins.wr, HIGH);
   digitalWrite(pins.cs, HIGH);    
 }
+
+#if 0
+void lcdWriteCommandWord(uint16_t command) {
+  digitalWrite(pins.cs, LOW);
+  digitalWrite(pins.rs, LOW);
+  digitalWrite(pins.rd, HIGH);
+
+  digitalWrite(pins.wr, HIGH);  
+  lcdWriteWord(command);
+  digitalWrite(pins.wr, LOW);
+  delayMicroseconds(10);
+
+  digitalWrite(pins.wr, HIGH);
+  digitalWrite(pins.cs, HIGH);    
+}
+#endif
 
 void lcdWriteCommandByte(uint8_t command) {
   digitalWrite(pins.cs, LOW);
@@ -191,6 +243,7 @@ void lcdInit(uint16_t model, uint16_t width, uint16_t height, char* ppath) {
   _width = width;
   _height = height;
 
+#if 0
   pins.rst = 7;
   pins.cs  = 8;
   pins.rs  = 9;
@@ -204,6 +257,7 @@ void lcdInit(uint16_t model, uint16_t width, uint16_t height, char* ppath) {
   pins.d5  = 26;
   pins.d6  = 27;
   pins.d7  = 28;
+#endif
 
 if(_DEBUG_)  printf("ppath=%s\n",ppath);
 
@@ -212,6 +266,10 @@ if(_DEBUG_)printf("rst=%d cs=%d rs=%d wr=%d rd=%d\n",
   pins.rst,pins.cs,pins.rs,pins.wr,pins.rd);
 if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
   pins.d0,pins.d1,pins.d2,pins.d3,pins.d4,pins.d5,pins.d6,pins.d7);
+#ifdef P16BIT
+if(_DEBUG_)printf("d8=%d d9=%d d10=%d d11=%d d12=%d d13=%d d14=%d d15=%d\n",
+  pins.d8,pins.d9,pins.d10,pins.d11,pins.d12,pins.d13,pins.d14,pins.d15);
+#endif
 
   pinMode(pins.cs, OUTPUT);
   digitalWrite(pins.cs, HIGH);
@@ -233,6 +291,16 @@ if(_DEBUG_)printf("d0=%d d1=%d d2=%d d4=%d d4=%d d5=%d d6=%d d7=%d\n",
   pinMode(pins.d5, OUTPUT);
   pinMode(pins.d6, OUTPUT);
   pinMode(pins.d7, OUTPUT);  
+
+  pinMode(pins.d8, OUTPUT);  
+  pinMode(pins.d9, OUTPUT);  
+  pinMode(pins.d10, OUTPUT);  
+  pinMode(pins.d11, OUTPUT);  
+  pinMode(pins.d12, OUTPUT);  
+  pinMode(pins.d13, OUTPUT);  
+  pinMode(pins.d14, OUTPUT);  
+  pinMode(pins.d15, OUTPUT);  
+
 #endif
 
 #ifdef SR595
@@ -469,7 +537,11 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
    lcdWriteDataWord(y);
    lcdWriteDataWord(y);
    lcdWriteCommandByte(0x2C); // Memory Write
+#ifndef P16BIT
    lcdWriteDataWord(color);
+#else
+   lcdWriteDataWord_16bit(color);
+#endif
 
   } else if (_model == 0x1121) {
    lcdWriteRegisterWord(0x0020,x); // RAM Address Set 1
@@ -515,7 +587,11 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
    lcdWriteCommandByte(0x2C); // Memory Write
    for(i=x1;i<=x2;i++){
     for(j=y1;j<=y2;j++){
+#ifndef P16BIT
       lcdWriteDataWord(color);
+#else
+      lcdWriteDataWord_16bit(color);
+#endif
     }
    }
   } else if (_model == 0x1121) {
@@ -1004,9 +1080,7 @@ int ReadPinConfig(TFTPin *pin, char *path) {
       sscanf(buff, "RST=%d", &(pin->rst));
     } else if (strncmp(buff,"RS=",3) == 0) {
       sscanf(buff, "RS=%d", &(pin->rs));
-    }
-
-    if (strncmp(buff,"CS=",3) == 0) {
+    }  else if (strncmp(buff,"CS=",3) == 0) {
       sscanf(buff, "CS=%d", &(pin->cs));
     } else if (strncmp(buff,"WR=",3) == 0) {
       sscanf(buff, "WR=%d", &(pin->wr));
@@ -1028,6 +1102,22 @@ int ReadPinConfig(TFTPin *pin, char *path) {
       sscanf(buff, "D6=%d", &(pin->d6));
     } else if (strncmp(buff,"D7=",3) == 0) {
       sscanf(buff, "D7=%d", &(pin->d7));
+    } else if (strncmp(buff,"D8=",3) == 0) {
+      sscanf(buff, "D8=%d", &(pin->d8));
+    } else if (strncmp(buff,"D9=",3) == 0) {
+      sscanf(buff, "D9=%d", &(pin->d9));
+    } else if (strncmp(buff,"D10=",4) == 0) {
+      sscanf(buff, "D10=%d", &(pin->d10));
+    } else if (strncmp(buff,"D11=",4) == 0) {
+      sscanf(buff, "D11=%d", &(pin->d11));
+    } else if (strncmp(buff,"D12=",4) == 0) {
+      sscanf(buff, "D12=%d", &(pin->d12));
+    } else if (strncmp(buff,"D13=",4) == 0) {
+      sscanf(buff, "D13=%d", &(pin->d13));
+    } else if (strncmp(buff,"D14=",4) == 0) {
+      sscanf(buff, "D14=%d", &(pin->d14));
+    } else if (strncmp(buff,"D15=",4) == 0) {
+      sscanf(buff, "D15=%d", &(pin->d15));
     }
 
   }

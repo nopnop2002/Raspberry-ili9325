@@ -151,6 +151,9 @@ int main(int argc, char **argv){
   XMAX = 240;
   YMAX = 320;
   strcpy(model,"ILI9341");
+#ifdef P16BIT
+  strcpy(model,"ILI9341(16Bit)");
+#endif
   printf("mode:%s\n",model);
   lcdInit(0x9341,XMAX,YMAX,ppath);
 #endif
