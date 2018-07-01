@@ -161,7 +161,7 @@ Wirering for SPI-Touch sensor
 \*\*Define this   
 #define SPI_CHANNEL 0 // /dev/spidev0.0  
 //#define SPI_CHANNEL 1 // /dev/spidev0.1  
-#define GPIO_PEN   
+#define GPIO_PEN 6   
 
 \*\*\*Can't change   
 
