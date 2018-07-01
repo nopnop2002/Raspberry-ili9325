@@ -134,9 +134,31 @@ Pin define is "pin.conf".
 
 for ILI9341   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+sudo ./demo   
 
 ----
 
 ![ili9341-16bit-1](https://user-images.githubusercontent.com/6020549/42122957-c62b7b66-7c84-11e8-8619-5c4ab0d624f5.JPG)
 
 ![ili9341-16bit-2](https://user-images.githubusercontent.com/6020549/42122960-c92f25e2-7c84-11e8-970b-11f0f08a88cd.JPG)
+
+----
+
+This module has SPI-Touch Sensor.   
+So you can read touch position.   
+Please make SPI effective first.
+
+cc -o xpt xpt.c xpt2046.c -lwiringPi -lm -lpthread   
+sudo ./xpt   
+
+![touch-1](https://user-images.githubusercontent.com/6020549/42130602-8710a000-7d24-11e8-9b8e-b1819301bc0f.jpg)
+
+
+And you can operate Pi using touch sensor.  
+
+cc -o touch touch.c fontx.c ili93xx.c xpt2046.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+sudo ./touch   
+
+
+![touch-2](https://user-images.githubusercontent.com/6020549/42130606-8b7c0ed6-7d24-11e8-97e8-41f7cf18d4bc.JPG)
+

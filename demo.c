@@ -31,6 +31,10 @@ int main(int argc, char **argv){
   uint16_t size;
   uint8_t utf[10];
 
+  int XMAX,YMAX;
+  int XMAX2,YMAX2;
+  char model[20];
+
   if(wiringPiSetup() == -1) {
     printf("Setup Fail\n");
     return 1;
@@ -104,10 +108,6 @@ int main(int argc, char **argv){
   Fontx_dump(fxM32);
   Fontx_dump(fxM24);
 #endif
-
-  int XMAX,YMAX;
-  int XMAX2,YMAX2;
-  char model[20];
 
   char ppath[128];
   strcpy(ppath,base);
