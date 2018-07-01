@@ -158,7 +158,7 @@ Wirering for SPI-Touch sensor
 |CLK|--|Pin#23(\*\*\*)|
 
 
-\*\*Define this   
+\*\*It's defined in the source cord.   
 #define SPI_CHANNEL 0 // /dev/spidev0.0  
 //#define SPI_CHANNEL 1 // /dev/spidev0.1  
 #define GPIO_PEN 6   
