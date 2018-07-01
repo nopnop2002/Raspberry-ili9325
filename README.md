@@ -148,21 +148,22 @@ So you can read touch position.
 Please make SPI effective first.
 
 Wirering for SPI-Touch sensor   
+
 |TFT||Rpi/Opi|
 |:-:|:-:|:-:|
-|PEN|--|Pin#22(**)|
-|T_CS|--|Pin#24(**)|
-|MOSI|--|Pin#19(***)|
-|MISO|--|Pin#21(***)|
-|CLK|--|Pin#23(***)|
+|PEN|--|Pin#22(\*\*)|
+|T_CS|--|Pin#24(\*\*)|
+|MOSI|--|Pin#19(\*\*\*)|
+|MISO|--|Pin#21(\*\*\*)|
+|CLK|--|Pin#23(\*\*\*)|
 
 
-\**Define this   
+\*\*Define this   
 #define SPI_CHANNEL 0 // /dev/spidev0.0  
 //#define SPI_CHANNEL 1 // /dev/spidev0.1  
 #define GPIO_PEN   
 
-\***Can't change   
+\*\*\*Can't change   
 
 
 cc -o xpt xpt.c xpt2046.c -lwiringPi -lm -lpthread   
