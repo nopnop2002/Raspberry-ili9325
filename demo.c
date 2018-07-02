@@ -12,6 +12,8 @@ FontxFile fxG32[2];
 FontxFile fxM32[2];
 FontxFile fxG24[2];
 FontxFile fxM24[2];
+FontxFile fxG16[2];
+FontxFile fxM16[2];
 
 #define _DEBUG_ 1
 
@@ -90,6 +92,22 @@ int main(int argc, char **argv){
 //printf("%s\n",M24[0]);
 //printf("%s\n",M24[1]);
   Fontx_init(fxM24,M24[0],M24[1]);
+
+  // 16Dot Gothic
+  char G16[2][128];
+  strcpy(G16[0],base);
+  strcpy(G16[1],base);
+  strcat(G16[0],"fontx/ILGH16XB.FNT");
+  strcat(G16[1],"fontx/ILGZ16XB.FNT");
+  Fontx_init(fxG16,G16[0],G16[1]);
+
+  // 16Dot Mincho
+  char M16[2][128];
+  strcpy(M16[0],base);
+  strcpy(M16[1],base);
+  strcat(M16[0],"fontx/ILMH16XB.FNT");
+  strcat(M16[1],"fontx/ILMZ16XB.FNT");
+  Fontx_init(fxM16,M16[0],M16[1]);
 
 #if 0
   // 32Dot Gothic

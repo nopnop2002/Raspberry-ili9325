@@ -52,27 +52,44 @@ Pin define is "pin.conf".
 
 for ILI9325   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
 
 for ILI9327   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9327   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9327   
 
 for ILI9341   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
 
 for ILI9342   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342   
 
 for ILI9481   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
 
 for SPFD5408   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DSPFD5408   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DSPFD5408   
 
 for S6D1121   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
 
 for R61505U   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
+
+----
+
+# Start Demo   
+sudo ./demo   
+sudo ./draw draw1.txt   
+sudo ./draw draw2.txt   
+
+You can change draw1.txt & draw2.txt   
 
 ---
 
@@ -133,7 +150,16 @@ Pin define is "pin.conf".
 # Build   
 
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+
+----
+
+# Start Demo   
 sudo ./demo   
+sudo ./draw draw1.txt   
+sudo ./draw draw2.txt   
+
+You can change draw1.txt & draw2.txt   
 
 ----
 
