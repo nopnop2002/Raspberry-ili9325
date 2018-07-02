@@ -85,9 +85,10 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 ----
 
 # Start Demo   
-sudo ./demo   
-sudo ./draw draw1.txt   
-sudo ./draw draw2.txt   
+./demo   
+./draw draw1.txt   
+./draw draw2.txt   
+bash ./me.sh   
 
 You can change draw1.txt & draw2.txt   
 
@@ -155,9 +156,10 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 ----
 
 # Start Demo   
-sudo ./demo   
-sudo ./draw draw1.txt   
-sudo ./draw draw2.txt   
+./demo   
+./draw draw1.txt   
+./draw draw2.txt   
+bash ./me.sh   
 
 You can change draw1.txt & draw2.txt   
 
