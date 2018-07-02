@@ -90,7 +90,7 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 ./draw draw2.txt   
 bash ./me.sh   
 
-You can change draw1.txt & draw2.txt   
+You can change draw1.txt & draw2.txt & me.sh   
 
 ---
 
@@ -161,7 +161,7 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 ./draw draw2.txt   
 bash ./me.sh   
 
-You can change draw1.txt & draw2.txt   
+You can change draw1.txt & draw2.txt & me.sh   
 
 ----
 
