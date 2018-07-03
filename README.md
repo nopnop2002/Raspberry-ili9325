@@ -88,7 +88,7 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 ----
 
-# Start Demo   
+# Start Auto Demo   
 ./demo   
 
 ![ili9325-para1](https://cloud.githubusercontent.com/assets/6020549/24833926/38353b08-1d12-11e7-8d0d-5dae59c3499b.JPG)
@@ -105,7 +105,7 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 ----
 
-# Interpreter mode   
+# Start Interpreter mode   
 
 ./draw draw1.txt   
 ./draw draw2.txt   
@@ -162,7 +162,7 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 
 ----
 
-# Start Demo   
+# Start Auto Demo   
 ./demo   
 
 ![ili9341-16bit-1](https://user-images.githubusercontent.com/6020549/42122957-c62b7b66-7c84-11e8-8619-5c4ab0d624f5.JPG)
