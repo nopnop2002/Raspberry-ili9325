@@ -12,7 +12,7 @@ fi
 _echo "FillScrren,0xffff"
 _echo "SetFontDirection,1"
 
-_echo "DrawRoundRect,205,40,230,300,10,${color}"
+_echo "DrawRoundRect,205,40,230,300,10,0x0000"
 _echo "DrawUTF8String,G24,205,280,System Information,0x0000"
 
 #Blue(0000ff)
