@@ -86,13 +86,6 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 
 # Start Demo   
 ./demo   
-./draw draw1.txt   
-./draw draw2.txt   
-bash ./me.sh   
-
-You can change draw1.txt & draw2.txt & me.sh   
-
----
 
 ![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
 
@@ -111,6 +104,21 @@ You can change draw1.txt & draw2.txt & me.sh
 ![ili9325-para8](https://cloud.githubusercontent.com/assets/6020549/24995079/6043fb62-2068-11e7-974b-29e23126e38f.JPG)
 
 ----
+
+# Interpreter mode   
+
+./draw draw1.txt   
+./draw draw2.txt   
+
+cc -o rgb2color rgb2color.c   
+bash ./me.sh   
+
+You can change draw1.txt & draw2.txt & me.sh   
+
+![me_sh](https://user-images.githubusercontent.com/6020549/42207927-f32ae206-7ee5-11e8-80a0-f5cb81d76747.JPG)
+
+----
+
 
 # Wirering for 16Bit Parallel   
 |TFT||Rpi/Opi|
@@ -157,11 +165,6 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 
 # Start Demo   
 ./demo   
-./draw draw1.txt   
-./draw draw2.txt   
-bash ./me.sh   
-
-You can change draw1.txt & draw2.txt & me.sh   
 
 ----
 
