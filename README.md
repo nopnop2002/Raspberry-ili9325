@@ -15,6 +15,10 @@ Supported TFT controllers:
 8bit Parallel R61505U   
 16bit Parallel ILI9341   
 
+![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
+
+![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
+
 Primarily, these TFT Shiled is the one for Arduino.   
 
 ----
@@ -87,10 +91,6 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U
 # Start Demo   
 ./demo   
 
-![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
-
-![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
-
 ![ili9325-para1](https://cloud.githubusercontent.com/assets/6020549/24833926/38353b08-1d12-11e7-8d0d-5dae59c3499b.JPG)
 
 ![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24995032/3ee3292a-2068-11e7-9179-bf5a74ba2a38.JPG)
@@ -118,7 +118,6 @@ You can change draw1.txt & draw2.txt & me.sh
 ![me_sh](https://user-images.githubusercontent.com/6020549/42207927-f32ae206-7ee5-11e8-80a0-f5cb81d76747.JPG)
 
 ----
-
 
 # Wirering for 16Bit Parallel   
 |TFT||Rpi/Opi|
@@ -165,8 +164,6 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 
 # Start Demo   
 ./demo   
-
-----
 
 ![ili9341-16bit-1](https://user-images.githubusercontent.com/6020549/42122957-c62b7b66-7c84-11e8-8619-5c4ab0d624f5.JPG)
 
