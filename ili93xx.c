@@ -1029,8 +1029,8 @@ if(_DEBUG_)printf("sjis[%d]=%x y=%d\n",i,sjis[i],y);
   if (_FONT_DIRECTION_ == 0) return x;
   if (_FONT_DIRECTION_ == 2) return x;
   if (_FONT_DIRECTION_ == 1) return y;
-//  if (_FONT_DIRECTION_ == 3) return y;
-  return y;
+  if (_FONT_DIRECTION_ == 3) return y;
+  return 0;
 }
 
 // Set font direction
