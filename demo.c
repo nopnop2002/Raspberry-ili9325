@@ -27,11 +27,10 @@ void inputKey() {
 int main(int argc, char **argv){
   int i,j;
   uint16_t Y1,Y2;
-  uint16_t X1,X2;
   uint16_t xpos,ypos;
   uint16_t color;
   uint16_t size;
-  uint8_t utf[10];
+  unsigned char utf[10];
 
   int XMAX,YMAX;
   int XMAX2,YMAX2;
@@ -208,8 +207,6 @@ int main(int argc, char **argv){
   lcdSetup();
 
   //color bar
-  X1=XMAX/3;
-  X2=(XMAX/3)*2;
   Y1=YMAX/3;
   Y2=(YMAX/3)*2;
   for(i=0;i<XMAX;i++){
@@ -240,7 +237,7 @@ if(_DEBUG_)inputKey();
   lcdDrawFillArrow(30,30,20,20,10,color);
   xpos = 30;
   ypos = 30;
-  strcpy(utf,"0,0");
+  strcpy((char *)utf,"0,0");
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = GREEN;
@@ -249,8 +246,8 @@ if(_DEBUG_)inputKey();
 //  xpos = 130;
   xpos = XMAX-110;
   ypos = 30;
-//  strcpy(utf,"239,0");
-  sprintf(utf,"%d,0",XMAX2);
+//  strcpy((char *)utf,"239,0");
+  sprintf((char *)utf,"%d,0",XMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = BLUE;
@@ -259,8 +256,8 @@ if(_DEBUG_)inputKey();
   xpos = 30;
 //  ypos = 250;
   ypos = YMAX-70;
-//  strcpy(utf,"0,319");
-  sprintf(utf,"%d,0",YMAX2);
+//  strcpy((char *)utf,"0,319");
+  sprintf((char *)utf,"%d,0",YMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   color = PURPLE;
@@ -270,8 +267,8 @@ if(_DEBUG_)inputKey();
   xpos = XMAX-110;
 //  ypos = 250;
   ypos = YMAX-70;
-//  strcpy(utf,"239,319");
-  sprintf(utf,"%d,%d",XMAX2,YMAX2);
+//  strcpy((char *)utf,"239,319");
+  sprintf((char *)utf,"%d,%d",XMAX2,YMAX2);
   lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 if(_DEBUG_)inputKey();
 
@@ -318,8 +315,8 @@ if(_DEBUG_)inputKey();
   xpos = 0;
   ypos = YMAX2-(32*1);
   color = BLACK;
-//  strcpy(utf,"ILI93XX");
-  strcpy(utf,model);
+//  strcpy((char *)utf,"ILI93XX");
+  strcpy((char *)utf,model);
   xpos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   xpos = 0;
@@ -396,38 +393,38 @@ if(_DEBUG_)inputKey();
   xpos = XMAX2-(32*1);
   ypos = YMAX2;
   color = BLACK;
-  strcpy(utf,"32Dot Gothic");
+  strcpy((char *)utf,"32Dot Gothic");
   xpos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*2);
-  strcpy(utf,"ABCDEFGabcdefg");
+  strcpy((char *)utf,"ABCDEFGabcdefg");
   xpos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*3);
   ypos = YMAX2;
-  strcpy(utf,"32Dot Mincho");
+  strcpy((char *)utf,"32Dot Mincho");
   xpos = lcdDrawUTF8String(fxM32, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*4);
-  strcpy(utf,"ABCDEFGabcdefg");
+  strcpy((char *)utf,"ABCDEFGabcdefg");
   xpos = lcdDrawUTF8String(fxM32, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*5)-(24*0);
   ypos = YMAX2;
-  strcpy(utf,"24Dot Gothic");
+  strcpy((char *)utf,"24Dot Gothic");
   xpos = lcdDrawUTF8String(fxG24, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*5)-(24*1);
-  strcpy(utf,"ABCDEFGabcdefg");
+  strcpy((char *)utf,"ABCDEFGabcdefg");
   xpos = lcdDrawUTF8String(fxG24, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*5)-(24*2);
   ypos = YMAX2;
-  strcpy(utf,"24Dot Mincho");
+  strcpy((char *)utf,"24Dot Mincho");
   xpos = lcdDrawUTF8String(fxM24, xpos, ypos, utf, color);
 
   xpos = XMAX2-(32*5)-(24*3);
-  strcpy(utf,"ABCDEFGabcdefg");
+  strcpy((char *)utf,"ABCDEFGabcdefg");
   xpos = lcdDrawUTF8String(fxM24, xpos, ypos, utf, color);
 if(_DEBUG_)inputKey();
 
@@ -447,4 +444,5 @@ if(_DEBUG_)inputKey();
     size=rand()%30;
     lcdDrawFillRect(xpos,ypos,xpos+size,ypos+size,color);
   }
+  return 0;
 }

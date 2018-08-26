@@ -11,7 +11,7 @@
 typedef struct {
   char name[32];
   char font[32];
-  char utf[32];
+  unsigned char utf[32];
   uint16_t x1;
   uint16_t y1;
   uint16_t x2;
@@ -123,7 +123,7 @@ int cmdParse(char * buf, cmd_t * hoge) {
     strcpy(hoge->font,wk[1]);
     hoge->x1 = strtol(wk[2],NULL,0);
     hoge->y1 = strtol(wk[3],NULL,0);
-    strcpy(hoge->utf,wk[4]);
+    strcpy((char *)hoge->utf,wk[4]);
     hoge->color = strtol(wk[5],NULL,0);
     return 1;
 
@@ -165,7 +165,7 @@ void cmdDump(cmd_t hoge) {
 
 
 int main(int argc, char **argv){
-  int i,j;
+  int i;
   int XMAX,YMAX;
   char model[20];
 
@@ -404,5 +404,5 @@ if(_DEBUG_)cmdDump(cmd);
 
   }
   fclose(fp);
-
+  return 0;
 }
