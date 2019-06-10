@@ -44,7 +44,7 @@ void lcdWriteByte(uint8_t data) {
   digitalWrite(pins.d7, (data & 128) >> 7);  
 
   digitalWrite(pins.wr, LOW);
-  delayMicroseconds(10);
+  //delayMicroseconds(10);
   digitalWrite(pins.wr, HIGH);
 }
 
@@ -67,7 +67,7 @@ void lcdWriteWord(uint16_t data) {
   digitalWrite(pins.d15, (data & 32768) >> 15);
 
   digitalWrite(pins.wr, LOW);
-  delayMicroseconds(10);
+  //delayMicroseconds(10);
   digitalWrite(pins.wr, HIGH);
 }
 
