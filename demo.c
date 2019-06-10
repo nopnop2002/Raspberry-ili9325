@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <wiringPi.h>
+
 #include "ili93xx.h"
 
 FontxFile fxG32[2];
@@ -109,17 +110,6 @@ int main(int argc, char **argv){
   Fontx_init(fxM16,M16[0],M16[1]);
 
 #if 0
-  // 32Dot Gothic
-  Fontx_init(fxG32,"./fontx/ILGH32XB.FNT","./fontx/ILGZ32XB.FNT");
-  // 32Dot Mincho
-  Fontx_init(fxM32,"./fontx/ILMH32XF.FNT","./fontx/ILMZ32XF.FNT");
-  // 24Dot Gothic
-  Fontx_init(fxG24,"./fontx/ILGH24XB.FNT","./fontx/ILGZ24XB.FNT");
-  // 24Dot Mincho
-  Fontx_init(fxM24,"./fontx/ILMH24XF.FNT","./fontx/ILMZ24XF.FNT");
-#endif
-
-#if 0
   Fontx_dump(fxG32);
   Fontx_dump(fxG24);
   Fontx_dump(fxM32);
@@ -198,6 +188,14 @@ int main(int argc, char **argv){
   strcpy(model,"S6D1121");
   printf("mode:%s\n",model);
   lcdInit(0x1121,XMAX,YMAX,ppath);
+#endif
+
+#ifdef ST7781
+  XMAX = 240;
+  YMAX = 320;
+  strcpy(model,"ST7781");
+  printf("mode:%s\n",model);
+  lcdInit(0x7781,XMAX,YMAX,ppath);
 #endif
 
   XMAX2 = XMAX - 1;
