@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <wiringPi.h>
+
 #include "ili93xx.h"
 
 typedef struct {
@@ -22,12 +23,14 @@ typedef struct {
   uint16_t dir;
 } cmd_t;
 
+#if 0
 FontxFile fxG32[2];
 FontxFile fxM32[2];
 FontxFile fxG24[2];
 FontxFile fxM24[2];
 FontxFile fxG16[2];
 FontxFile fxM16[2];
+#endif
 
 #define _DEBUG_ 0
 
@@ -190,6 +193,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   }
 //printf("base=%s\n",base);
 
+
   // You can change font file
   // 32Dot Gothic
   char G32[2][128];
@@ -197,8 +201,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(G32[1],base);
   strcat(G32[0],"fontx/ILGH32XB.FNT");
   strcat(G32[1],"fontx/ILGZ32XB.FNT");
-//printf("%s\n",G32[0]);
-//printf("%s\n",G32[1]);
+  FontxFile fxG32[2];
   Fontx_init(fxG32,G32[0],G32[1]);
 
   // 32Dot Mincho
@@ -207,8 +210,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(M32[1],base);
   strcat(M32[0],"fontx/ILMH32XF.FNT");
   strcat(M32[1],"fontx/ILMZ32XF.FNT");
-//printf("%s\n",M32[0]);
-//printf("%s\n",M32[1]);
+  FontxFile fxM32[2];
   Fontx_init(fxM32,M32[0],M32[1]);
 
   // 24Dot Gothic
@@ -217,8 +219,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(G24[1],base);
   strcat(G24[0],"fontx/ILGH24XB.FNT");
   strcat(G24[1],"fontx/ILGZ24XB.FNT");
-//printf("%s\n",G24[0]);
-//printf("%s\n",G24[1]);
+  FontxFile fxG24[2];
   Fontx_init(fxG24,G24[0],G24[1]);
 
   // 24Dot Mincho
@@ -227,8 +228,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(M24[1],base);
   strcat(M24[0],"fontx/ILMH24XF.FNT");
   strcat(M24[1],"fontx/ILMZ24XF.FNT");
-//printf("%s\n",M24[0]);
-//printf("%s\n",M24[1]);
+  FontxFile fxM24[2];
   Fontx_init(fxM24,M24[0],M24[1]);
 
   // 16Dot Gothic
@@ -237,6 +237,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(G16[1],base);
   strcat(G16[0],"fontx/ILGH16XB.FNT");
   strcat(G16[1],"fontx/ILGZ16XB.FNT");
+  FontxFile fxG16[2];
   Fontx_init(fxG16,G16[0],G16[1]);
 
   // 16Dot Mincho
@@ -245,6 +246,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(M16[1],base);
   strcat(M16[0],"fontx/ILMH16XB.FNT");
   strcat(M16[1],"fontx/ILMZ16XB.FNT");
+  FontxFile fxM16[2];
   Fontx_init(fxM16,M16[0],M16[1]);
 
 
@@ -257,7 +259,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   Fontx_dump(fxM16);
 #endif
 
-  // set full path of pin.con
+  // set full path of pin.conf
   char ppath[128];
   strcpy(ppath,base);
   strcat(ppath,"pin.conf");
@@ -340,6 +342,14 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   strcpy(model,"S6D1121");
   printf("mode:%s\n",model);
   lcdInit(0x1121,XMAX,YMAX,ppath);
+#endif
+
+#ifdef ST7781
+  XMAX = 240;
+  YMAX = 320;
+  strcpy(model,"ST7781");
+  printf("mode:%s\n",model);
+  lcdInit(0x7781,XMAX,YMAX,ppath);
 #endif
 
   lcdReset();
