@@ -7,6 +7,7 @@
  SPFD5408: 16Bit Instruction
  S6D1121 : 16Bit Instruction
  R61505U : 16Bit Instruction
+ R61509V : 16Bit Instruction
  ST7781  : 16Bit instruction
 */
 #include <stdio.h>
@@ -246,8 +247,8 @@ void lcdSetup(void) {
     0x29, 0,            //Display On
   };
 
-//  if (_model == 0x9325) {
-  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505) { // ILI9325 SPFD5408 R61505U 
+  // ILI9325 SPFD5408 R61505U
+  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505) {
    lcdWriteRegisterWord(0x00e5,0x8000);
    lcdWriteRegisterWord(0x0000,0x0001);
    if (_model == 0x9325)
@@ -305,7 +306,8 @@ void lcdSetup(void) {
    lcdWriteRegisterWord(0x0007,0x0031);
    lcdWriteRegisterWord(0x0007,0x0173);
 
-  } else if (_model == 0x9327) { // ILI9327
+  // ILI9327
+  } else if (_model == 0x9327) {
    static const uint8_t regValues[] = {
       0x36, 1, 0x08,
       0x3A, 1, 0x05,
@@ -321,7 +323,8 @@ void lcdSetup(void) {
     init_table(regValues, sizeof(regValues));
     init_table(wake_on, sizeof(wake_on));
 
-  } else if (_model == 0x9341) { // ILI9341
+  // ILI9341
+  } else if (_model == 0x9341) {
    static const uint8_t regValues[] = {
       0xC0, 1, 0x23,
       0xC1, 1, 0x10,
@@ -338,7 +341,8 @@ void lcdSetup(void) {
     init_table(regValues, sizeof(regValues));
     init_table(wake_on, sizeof(wake_on));
 
-  } else if (_model == 0x9342) { // ILI9342
+  // ILI9342
+  } else if (_model == 0x9342) {
     static const uint8_t regValues[] = {
       0xC0, 2, 0x26, 0x09,
       0xC1, 1, 0x10,
@@ -356,7 +360,8 @@ void lcdSetup(void) {
     init_table(regValues, sizeof(regValues));
     init_table(wake_on, sizeof(wake_on));
 
-  } else if (_model == 0x9481) { // ILI9481
+  // ILI9481
+  } else if (_model == 0x9481) {
    static const uint8_t regValues[] = {
       0xB0, 1, 0x00,              // unlocks E0, F0
       0xB3, 4, 0x02, 0x00, 0x00, 0x00, //Frame Memory, interface [02 00 00 00]
@@ -378,7 +383,8 @@ void lcdSetup(void) {
     init_table(regValues, sizeof(regValues));
     init_table(wake_on, sizeof(wake_on));
 
-  } else if (_model == 0x1121) { // S6D1121
+  // S6D1121
+  } else if (_model == 0x1121) {
    lcdWriteRegisterWord(0x0011,0x2004);
    lcdWriteRegisterWord(0x0013,0xCC00);
    lcdWriteRegisterWord(0x0015,0x2600);
@@ -424,7 +430,51 @@ void lcdSetup(void) {
    lcdWriteRegisterWord(0x0007,0x0053);
    lcdWriteRegisterWord(0x0079,0x0000);
 
-  } else if (_model == 0x7781) { // ST7781
+  // R61509V
+  } else if (_model == 0xB509) {
+   lcdWriteRegisterWord(0x0400, 0x6200);
+   lcdWriteRegisterWord(0x0008, 0x0808);
+
+   lcdWriteRegisterWord(0x0010, 0x0016);      //69.5Hz         0016
+   lcdWriteRegisterWord(0x0011, 0x0101);
+   lcdWriteRegisterWord(0x0012, 0x0000);
+   lcdWriteRegisterWord(0x0013, 0x0001);
+
+   lcdWriteRegisterWord(0x0100, 0x0330);      //BT,AP
+   lcdWriteRegisterWord(0x0101, 0x0237);      //DC0,DC1,VC
+   lcdWriteRegisterWord(0x0103, 0x0D00);      //VDV
+   lcdWriteRegisterWord(0x0280, 0x6100);      //VCM
+   lcdWriteRegisterWord(0x0102, 0xC1B0);      //VRH,VCMR,PSON,PON
+   delay(50);
+
+//   lcdWriteRegisterWord(0x0001, 0x0100);
+   lcdWriteRegisterWord(0x0001, 0x0000);
+   lcdWriteRegisterWord(0x0002, 0x0100);
+   lcdWriteRegisterWord(0x0003, 0x1030);       //1030
+   lcdWriteRegisterWord(0x0009, 0x0001);
+   lcdWriteRegisterWord(0x000C, 0x0000);
+   lcdWriteRegisterWord(0x0090, 0x8000);
+   lcdWriteRegisterWord(0x000F, 0x0000);
+
+   lcdWriteRegisterWord(0x0210, 0x0000);
+   lcdWriteRegisterWord(0x0211, 0x00EF);
+   lcdWriteRegisterWord(0x0212, 0x0000);
+   lcdWriteRegisterWord(0x0213, 0x018F);       //432=01AF,400=018F
+   lcdWriteRegisterWord(0x0500, 0x0000);
+   lcdWriteRegisterWord(0x0501, 0x0000);
+   lcdWriteRegisterWord(0x0502, 0x005F);
+   lcdWriteRegisterWord(0x0401, 0x0001);
+   lcdWriteRegisterWord(0x0404, 0x0000);
+   delay(50);
+
+   lcdWriteRegisterWord(0x0007, 0x0100);         //BASEE
+   delay(50);
+
+   lcdWriteRegisterWord(0x0200, 0x0000);
+   lcdWriteRegisterWord(0x0201, 0x0000);
+
+  // ST7781
+  } else if (_model == 0x7781) {
    lcdWriteRegisterWord(0x00FF, 0x0001);     //can we do 0xFF
    lcdWriteRegisterWord(0x00F3, 0x0008);
    lcdWriteRegisterWord(0x0000, 0x0001);
@@ -965,7 +1015,7 @@ int lcdDrawUTF8String(FontxFile *fx, uint16_t x,uint16_t y,unsigned char *utfs,u
   spos = String2SJIS(utfs, strlen((char *)utfs), sjis, 64);
 if(_DEBUG_)printf("spos=%d\n",spos);
   for(i=0;i<spos;i++) {
-if(_DEBUG_)printf("sjis[%d]=%x y=%d\n",i,sjis[i],y);
+if(_DEBUG_)printf("sjis[%d]=0x%x x=%d y=%d\n",i,sjis[i],x,y);
     if (_FONT_DIRECTION_ == 0)
       x=lcdDrawSJISChar(fx,x,y,sjis[i],color);
     if (_FONT_DIRECTION_ == 1)
