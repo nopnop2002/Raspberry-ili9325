@@ -96,17 +96,16 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DST7781
 # Start Auto Demo   
 ./demo   
 
-![ili9325-para1](https://cloud.githubusercontent.com/assets/6020549/24833926/38353b08-1d12-11e7-8d0d-5dae59c3499b.JPG)
-
-![ili9325-para2](https://cloud.githubusercontent.com/assets/6020549/24995032/3ee3292a-2068-11e7-9179-bf5a74ba2a38.JPG)
-
-![ili9325-para3](https://cloud.githubusercontent.com/assets/6020549/24833940/c58dc0ec-1d12-11e7-85b6-7f57a80b5e66.JPG)
-
-![ili9325-para4](https://cloud.githubusercontent.com/assets/6020549/24833950/f48f0e6e-1d12-11e7-95a5-28ef894ea311.JPG)
-
-![ili9325-para7](https://cloud.githubusercontent.com/assets/6020549/24932578/0c0319fa-1f4d-11e7-8da8-901a94e89e28.JPG)
-
-![ili9325-para8](https://cloud.githubusercontent.com/assets/6020549/24995079/6043fb62-2068-11e7-974b-29e23126e38f.JPG)
+![ILI9341-10](https://user-images.githubusercontent.com/6020549/59558184-52df4900-9027-11e9-8e80-7c85fdb4213c.JPG)
+![ILI9341-11](https://user-images.githubusercontent.com/6020549/59558185-52df4900-9027-11e9-84d6-cf6e69051ce8.JPG)
+![ILI9341-12](https://user-images.githubusercontent.com/6020549/59558186-5377df80-9027-11e9-88a8-4c8c4df9a830.JPG)
+![ILI9341-13](https://user-images.githubusercontent.com/6020549/59558187-5377df80-9027-11e9-8f72-a7ebbbe57c0b.JPG)
+![ILI9341-14](https://user-images.githubusercontent.com/6020549/59558188-5377df80-9027-11e9-99f7-de3c8b1878dd.JPG)
+![ILI9341-15](https://user-images.githubusercontent.com/6020549/59558189-54107600-9027-11e9-89eb-39e8f2cbeab2.JPG)
+![ILI9341-16](https://user-images.githubusercontent.com/6020549/59558190-54107600-9027-11e9-9d23-d71c3997a3d0.JPG)
+![ILI9341-17](https://user-images.githubusercontent.com/6020549/59558191-54107600-9027-11e9-888c-a1485758e943.JPG)
+![ILI9341-18](https://user-images.githubusercontent.com/6020549/59558192-54107600-9027-11e9-946c-39443ae83053.JPG)
+![ILI9341-19](https://user-images.githubusercontent.com/6020549/59558183-52df4900-9027-11e9-9a79-8969d47f902e.JPG)
 
 ----
 
