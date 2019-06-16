@@ -98,6 +98,13 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DST7781
 
 ----
 
+# How to get your TFT controller CHIP_ID   
+
+You can use this tool.   
+https://github.com/nopnop2002/lcd_id
+
+----
+
 # Start Auto Demo   
 ./demo   
 
