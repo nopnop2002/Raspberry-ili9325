@@ -23,15 +23,6 @@ typedef struct {
   uint16_t dir;
 } cmd_t;
 
-#if 0
-FontxFile fxG32[2];
-FontxFile fxM32[2];
-FontxFile fxG24[2];
-FontxFile fxM24[2];
-FontxFile fxG16[2];
-FontxFile fxM16[2];
-#endif
-
 #define _DEBUG_ 0
 
 int cmdParse(char * buf, cmd_t * hoge) {
@@ -169,8 +160,6 @@ void cmdDump(cmd_t hoge) {
 
 int main(int argc, char **argv){
   int i;
-  int XMAX,YMAX;
-  char model[20];
 
 if(_DEBUG_)printf("argc=%d\n",argc);
   if (argc != 2) {
@@ -191,7 +180,7 @@ if(_DEBUG_)printf("argc=%d\n",argc);
       break;
     }
   }
-//printf("base=%s\n",base);
+if(_DEBUG_)printf("base=%s\n",base);
 
 
   // You can change font file
@@ -263,95 +252,98 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   char ppath[128];
   strcpy(ppath,base);
   strcat(ppath,"pin.conf");
-//printf("ppath=%s\n",ppath);
+if(_DEBUG_)printf("ppath=%s\n",ppath);
 
   // set full path of draw file
   char dpath[128];
   FILE *fp;
   strcpy(dpath,base);
   strcat(dpath,argv[1]);
-//printf("dpath=%s\n",dpath);
+if(_DEBUG_)printf("dpath=%s\n",dpath);
   if ((fp = fopen(dpath, "r")) == NULL) {
     printf("draw file [%s] not found\n",dpath);
     return 1;
   }
 
+  int screenWidth,screenHeight;
+  char model[20];
+
 #ifdef ILI9325
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"ILI9325");
-  printf("mode:%s\n",model);
-  lcdInit(0x9325,XMAX,YMAX,ppath);
+  lcdInit(0x9325,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef ILI9327
-  XMAX = 240;
-  YMAX = 400;
+  screenWidth = 240;
+  screenHeight = 400;
   strcpy(model,"ILI9327");
-  printf("mode:%s\n",model);
-  lcdInit(0x9327,XMAX,YMAX,ppath);
+  lcdInit(0x9327,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef SPFD5408
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"SPFD5408");
-  printf("mode:%s\n",model);
-  lcdInit(0x5408,XMAX,YMAX,ppath);
+  lcdInit(0x5408,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef R61505U
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"R61505U");
-  printf("mode:%s\n",model);
-  lcdInit(0x1505,XMAX,YMAX,ppath);
+  lcdInit(0x1505,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef ILI9341
-  XMAX = 240;
-  YMAX = 320;
-  strcpy(model,"ILI9341");
+  screenWidth = 240;
+  screenHeight = 320;
 #ifndef P16BIT
-  printf("mode:%s\n",model);
+  strcpy(model,"ILI9341");
 #else
-  printf("mode:%s(16Bit Parallel)\n",model);
+  strcpy(model,"ILI9341(16bit)");
 #endif
-  lcdInit(0x9341,XMAX,YMAX,ppath);
+  lcdInit(0x9341,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef ILI9342
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"ILI9342");
-  printf("mode:%s\n",model);
-  lcdInit(0x9342,XMAX,YMAX,ppath);
+  lcdInit(0x9342,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef ILI9481
-  XMAX = 320;
-  YMAX = 480;
+  screenWidth = 320;
+  screenHeight = 480;
   strcpy(model,"ILI9481");
-  printf("mode:%s\n",model);
-  lcdInit(0x9481,XMAX,YMAX,ppath);
+  lcdInit(0x9481,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef S6D1121
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"S6D1121");
-  printf("mode:%s\n",model);
-  lcdInit(0x1121,XMAX,YMAX,ppath);
+  lcdInit(0x1121,screenWidth,screenHeight,ppath);
 #endif
 
 #ifdef ST7781
-  XMAX = 240;
-  YMAX = 320;
+  screenWidth = 240;
+  screenHeight = 320;
   strcpy(model,"ST7781");
-  printf("mode:%s\n",model);
-  lcdInit(0x7781,XMAX,YMAX,ppath);
+  lcdInit(0x7781,screenWidth,screenHeight,ppath);
 #endif
 
+#ifdef R61509V
+  screenWidth = 240;
+  screenHeight = 400;
+  strcpy(model,"R61509V");
+  lcdInit(0xB509,screenWidth,screenHeight,ppath);
+#endif
+
+  printf("Your TFT controller is %s.\n",model);
+  printf("TFT resolution is %d x %d.\n",screenWidth, screenHeight);
   lcdReset();
   lcdSetup();
 
