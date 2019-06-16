@@ -552,6 +552,13 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
   lcdInit(0x7781,screenWidth,screenHeight,ppath);
 #endif
 
+#ifdef R61509V
+  screenWidth = 240;
+  screenHeight = 400;
+  strcpy(model,"R61509V");
+  lcdInit(0xB509,screenWidth,screenHeight,ppath);
+#endif
+
   printf("Your TFT controller is %s.\n",model); 
   printf("TFT resolution is %d x %d.\n",screenWidth, screenHeight); 
   lcdReset();

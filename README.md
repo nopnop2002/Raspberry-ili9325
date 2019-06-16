@@ -13,6 +13,7 @@ Supported TFT controllers:
 8bit Parallel SPFD5408   
 8bit Parallel S6D1121   
 8bit Parallel R61505U   
+8bit Parallel R61509V   
 8bit Parallel ST7781   
 16bit Parallel ILI9341   
 
@@ -86,6 +87,10 @@ cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121
 for R61505U   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
 cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
+
+for R61509B   
+cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61509V   
+cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61509V   
 
 for ST7781   
 cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DST7781   

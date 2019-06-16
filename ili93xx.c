@@ -523,7 +523,9 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
   if (x >= _width) return;
   if (y >= _height) return;
 
-  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
+  //if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
+  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505
+   || _model == 0x7781 || _model == 0x1121) {
    lcdWriteRegisterWord(0x0020, x); // RAM Address Set 1
    lcdWriteRegisterWord(0x0021, y); // RAM Address Set 2
    lcdWriteRegisterWord(0x0022, color); // Write Data to GRAM
@@ -542,10 +544,10 @@ void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color) {
    lcdWriteDataWord_16bit(color);
 #endif
 
-  } else if (_model == 0x1121) {
-   lcdWriteRegisterWord(0x0020,x); // RAM Address Set 1
-   lcdWriteRegisterWord(0x0021,y); // RAM Address Set 2
-   lcdWriteRegisterWord(0x0022,color); // Write Data to GRAM
+  } else if (_model == 0xB509) {
+    lcdWriteRegisterWord(0x0200,x); // RAM Address Set 1
+    lcdWriteRegisterWord(0x0201,y); // RAM Address Set 2
+    lcdWriteRegisterWord(0x0202,color); // Write Data to GRAM
   }
 }
 
@@ -562,7 +564,9 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
   if (y1 >= _height) return;
   if (y2 >= _height) y2=_height-1;
 
-  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
+  //if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
+  if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505
+   || _model == 0x7781 || _model == 0x1121) {
    for(j=y1;j<=y2;j++){
     lcdWriteRegisterWord(0x0020, x1); // RAM Address Set 1
     lcdWriteRegisterWord(0x0021, j); // RAM Address Set 2
@@ -591,14 +595,14 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
     }
    }
 
-  } else if (_model == 0x1121) {
-   for(j=y1;j<=y2;j++){
-     lcdWriteRegisterWord(0x020,x1);
-     lcdWriteRegisterWord(0x021,j);
-     for(i=x1;i<=x2;i++){
-       lcdWriteRegisterWord(0x022,color);
-     }
-   }
+  } else if (_model == 0xB509) {
+    for(i=x1;i<=x2;i++){
+      for(j=y1;j<=y2;j++){
+        lcdWriteRegisterWord(0x0200,i);
+        lcdWriteRegisterWord(0x0201,j);
+        lcdWriteRegisterWord(0x0202,color);
+      }
+    }
   }
 
 }
@@ -606,22 +610,26 @@ void lcdDrawFillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_
 // Display Off
 void lcdDisplayOff(void) {
   if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
-   lcdWriteRegisterWord(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
+    lcdWriteRegisterWord(0x0007, 0x0000); // Set GON=0 DTE=0 D1=0, D0=0
   } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
-   lcdWriteCommandByte(0x28); 
+    lcdWriteCommandByte(0x28); 
   } else if (_model == 0x1121) {
-   lcdWriteRegisterWord(0x0007, 0x0010); // Set GON=0 D1=0, D0=0
+    lcdWriteRegisterWord(0x0007, 0x0010);	// Set GON=0 D1=0, D0=0
+  } else if (_model == 0xB509) {
+    lcdWriteRegisterWord(0x0007, 0x0000);	// Display Control 1
   }
 }
 
 // Display On
 void lcdDisplayOn(void) {
   if (_model == 0x9325 || _model == 0x5408 || _model == 0x1505 || _model == 0x7781) {
-   lcdWriteRegisterWord(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
+    lcdWriteRegisterWord(0x0007, 0x0173); // Set GON=1 DTE=1 D1=1, D0=1
   } else if (_model == 0x9327 || _model == 0x9341 || _model == 0x9342 || _model == 0x9481) {
-   lcdWriteCommandByte(0x29); 
+    lcdWriteCommandByte(0x29); 
   } else if (_model == 0x1121) {
-   lcdWriteRegisterWord(0x0007, 0x0053); // Set GON=1 D1=1, D0=1
+    lcdWriteRegisterWord(0x0007, 0x0053);	// Set GON=1 D1=1, D0=1
+  } else if (_model == 0xB509) {
+    lcdWriteRegisterWord(0x0007, 0x0100);	// Display Control 1
   }
 }
 
