@@ -49,8 +49,18 @@ Primarily, these TFT Shiled is the one for Arduino.
 \*When a regulator(It's often AMS1117) is mounted on the back, it's operated 5V.   
 \*When a regulator is NOT mounted on the back, it's operated 3.3V.   
 
+__NOTE__   
+My R61509V has a regulator.   
+Normally, a TFT with a regulator works at 5V, but my R61509V doesn't work unless I supply both 5V and 3.3V.   
+
 You can change any pin.   
 Pin define is "pin.conf".   
+
+---
+
+# Software requirement
+
+WiringPi Library   
 
 ----
 
