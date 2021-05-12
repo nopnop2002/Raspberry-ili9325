@@ -8,7 +8,7 @@ void ili9325_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety
 	lcdInit(dev, 0x9325, width, height, offsetx, offsety);
 	//printf("ili9325_lcdInit _model=%x\n", dev->_model);
 
-	static const uint16_t ILI9325_regValues[] = {
+	static const uint16_t regValues[] = {
 		0x00E5, 0x78F0,		// set SRAM internal timing
 		0x0001, 0x0100,		// set Driver Output Control
 		0x0002, 0x0200,		// set 1 line inversion
@@ -69,7 +69,7 @@ void ili9325_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety
 		0x0092, 0x0000,
 		0x0007, 0x0133,		// 262K color and display ON
 	};
-	lcdInitTable16(dev, ILI9325_regValues, sizeof(ILI9325_regValues));
+	lcdInitTable16(dev, regValues, sizeof(regValues));
 
 	// ili9325 custom function
 	DrawPixel = ili9325_lcdDrawPixel;

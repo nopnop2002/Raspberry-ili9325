@@ -33,6 +33,7 @@ This may works with other boards like OrangePi/NanoPi.
 - ILI9341(240x320)   
 
 ## OPEN-SMART Products
+- OPEN-SMART S6D1121 16Pin-Parallel(240x320)   
 - OPEN-SMART ST7783 16Pin-Parallel(240x320)   
 - OPEN-SMART R61509V 16Pin-Parallel(240x400)   
 - OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion Color)
@@ -130,6 +131,10 @@ Pin define is "pin.conf".
 - for R61509V   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V`  
 `cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V`  
+
+- for S6D1121   
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
 
 - for ST7781   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781`   

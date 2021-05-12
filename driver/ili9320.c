@@ -7,7 +7,7 @@
 void ili9320_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety) {
 	lcdInit(dev, 0x9320, width, height, offsetx, offsety);
 
-	static const uint16_t ILI9320_regValues[] = {
+	static const uint16_t regValues[] = {
 		0x00e5, 0x8000,
 		0x0000, 0x0001,
 		0x0001, 0x100,
@@ -70,7 +70,7 @@ void ili9320_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety
 		0x0007, 0x0173,
 		TFTLCD_DELAY, 50,
 	};
-	lcdInitTable16(dev, ILI9320_regValues, sizeof(ILI9320_regValues));
+	lcdInitTable16(dev, regValues, sizeof(regValues));
 
 	// ili9320 custom function
 	DrawPixel = ili9325_lcdDrawPixel;

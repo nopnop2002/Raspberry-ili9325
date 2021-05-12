@@ -104,6 +104,15 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) r61509_lcdInit(a, b, c, d, e)
 
+#elif defined S6D1121
+#include "driver/s6d1121.h"
+#define DRIVER_NAME "S6D1121"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) s6d1121_lcdInit(a, b, c, d, e)
+
 #elif defined ST7781
 #include "driver/st7781.h"
 #define DRIVER_NAME "ST7781"
@@ -417,13 +426,6 @@ if(_DEBUG_)printf("dpath=%s\n",dpath);
   SCREEN_HEIGHT = 400;
   strcpy(DRIVER_NAME,"ILI9327");
   lcdInit(0x9327,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
-#endif
-
-#ifdef S6D1121
-  SCREEN_WIDTH = 240;
-  SCREEN_HEIGHT = 320;
-  strcpy(DRIVER_NAME,"S6D1121");
-  lcdInit(0x1121,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
   printf("Your TFT controller is %s.\n",DRIVER_NAME);
