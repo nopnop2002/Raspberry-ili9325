@@ -1,6 +1,6 @@
 # 8Bit/16Bit Parallel TFT Library for WiringPi
 
-This is library for RaspberryPi/OrangePi.   
+This is library for RaspberryPi.   
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
 
@@ -9,6 +9,7 @@ This library can show a chart to TFT Shield.
 ![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
 
 Primarily, these TFT Shiled is the one for Arduino.   
+This may works with other boards like OrangePi/NanoPi.   
 
 # Supported TFT controllers:   
 
@@ -62,81 +63,86 @@ __NOTE__
 My R61509V has a regulator.   
 Normally, a TFT with a regulator works at 5V, but my R61509V doesn't work unless I supply both 5V and 3.3V.   
 
+__NOTE__   
 You can change any pin.   
 Pin define is "pin.conf".   
 
----
+----
 
-# Software requirement
-
+# Software requirement   
 WiringPi Library   
 
 ----
 
 # Build   
 
-for ILI9320   
+- for ILI9320   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
 
-for ILI9325   
+- for ILI9325   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325   
 
-for ILI9341   
+- for ILI9341   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341   
 
-for ILI9342   
+- for ILI9342   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342   
 
-for ILI9481   
+- for ILI9481   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481   
 
-for ILI9486   
+- for ILI9486   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486   
 
-for ILI9488   
+- for ILI9488   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488   
 
-for SPFD5408   
+- for SPFD5408   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408   
 
-for R61505U   
+- for R61505U   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U  
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U  
 
-for R61509V   
+- for R61509V   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V  
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V  
 
-for ST7781   
+- for ST7781   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781   
 
-for ST7783   
+- for ST7783   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783   
 
-for ST7793   
+- for ST7793   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793   
 
-for ST7796   
+- for ST7796   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796   
 cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796   
 
 ----
 
 # How to get your TFT controller CHIP_ID   
-
-You can use this tool.   
-https://github.com/nopnop2002/lcd_id
+![](https://img.shields.io/badge/_IMPORTANT-important)  
+The information provided by sellers on Ebay or AliExpress is largely incorrect.   
+You waste time if you don't choose the right driver.   
+There are many [variations](http://domoticx.com/arduino-shield-2-4-tft-lcd-touch/) of the 2.4 inch shield.   
+You can use [this](https://github.com/prenticedavid/MCUFRIEND_kbv/tree/master/examples/LCD_ID_readreg) to find out your driver.   
+This is for Arduino UNO.   
+Do not use this on the ESP32 as the GPIO on the ESP32 is not 5V tolerant.   
+__Never believe the seller's information.__   
 
 ----
 
