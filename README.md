@@ -72,12 +72,12 @@ Pin define is "pin.conf".
 # Software requirement   
 - WiringPi Library   
  This project uses only GPIOs, so it may work with WiringPi libraries ported to other boards.   
+ If you use it for anything other than RPI, you may need to change the GPIO number.   
  As far as I know, there are these libraries.   
 	- WiringPi for OrangePi   
 	- WiringPi for OrangePi Zero   
 	- WiringPi for OrangePi3   
 	- WiringPi for NanoPi   
- If you use it for anything other than RPI, you may need to change the GPIO number.   
 
 ----
 
