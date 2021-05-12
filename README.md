@@ -4,18 +4,27 @@ This is library for RaspberryPi/OrangePi.
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
 
-Supported TFT controllers:   
-8bit Parallel ILI9325   
-8bit Parallel ILI9327   
-8bit Parallel ILI9341   
-8bit Parallel ILI9342   
-8bit Parallel ILI9481   
-8bit Parallel SPFD5408   
-8bit Parallel S6D1121   
-8bit Parallel R61505U   
-8bit Parallel R61509V   
-8bit Parallel ST7781   
-16bit Parallel ILI9341   
+# Supported TFT controllers:   
+
+## Generic 8bit Sheild
+- ILI9320(240x320)      
+- ILI9325(240x320)      
+- ILI9341(240x320)      
+- ILI9342(240x320)      
+- ILI9481(320x480)      
+- ILI9486(320x480)      
+- SPFD5408(240x320 Same as ILI9320)      
+- R61505(240x320 Same as ILI9320)      
+- R61509(240x400)      
+- ST7781     
+- ST7783(240x320 Same as ST7781)      
+- ST7793(240x400 Same as R61509)      
+- ST7796(320x480 Same as ILI9486)      
+
+## Generic 16bit Sheild
+- ILI9341(240x320)   
+
+## OPEN-SMART Products
 
 ![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
 
@@ -66,45 +75,61 @@ WiringPi Library
 
 # Build   
 
-for ILI9325   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9325   
+for ILI9320   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
 
-for ILI9327   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9327   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9327   
+for ILI9325   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325   
 
 for ILI9341   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341   
 
 for ILI9342   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9342   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342   
 
 for ILI9481   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9481   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481   
+
+for ILI9486   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486   
+
+for ILI9488   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488   
 
 for SPFD5408   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DSPFD5408   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DSPFD5408   
-
-for S6D1121   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DS6D1121   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408   
 
 for R61505U   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61505U   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U  
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U  
 
-for R61509B   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61509V   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DR61509V   
+for R61509V   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V  
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V  
 
 for ST7781   
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DST7781   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DST7781   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781   
+
+for ST7783   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783   
+
+for ST7793   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793   
+
+for ST7796   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796   
 
 ----
 
@@ -182,9 +207,8 @@ Pin define is "pin.conf".
 ----
 
 # Build   
-
-cc -o demo demo.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
-cc -o draw draw.c fontx.c ili93xx.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
 
 ----
 
@@ -228,7 +252,7 @@ sudo ./xpt
 
 And you can operate Pi using touch sensor.  
 
-cc -o touch touch.c fontx.c ili93xx.c xpt2046.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT   
+cc -o touch touch.c fontx.c tft_lib.c driver/ili9341.c xpt2046.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
 sudo ./touch   
 
 

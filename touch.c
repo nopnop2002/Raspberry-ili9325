@@ -3,10 +3,12 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
-#include "ili93xx.h"
+#include "tft_lib.h"
 #include "xpt2046.h"
+#include "driver/ili9341.h"
 
 #define SPI_CHANNEL 0 // /dev/spidev0.0
 //#define SPI_CHANNEL 1 // /dev/spidev0.1
@@ -113,47 +115,52 @@ int main(int argc, char **argv){
   strcpy(ppath,base);
   strcat(ppath,"pin.conf");
 //printf("ppath=%s\n",ppath);
+  struct stat buffer;
+  if (stat(ppath, &buffer) != 0) {
+    printf("pin.conf [%s] not found\n",ppath);
+    return 1;
+  }
 
   xptInit(&tinfo);
 
+  TFT_t dev;
+  lcdInterface(&dev, ppath);
+  lcdReset(&dev);
   XMAX = 240;
   YMAX = 320;
-  lcdInit(0x9341,XMAX,YMAX,ppath);
+  ili9341_lcdInit(&dev, XMAX, YMAX, 0, 0);
 
   XMAX2 = XMAX - 1;
   YMAX2 = YMAX - 1;
 
-  lcdReset();
-  lcdSetup();
-
   //drawString
-  lcdFillScreen(WHITE);
-  lcdSetFontDirection(DIRECTION90);
+  lcdFillScreen(&dev, WHITE);
+  lcdSetFontDirection(&dev, DIRECTION90);
   xpos = 180;
   ypos = YMAX2-(32*1);
   for (i=0;i<5;i++) {
-    lcdDrawRect(xpos-8, ypos+16, xpos+40, ypos-32, BLACK);
+    lcdDrawRect(&dev, xpos-8, ypos+16, xpos+40, ypos-32, BLACK);
     xptSetPoint(&tinfo, xpos-8 ,ypos+16 ,xpos+40, ypos-32, i);
     xptDump(&tinfo);
     color = BLACK;
 //    strcpy(utf,"1");
     utf[0] = i + 48;
     utf[1] = 0;
-    ypos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
+    ypos = lcdDrawUTF8String(&dev, fxG32, xpos, ypos, utf, color);
     ypos = ypos - 32;
   }
 
   xpos = 120;
   ypos = YMAX2-(32*1);
   for (i=0;i<5;i++) {
-    lcdDrawRect(xpos-8, ypos+16, xpos+40, ypos-32, BLACK);
+    lcdDrawRect(&dev, xpos-8, ypos+16, xpos+40, ypos-32, BLACK);
     xptSetPoint(&tinfo, xpos-8 ,ypos+16 ,xpos+40, ypos-32, i+5);
     xptDump(&tinfo);
     color = BLACK;
 //    strcpy(utf,"1");
     utf[0] = i + 53;
     utf[1] = 0;
-    ypos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
+    ypos = lcdDrawUTF8String(&dev, fxG32, xpos, ypos, utf, color);
     ypos = ypos - 32;
   }
 
@@ -173,10 +180,10 @@ int main(int argc, char **argv){
       id = xptGetPoint(SPI_CHANNEL, &tinfo);
       if (id != -1) {
 if(_DEBUG_)printf("id=%d\n",id);
-        lcdInit(0x9341,XMAX,YMAX,ppath);
-        lcdSetFontDirection(DIRECTION90);
+        ili9341_lcdInit(&dev, XMAX, YMAX, 0, 0);
+        lcdSetFontDirection(&dev, DIRECTION90);
         utf[0] = id + 48;
-        ypos = lcdDrawUTF8String(fxG32, xpos, ypos, utf, color);
+        ypos = lcdDrawUTF8String(&dev, fxG32, xpos, ypos, utf, color);
       }
     }
   }

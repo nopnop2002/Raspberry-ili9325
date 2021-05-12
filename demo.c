@@ -6,10 +6,142 @@
 #include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
+#include <sys/stat.h>
 #include <wiringPi.h>
 
-#include "ili93xx.h"
+#include "tft_lib.h"
 
+#ifdef ILI9320
+#include "driver/ili9320.h"
+#define DRIVER_NAME "ILI9320"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9320_lcdInit(a, b, c, d, e)
+
+#elif ILI9325
+#include "driver/ili9325.h"
+#define DRIVER_NAME "ILI9325"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9325_lcdInit(a, b, c, d, e)
+
+#elif defined ILI9341
+#include "driver/ili9341.h"
+#ifndef P16BIT
+#define DRIVER_NAME "ILI9341"
+#else
+#define DRIVER_NAME "ILI9341(16Bit)"
+#endif
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9341_lcdInit(a, b, c, d, e)
+
+#elif defined ILI9342
+#include "driver/ili9342.h"
+#define DRIVER_NAME "ILI9342"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9342_lcdInit(a, b, c, d, e)
+
+#elif defined ILI9481
+#include "driver/ili9481.h"
+#define DRIVER_NAME "ILI9481"
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 480
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9481_lcdInit(a, b, c, d, e)
+
+#elif defined ILI9486
+#include "driver/ili9486.h"
+#define DRIVER_NAME "ILI9486"
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 480
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9486_lcdInit(a, b, c, d, e)
+
+#elif defined ILI9488
+#include "driver/ili9488.h"
+#define DRIVER_NAME "ILI9488"
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 480
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9488_lcdInit(a, b, c, d, e)
+
+#elif defined SPFD5408
+#include "driver/ili9320.h"
+#define DRIVER_NAME "SPFD5408"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9320_lcdInit(a, b, c, d, e)
+
+#elif defined R61505U
+#include "driver/ili9320.h"
+#define DRIVER_NAME "R61505U"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9320_lcdInit(a, b, c, d, e)
+
+#elif defined R61509V
+#include "driver/r61509.h"
+#define DRIVER_NAME "R61509V"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 400
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) r61509_lcdInit(a, b, c, d, e)
+
+#elif defined ST7781
+#include "driver/st7781.h"
+#define DRIVER_NAME "ST7781"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) st7781_lcdInit(a, b, c, d, e)
+
+#elif defined ST7783
+#include "driver/st7781.h"
+#define DRIVER_NAME "ST7783"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) st7781_lcdInit(a, b, c, d, e)
+
+#elif defined ST7793
+#include "driver/r61509.h"
+#define DRIVER_NAME "ST7793"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 400
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) r61509_lcdInit(a, b, c, d, e)
+
+#elif defined ST7796
+#include "driver/ili9486.h"
+#define DRIVER_NAME "ST7796"
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 480
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9486_lcdInit(a, b, c, d, e)
+
+#endif
 
 #define _DEBUG_ 0
 
@@ -17,7 +149,7 @@
 //#define WAIT inputKey()
 
 //When you'd like to wait in the waiting time, enable this line.
-#define WAIT sleep(10)
+#define WAIT sleep(5)
 
 void inputKey() {
   char ch;
@@ -26,392 +158,415 @@ void inputKey() {
 }
 
 time_t elapsedTime(struct timeval startTime, struct timeval endTime) {
-    time_t diffsec = difftime(endTime.tv_sec, startTime.tv_sec);
-    suseconds_t diffsub = endTime.tv_usec - startTime.tv_usec;
+	time_t diffsec = difftime(endTime.tv_sec, startTime.tv_sec);
+	suseconds_t diffsub = endTime.tv_usec - startTime.tv_usec;
 //printf("diffsec=%ld diffsub=%ld\n",diffsec, diffsub);
-    if(diffsub < 0) {
-        diffsec--;
-        diffsub = (endTime.tv_usec+1000000) - startTime.tv_usec;
-    }
-    uint16_t diffmsec = diffsub / 1000;
-    time_t diff = (diffsec * 1000) + diffmsec;
-    return diff;
+	if(diffsub < 0) {
+		diffsec--;
+		diffsub = (endTime.tv_usec+1000000) - startTime.tv_usec;
+	}
+	uint16_t diffmsec = diffsub / 1000;
+	time_t diff = (diffsec * 1000) + diffmsec;
+	return diff;
 }
 
-time_t ColorBarTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t AddressTest(TFT_t * dev, int width, int height, uint16_t color) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t y1 = height/3;
-    uint16_t y2 = (height/3)*2;
-    lcdDrawFillRect(0, 0, width-1, y1-1, RED);
-    lcdDrawFillRect(0, y1-1, width-1, y2-1, GREEN);
-    lcdDrawFillRect(0, y2-1, width-1, height-1, BLUE);
+	lcdFillScreen(dev, color);
+	lcdDrawFillRect(dev, 0, 0, 19, 19, RED);
+	lcdDrawFillRect(dev, 20, 20, 39, 39, GREEN);
+	lcdDrawFillRect(dev, 40, 40, 59, 59, BLUE);
+	lcdDrawFillRect(dev, 60, 60, 79, 79, ~color);
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	sleep(2);
+	lcdInversionOn(dev);
+
+	sleep(2);
+	lcdInversionOff(dev);
+
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
+}
+
+time_t ColorBarTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
+
+	uint16_t y1 = height/3;
+	uint16_t y2 = (height/3)*2;
+	lcdDrawFillRect(dev, 0, 0, width-1, y1-1, RED);
+	lcdDrawFillRect(dev, 0, y1-1, width-1, y2-1, GREEN);
+	lcdDrawFillRect(dev, 0, y2-1, width-1, height-1, BLUE);
+
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 } 
 
-time_t ArrowTest(FontxFile *fx, char * model, int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t ArrowTest(TFT_t *dev, FontxFile *fx, char * model, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    // get font width & height
-    uint8_t buffer[FontxGlyphBufSize];
-    uint8_t fontWidth;
-    uint8_t fontHeight;
-    GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
+	// get font width & height
+	uint8_t buffer[FontxGlyphBufSize];
+	uint8_t fontWidth;
+	uint8_t fontHeight;
+	GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
 if(_DEBUG_)printf("fontWidth=%d fontHeight=%d\n",fontWidth,fontHeight);
 
-    uint16_t xpos;
-    uint16_t ypos;
-    int stlen;
-    uint16_t color;
+	uint16_t xpos;
+	uint16_t ypos;
+	int stlen;
+	unsigned char ascii[10];
+	uint16_t color;
 
-    lcdFillScreen(BLACK);
-    xpos = ((width - fontHeight) / 2) - 1;
-    ypos = height - ((height - (strlen(model) * (fontWidth/2))) / 2) - 1;
+	lcdFillScreen(dev, BLACK);
+	xpos = ((width - fontHeight) / 2) - 1;
+	ypos = height - ((height - (strlen(model) * fontWidth)) / 2) - 1;
+	lcdSetFontDirection(dev, DIRECTION90);
 if(_DEBUG_)printf("xpos=%d ypos=%d\n",xpos,ypos);
-    lcdSetFontDirection(DIRECTION90);
-    color = WHITE;
-    lcdDrawUTF8String(fx, xpos, ypos, (unsigned char *)model, color);
+	color = WHITE;
+	lcdDrawUTF8String(dev, fx, xpos, ypos, (unsigned char *)model, color);
 
-    lcdSetFontDirection(0);
-    color = RED;
-    unsigned char utf8[10];
-    lcdDrawFillArrow(10, 10, 0, 0, 5, color);
-    strcpy((char *)utf8, "0,0");
-    lcdDrawUTF8String(fx, 0, 20, utf8, color);
+	lcdSetFontDirection(dev, 0);
+	color = RED;
+	lcdDrawFillArrow(dev, 10, 10, 0, 0, 5, color);
+	strcpy((char *)ascii, "0,0");
+	ypos = 15;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
 
-    color = GREEN;
-    lcdDrawFillArrow(width-11, 10, width-1, 0, 5, color);
-    sprintf((char *)utf8, "%d,0",width-1);
-    stlen = strlen((char *)utf8);
-    xpos = (width-1) - (fontWidth*stlen);
-    lcdDrawUTF8String(fx, xpos, 20, utf8, color);
+	color = GREEN;
+	lcdDrawFillArrow(dev, width-11, 10, width-1, 0, 5, color);
+	sprintf((char *)ascii, "%d,0",width-1);
+	stlen = strlen((char *)ascii);
+	xpos = (width-1) - (fontWidth*stlen);
+	lcdDrawUTF8String(dev, fx, xpos, ypos, ascii, color);
 
-    color = GRAY;
-    lcdDrawFillArrow(10, height-11, 0, height-1, 5, color);
-    sprintf((char *)utf8, "0,%d",height-1);
-    ypos = (height-11) - (fontHeight) - 5;
-    lcdDrawUTF8String(fx, 0, ypos, utf8, color);
+	color = GRAY;
+	lcdDrawFillArrow(dev, 10, height-11, 0, height-1, 5, color);
+	sprintf((char *)ascii, "0,%d",height-1);
+	ypos = (height-11) - (fontHeight) - 10;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
 
-    color = CYAN;
-    lcdDrawFillArrow(width-11, height-11, width-1, height-1, 5, color);
-    sprintf((char *)utf8, "%d,%d",width-1, height-1);
-    stlen = strlen((char *)utf8);
-    xpos = (width-1) - (fontWidth*stlen);
-    lcdDrawUTF8String(fx, xpos, ypos, utf8, color);
+	color = CYAN;
+	lcdDrawFillArrow(dev, width-11, height-11, width-1, height-1, 5, color);
+	sprintf((char *)ascii, "%d,%d",width-1, height-1);
+	stlen = strlen((char *)ascii);
+	xpos = (width-1) - (fontWidth*stlen);
+	lcdDrawUTF8String(dev, fx, xpos, ypos, ascii, color);
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t LineTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t LineTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t color;
-    lcdFillScreen(BLACK);
-    color = RED;
-    uint16_t xpos;
-    uint16_t ypos;
-    for(ypos=0;ypos<height;ypos=ypos+10) {
-        lcdDrawLine(0, ypos, width, ypos, color);
-    }
+	uint16_t color;
+	lcdFillScreen(dev, BLACK);
+	color = RED;
+	uint16_t xpos;
+	uint16_t ypos;
+	for(ypos=0;ypos<height;ypos=ypos+10) {
+		lcdDrawLine(dev, 0, ypos, width, ypos, color);
+	}
 
-    for(xpos=0;xpos<width;xpos=xpos+10) {
-        lcdDrawLine(xpos, 0, xpos, height, color);
-    }
+	for(xpos=0;xpos<width;xpos=xpos+10) {
+		lcdDrawLine(dev, xpos, 0, xpos, height, color);
+	}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t CircleTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t CircleTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t color;
-    lcdFillScreen(BLACK);
-    color = GRAY;
-    uint16_t xpos = width/2;
-    uint16_t ypos = height/2;
-    int i;
-    for(i=5;i<height;i=i+5) {
-        lcdDrawCircle(xpos, ypos, i, color);
-    }
+	uint16_t color;
+	lcdFillScreen(dev, BLACK);
+	color = GRAY;
+	uint16_t xpos = width/2;
+	uint16_t ypos = height/2;
+	int i;
+	for(i=5;i<height;i=i+5) {
+		lcdDrawCircle(dev, xpos, ypos, i, color);
+	}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t RoundRectTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t RoundRectTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t color;
-    uint16_t limit = width;
-    if (width > height) limit = height;
-    lcdFillScreen(BLACK);
-    color = BLUE;
-    int i;
-    for(i=5;i<limit;i=i+5) {
-        if (i > (limit-i-1) ) break;
-        lcdDrawRoundRect(i, i, (width-i-1), (height-i-1), 10, color);
-    }
+	uint16_t color;
+	uint16_t limit = width;
+	if (width > height) limit = height;
+	lcdFillScreen(dev, BLACK);
+	color = BLUE;
+	int i;
+	for(i=5;i<limit;i=i+5) {
+		if (i > (limit-i-1) ) break;
+		lcdDrawRoundRect(dev, i, i, (width-i-1), (height-i-1), 10, color);
+	}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t DirectionTest(FontxFile *fx, int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t DirectionTest(TFT_t *dev, FontxFile *fx, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    // get font width & height
-    uint8_t buffer[FontxGlyphBufSize];
-    uint8_t fontWidth;
-    uint8_t fontHeight;
-    GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
+	// get font width & height
+	uint8_t buffer[FontxGlyphBufSize];
+	uint8_t fontWidth;
+	uint8_t fontHeight;
+	GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
 if(_DEBUG_)printf("fontWidth=%d fontHeight=%d\n",fontWidth,fontHeight);
 
-    uint16_t color;
-    lcdFillScreen(BLACK);
-    unsigned char utf8[20];
+	uint16_t color;
+	lcdFillScreen(dev, BLACK);
+	unsigned char ascii[20];
 
-    color = RED;
-    strcpy((char *)utf8, "Direction=0");
-    lcdSetFontDirection(DIRECTION0);
-    lcdDrawUTF8String(fx, 0, height-fontHeight-1, utf8, color);
+	color = RED;
+	strcpy((char *)ascii, "Direction=0");
+	lcdSetFontDirection(dev, DIRECTION0);
+	lcdDrawUTF8String(dev, fx, 0, height-fontHeight-1, ascii, color);
 
-    color = BLUE;
-    strcpy((char *)utf8, "Direction=180");
-    lcdSetFontDirection(DIRECTION180);
-    lcdDrawUTF8String(fx, width-1, fontHeight-1, utf8, color);
+	color = BLUE;
+	strcpy((char *)ascii, "Direction=180");
+	lcdSetFontDirection(dev, DIRECTION180);
+	lcdDrawUTF8String(dev, fx, width-1, fontHeight-1, ascii, color);
 
-    color = CYAN;
-    strcpy((char *)utf8, "Direction=90");
-    lcdSetFontDirection(DIRECTION90);
-    lcdDrawUTF8String(fx, width-fontHeight-1, height-1, utf8, color);
+	color = CYAN;
+	strcpy((char *)ascii, "Direction=90");
+	lcdSetFontDirection(dev, DIRECTION90);
+	lcdDrawUTF8String(dev, fx, width-fontHeight-1, height-1, ascii, color);
 
-    color = GREEN;
-    strcpy((char *)utf8, "Direction=270");
-    lcdSetFontDirection(DIRECTION270);
-    lcdDrawUTF8String(fx, fontHeight-1, 0, utf8, color);
+	color = GREEN;
+	strcpy((char *)ascii, "Direction=270");
+	lcdSetFontDirection(dev, DIRECTION270);
+	lcdDrawUTF8String(dev, fx, fontHeight-1, 0, ascii, color);
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t HorizontalTest(FontxFile *fx, int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t HorizontalTest(TFT_t *dev, FontxFile *fx, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    // get font width & height
-    uint8_t buffer[FontxGlyphBufSize];
-    uint8_t fontWidth;
-    uint8_t fontHeight;
-    GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
+	// get font width & height
+	uint8_t buffer[FontxGlyphBufSize];
+	uint8_t fontWidth;
+	uint8_t fontHeight;
+	GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
 if(_DEBUG_)printf("fontWidth=%d fontHeight=%d\n",fontWidth,fontHeight);
 
-    uint16_t color;
-    lcdFillScreen(BLACK);
-    unsigned char utf8[20];
+	uint16_t color;
+	lcdFillScreen(dev, BLACK);
+	unsigned char ascii[20];
 
-    color = RED;
-    strcpy((char *)utf8, "Direction=0");
-    lcdSetFontDirection(DIRECTION0);
-    uint16_t ypos = height - fontHeight - 1;
-    lcdDrawUTF8String(fx, 0, ypos, utf8, color);
+	color = RED;
+	strcpy((char *)ascii, "Direction=0");
+	lcdSetFontDirection(dev, DIRECTION0);
+	uint16_t ypos = height - fontHeight - 1;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
 
-    lcdSetFontUnderLine(RED);
-    ypos = ypos - fontHeight;
-    lcdDrawUTF8String(fx, 0, ypos, utf8, color);
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, RED);
+	ypos = ypos - fontHeight;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
+	lcdUnsetFontUnderLine(dev);
 
-    lcdSetFontFill(GREEN);
-    ypos = ypos - fontHeight;
-    ypos = ypos - fontHeight;
-    lcdDrawUTF8String(fx, 0, ypos, utf8, color);
+	lcdSetFontFill(dev, GREEN);
+	ypos = ypos - fontHeight;
+	ypos = ypos - fontHeight;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
 
-    lcdSetFontUnderLine(RED);
-    ypos = ypos - fontHeight;
-    lcdDrawUTF8String(fx, 0, ypos, utf8, color);
-    lcdUnsetFontFill();
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, RED);
+	ypos = ypos - fontHeight;
+	lcdDrawUTF8String(dev, fx, 0, ypos, ascii, color);
+	lcdUnsetFontFill(dev);
+	lcdUnsetFontUnderLine(dev);
 
-    color = BLUE;
-    strcpy((char *)utf8, "Direction=2");
-    lcdSetFontDirection(DIRECTION180);
-    ypos = fontHeight - 1;
-    lcdDrawUTF8String(fx, width-1, ypos, utf8, color);
+	color = BLUE;
+	strcpy((char *)ascii, "Direction=2");
+	lcdSetFontDirection(dev, DIRECTION180);
+	ypos = fontHeight - 1;
+	lcdDrawUTF8String(dev, fx, width-1, ypos, ascii, color);
 
-    lcdSetFontUnderLine(BLUE);
-    ypos = ypos + fontHeight;
-    lcdDrawUTF8String(fx, width-1, ypos, utf8, color);
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, BLUE);
+	ypos = ypos + fontHeight;
+	lcdDrawUTF8String(dev, fx, width-1, ypos, ascii, color);
+	lcdUnsetFontUnderLine(dev);
 
-    lcdSetFontFill(YELLOW);
-    ypos = ypos + fontHeight;
-    ypos = ypos + fontHeight;
-    lcdDrawUTF8String(fx, width-1, ypos, utf8, color);
+	lcdSetFontFill(dev, YELLOW);
+	ypos = ypos + fontHeight;
+	ypos = ypos + fontHeight;
+	lcdDrawUTF8String(dev, fx, width-1, ypos, ascii, color);
 
-    lcdSetFontUnderLine(BLUE);
-    ypos = ypos + fontHeight;
-    lcdDrawUTF8String(fx, width-1, ypos, utf8, color);
-    lcdUnsetFontFill();
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, BLUE);
+	ypos = ypos + fontHeight;
+	lcdDrawUTF8String(dev, fx, width-1, ypos, ascii, color);
+	lcdUnsetFontFill(dev);
+	lcdUnsetFontUnderLine(dev);
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t VerticalTest(FontxFile *fx, int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t VerticalTest(TFT_t *dev, FontxFile *fx, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    // get font width & height
-    uint8_t buffer[FontxGlyphBufSize];
-    uint8_t fontWidth;
-    uint8_t fontHeight;
-    GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
+	// get font width & height
+	uint8_t buffer[FontxGlyphBufSize];
+	uint8_t fontWidth;
+	uint8_t fontHeight;
+	GetFontx(fx, 0, buffer, &fontWidth, &fontHeight);
 if(_DEBUG_)printf("fontWidth=%d fontHeight=%d\n",fontWidth,fontHeight);
 
-    uint16_t color;
-    lcdFillScreen(BLACK);
-    unsigned char utf8[20];
+	uint16_t color;
+	lcdFillScreen(dev, BLACK);
+	unsigned char ascii[20];
 
-    color = RED;
-    strcpy((char *)utf8, "Direction=1");
-    lcdSetFontDirection(DIRECTION90);
-    uint16_t xpos = width - fontHeight - 1;
-    lcdDrawUTF8String(fx, xpos, height-1, utf8, color);
+	color = RED;
+	strcpy((char *)ascii, "Direction=1");
+	lcdSetFontDirection(dev, DIRECTION90);
+	uint16_t xpos = width - fontHeight - 1;
+	lcdDrawUTF8String(dev, fx, xpos, height-1, ascii, color);
 
-    lcdSetFontUnderLine(RED);
-    xpos = xpos - fontHeight;
-    lcdDrawUTF8String(fx, xpos, height-1, utf8, color);
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, RED);
+	xpos = xpos - fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, height-1, ascii, color);
+	lcdUnsetFontUnderLine(dev);
 
-    lcdSetFontFill(GREEN);
-    xpos = xpos - fontHeight;
-    xpos = xpos - fontHeight;
-    lcdDrawUTF8String(fx, xpos, height-1, utf8, color);
+	lcdSetFontFill(dev, GREEN);
+	xpos = xpos - fontHeight;
+	xpos = xpos - fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, height-1, ascii, color);
 
-    lcdSetFontUnderLine(RED);
-    xpos = xpos - fontHeight;
-    lcdDrawUTF8String(fx, xpos, height-1, utf8, color);
-    lcdUnsetFontFill();
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, RED);
+	xpos = xpos - fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, height-1, ascii, color);
+	lcdUnsetFontFill(dev);
+	lcdUnsetFontUnderLine(dev);
 
-    color = BLUE;
-    strcpy((char *)utf8, "Direction=3");
-    lcdSetFontDirection(DIRECTION270);
-    xpos = fontHeight -1;
-    lcdDrawUTF8String(fx, xpos, 0, utf8, color);
+	color = BLUE;
+	strcpy((char *)ascii, "Direction=3");
+	lcdSetFontDirection(dev, DIRECTION270);
+	xpos = fontHeight -1;
+	lcdDrawUTF8String(dev, fx, xpos, 0, ascii, color);
 
-    lcdSetFontUnderLine(BLUE);
-    xpos = xpos + fontHeight;
-    lcdDrawUTF8String(fx, xpos, 0, utf8, color);
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, BLUE);
+	xpos = xpos + fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, 0, ascii, color);
+	lcdUnsetFontUnderLine(dev);
 
-    lcdSetFontFill(YELLOW);
-    xpos = xpos + fontHeight;
-    xpos = xpos + fontHeight;
-    lcdDrawUTF8String(fx, xpos, 0, utf8, color);
+	lcdSetFontFill(dev, YELLOW);
+	xpos = xpos + fontHeight;
+	xpos = xpos + fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, 0, ascii, color);
 
-    lcdSetFontUnderLine(BLUE);
-    xpos = xpos + fontHeight;
-    lcdDrawUTF8String(fx, xpos, 0, utf8, color);
-    lcdUnsetFontFill();
-    lcdUnsetFontUnderLine();
+	lcdSetFontUnderLine(dev, BLUE);
+	xpos = xpos + fontHeight;
+	lcdDrawUTF8String(dev, fx, xpos, 0, ascii, color);
+	lcdUnsetFontFill(dev);
+	lcdUnsetFontUnderLine(dev);
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t FillRectTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t FillRectTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t color;
-    lcdFillScreen(CYAN);
+	uint16_t color;
+	lcdFillScreen(dev, CYAN);
 
-    uint16_t red;
-    uint16_t green;
-    uint16_t blue;
-    srand( (unsigned int)time( NULL ) );
-    int i;
-    for(i=1;i<100;i++) {
-        red=rand()%255;
-        green=rand()%255;
-        blue=rand()%255;
-        color=rgb565_conv(red, green, blue);
-        uint16_t xpos=rand()%width;
-        uint16_t ypos=rand()%height;
-        uint16_t size=rand()%(width/5);
-        lcdDrawFillRect(xpos, ypos, xpos+size, ypos+size, color);
-    }
+	uint16_t red;
+	uint16_t green;
+	uint16_t blue;
+	srand( (unsigned int)time( NULL ) );
+	int i;
+	for(i=1;i<100;i++) {
+		red=rand()%255;
+		green=rand()%255;
+		blue=rand()%255;
+		color=rgb565_conv(red, green, blue);
+		uint16_t xpos=rand()%width;
+		uint16_t ypos=rand()%height;
+		uint16_t size=rand()%(width/5);
+		lcdDrawFillRect(dev, xpos, ypos, xpos+size, ypos+size, color);
+	}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
-time_t ColorTest(int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+time_t ColorTest(TFT_t *dev, int width, int height) {
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    uint16_t color;
-    lcdFillScreen(WHITE);
-    color = RED;
-    uint16_t delta = height/16;
-    uint16_t ypos = 0;
-    int i;
-    for(i=0;i<16;i++) {
-        lcdDrawFillRect(0, ypos, width-1, ypos+delta, color);
-        color = color >> 1;
-        ypos = ypos + delta;
-    }
+	uint16_t color;
+	lcdFillScreen(dev, WHITE);
+	color = RED;
+	uint16_t delta = height/16;
+	uint16_t ypos = 0;
+	int i;
+	for(i=0;i<16;i++) {
+		lcdDrawFillRect(dev, 0, ypos, width-1, ypos+delta, color);
+		color = color >> 1;
+		ypos = ypos + delta;
+	}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 } 
 
 int main(int argc, char **argv){
 
   if(wiringPiSetup() == -1) {
-    printf("wiringPiSetup Fail\n");
-    return 1;
+	printf("wiringPiSetup Fail\n");
+	return 1;
   }
 
   int i;
   char base[128];
   strcpy(base, argv[0]);
   for(i=strlen(base);i>0;i--) {
-    if (base[i-1] == '/') {
-      base[i] = 0;
-      break;
-    }
+	if (base[i-1] == '/') {
+	  base[i] = 0;
+	  break;
+	}
   }
 if(_DEBUG_)printf("base=%s\n",base);
 
@@ -481,125 +636,72 @@ if(_DEBUG_)printf("base=%s\n",base);
   strcpy(ppath,base);
   strcat(ppath,"pin.conf");
 if(_DEBUG_)printf("ppath=%s\n",ppath);
+  struct stat buffer;
+  if (stat(ppath, &buffer) != 0) {
+	printf("pin.conf [%s] not found\n",ppath);
+	return 1;
+  }
 
-  int screenWidth,screenHeight;
-  char model[20];
-
-#ifdef ILI9325
-  screenWidth = 240;
-  screenHeight = 320;
-  strcpy(model,"ILI9325");
-  lcdInit(0x9325,screenWidth,screenHeight,ppath);
-#endif
+  TFT_t dev;
+  lcdInterface(&dev, ppath);
+  lcdReset(&dev);
+  INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
 
 #ifdef ILI9327
-  screenWidth = 240;
-  screenHeight = 400;
+  SCREEN_WIDTH = 240;
+  SCREEN_HEIGHT = 400;
   strcpy(model,"ILI9327");
-  lcdInit(0x9327,screenWidth,screenHeight,ppath);
-#endif
-
-#ifdef SPFD5408
-  screenWidth = 240;
-  screenHeight = 320;
-  strcpy(model,"SPFD5408");
-  lcdInit(0x5408,screenWidth,screenHeight,ppath);
-#endif
-
-#ifdef R61505U
-  screenWidth = 240;
-  screenHeight = 320;
-  strcpy(model,"R61505U");
-  lcdInit(0x1505,screenWidth,screenHeight,ppath);
-#endif
-
-#ifdef ILI9341
-  screenWidth = 240;
-  screenHeight = 320;
-#ifndef P16BIT
-  strcpy(model,"ILI9341");
-#else
-  strcpy(model,"ILI9341(16Bit)");
-#endif
-  lcdInit(0x9341,screenWidth,screenHeight,ppath);
-#endif
-
-#ifdef ILI9342
-  screenWidth = 240;
-  screenHeight = 320;
-  strcpy(model,"ILI9342");
-  lcdInit(0x9342,screenWidth,screenHeight,ppath);
-#endif
-
-#ifdef ILI9481
-  screenWidth = 320;
-  screenHeight = 480;
-  strcpy(model,"ILI9481");
-  lcdInit(0x9481,screenWidth,screenHeight,ppath);
+  lcdInit(0x9327,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
 #ifdef S6D1121
-  screenWidth = 240;
-  screenHeight = 320;
+  SCREEN_WIDTH = 240;
+  SCREEN_HEIGHT = 320;
   strcpy(model,"S6D1121");
-  lcdInit(0x1121,screenWidth,screenHeight,ppath);
+  lcdInit(0x1121,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
-#ifdef ST7781
-  screenWidth = 240;
-  screenHeight = 320;
-  strcpy(model,"ST7781");
-  lcdInit(0x7781,screenWidth,screenHeight,ppath);
+  printf("Your TFT controller is %s.\n",DRIVER_NAME); 
+  printf("TFT resolution is %d x %d.\n",SCREEN_WIDTH, SCREEN_HEIGHT); 
+
+#if 0
+while (1) {
+  ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
+  WAIT;
+}
 #endif
 
-#ifdef R61509V
-  screenWidth = 240;
-  screenHeight = 400;
-  strcpy(model,"R61509V");
-  lcdInit(0xB509,screenWidth,screenHeight,ppath);
-#endif
-
-  printf("Your TFT controller is %s.\n",model); 
-  printf("TFT resolution is %d x %d.\n",screenWidth, screenHeight); 
-  lcdReset();
-  lcdSetup();
-
-  ColorBarTest(screenWidth, screenHeight);
+  AddressTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
   WAIT;
 
-  for(i=0;i<2;i++) {
-    lcdDisplayOff();
-    sleep(1);
-    lcdDisplayOn();
-    sleep(1);
-  }
+  ColorBarTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  ArrowTest(fx32G, model, screenWidth, screenHeight);
+  ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  LineTest(screenWidth, screenHeight);
+  LineTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  CircleTest(screenWidth, screenHeight);
+  CircleTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  RoundRectTest(screenWidth, screenHeight);
+  RoundRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  DirectionTest(fx24G, screenWidth, screenHeight);
+  DirectionTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  HorizontalTest(fx24G, screenWidth, screenHeight);
+  HorizontalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  VerticalTest(fx24G, screenWidth, screenHeight);
+  VerticalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  FillRectTest(screenWidth, screenHeight);
+  FillRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
-  ColorTest(screenWidth, screenHeight);
+  ColorTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
   WAIT;
 
   //draw multi font
@@ -607,42 +709,44 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
   uint16_t xpos,ypos;
   uint16_t color;
 
-  lcdFillScreen(CYAN);
-  lcdSetFontDirection(DIRECTION90);
+  lcdFillScreen(&dev, CYAN);
+  lcdSetFontDirection(&dev, DIRECTION90);
 
-  xpos = screenWidth - 32 - 1;
-  ypos = screenHeight - 1;
+  xpos = SCREEN_WIDTH - 32 - 1;
+  ypos = SCREEN_HEIGHT - 1;
   color = BLACK;
   strcpy((char *)utf,"32Dot Gothic");
-  lcdDrawUTF8String(fx32G, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
 
   xpos = xpos - 32;
   strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(fx32G, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
 
   xpos = xpos - 32;
   strcpy((char *)utf,"32Dot Mincho");
-  lcdDrawUTF8String(fx32M, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
 
   xpos = xpos - 32;
   strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(fx32M, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
 
   xpos = xpos - 32;
   strcpy((char *)utf,"24Dot Gothic");
-  lcdDrawUTF8String(fx24G, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
 
   xpos = xpos - 24;
   strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(fx24G, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
 
   xpos = xpos - 24;
   strcpy((char *)utf,"24Dot Mincho");
-  lcdDrawUTF8String(fx24M, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
 
   xpos = xpos - 24;
   strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(fx24M, xpos, ypos, utf, color);
+  lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
+  WAIT;
 
+  lcdFadeout(&dev, 1, BLACK);
   return 0;
 }
