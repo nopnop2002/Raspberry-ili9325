@@ -4,6 +4,12 @@ This is library for RaspberryPi/OrangePi.
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
 
+![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
+
+![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
+
+Primarily, these TFT Shiled is the one for Arduino.   
+
 # Supported TFT controllers:   
 
 ## Generic 8bit Sheild
@@ -16,7 +22,7 @@ This library can show a chart to TFT Shield.
 - SPFD5408(240x320 Same as ILI9320)      
 - R61505(240x320 Same as ILI9320)      
 - R61509(240x400)      
-- ST7781     
+- ST7781(240x320)     
 - ST7783(240x320 Same as ST7781)      
 - ST7793(240x400 Same as R61509)      
 - ST7796(320x480 Same as ILI9486)      
@@ -25,12 +31,6 @@ This library can show a chart to TFT Shield.
 - ILI9341(240x320)   
 
 ## OPEN-SMART Products
-
-![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
-
-![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
-
-Primarily, these TFT Shiled is the one for Arduino.   
 
 ----
 
