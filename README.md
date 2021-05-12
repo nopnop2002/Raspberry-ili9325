@@ -70,7 +70,9 @@ Pin define is "pin.conf".
 ----
 
 # Software requirement   
-WiringPi Library   
+- WiringPi Library   
+ This project uses only GPIOs, so it may work with WiringPi libraries ported to other boards.   
+ If you use it for anything other than RPI, you may need to change the GPIO number.   
 
 ----
 
