@@ -50,7 +50,7 @@ This may works with other boards like OrangePi/NanoPi.
 
 # Wirering for 8Bit Parallel   
 
-|TFT||Rpi/Opi|
+|TFT||RPI|
 |:-:|:-:|:-:|
 |LCD_RST|--|Pin#7|
 |LCD_CS|--|Pin#3|
@@ -185,7 +185,7 @@ You can change draw1.txt & draw2.txt & me.sh
 ----
 
 # Wirering for 16Bit Parallel   
-|TFT||Rpi/Opi|
+|TFT||RPI|
 |:-:|:-:|:-:|
 |LCD_RST|--|Pin#7|
 |LCD_CS|--|Pin#3|
@@ -242,7 +242,7 @@ Please make SPI effective first.
 
 Wirering for SPI-Touch sensor   
 
-|TFT||Rpi/Opi|
+|TFT||RPI|
 |:-:|:-:|:-:|
 |PEN|--|Pin#22(\*\*)|
 |T_CS|--|Pin#24(\*\*)|
