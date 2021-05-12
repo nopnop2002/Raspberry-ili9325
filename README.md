@@ -60,7 +60,7 @@ This may works with other boards like OrangePi/NanoPi.
 \*When a regulator is NOT mounted on the back, it's operated 3.3V.   
 
 __NOTE__   
-My R61509V has a regulator.   
+My R61509V has a regulator on the back.   
 Normally, a TFT with a regulator works at 5V, but my R61509V doesn't work unless I supply both 5V and 3.3V.   
 
 __NOTE__   
