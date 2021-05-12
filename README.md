@@ -36,6 +36,18 @@ This may works with other boards like OrangePi/NanoPi.
 
 ----
 
+# Software requirement   
+- WiringPi Library   
+ This project uses only GPIOs, so it may work with WiringPi libraries ported to other boards.   
+ If you use it for anything other than RPI, you may need to change the GPIO number.   
+ As far as I know, there are these libraries.   
+	- WiringPi for OrangePi   
+	- WiringPi for OrangePi Zero   
+	- WiringPi for OrangePi3   
+	- WiringPi for NanoPi   
+
+----
+
 # Wirering for 8Bit Parallel   
 
 |TFT||Rpi/Opi|
@@ -67,18 +79,6 @@ Normally, a TFT with a regulator works at 5V, but my R61509V doesn't work unless
 __NOTE__   
 You can change any pin.   
 Pin define is "pin.conf".   
-
-----
-
-# Software requirement   
-- WiringPi Library   
- This project uses only GPIOs, so it may work with WiringPi libraries ported to other boards.   
- If you use it for anything other than RPI, you may need to change the GPIO number.   
- As far as I know, there are these libraries.   
-	- WiringPi for OrangePi   
-	- WiringPi for OrangePi Zero   
-	- WiringPi for OrangePi3   
-	- WiringPi for NanoPi   
 
 ----
 
