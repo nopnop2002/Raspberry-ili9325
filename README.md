@@ -33,6 +33,9 @@ This may works with other boards like OrangePi/NanoPi.
 - ILI9341(240x320)   
 
 ## OPEN-SMART Products
+- OPEN-SMART ST7783 16Pin-Parallel(240x320)   
+- OPEN-SMART R61509V 16Pin-Parallel(240x400)   
+- OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion)
 
 ----
 
@@ -111,6 +114,10 @@ Pin define is "pin.conf".
 - for ILI9488   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488`   
 `cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488`   
+
+- for ILI9488 Inversion  
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488 -DINVERT`   
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488 -DINVERT`   
 
 - for SPFD5408   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408`   

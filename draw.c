@@ -408,25 +408,15 @@ if(_DEBUG_)printf("dpath=%s\n",dpath);
   lcdReset(&dev);
   INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
 
+#ifdef INVERT
+  lcdInversionOn(dev);
+#endif
+
 #ifdef ILI9327
   SCREEN_WIDTH = 240;
   SCREEN_HEIGHT = 400;
   strcpy(DRIVER_NAME,"ILI9327");
   lcdInit(0x9327,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
-#endif
-
-#ifdef ILI9342
-  SCREEN_WIDTH = 240;
-  SCREEN_HEIGHT = 320;
-  strcpy(DRIVER_NAME,"ILI9342");
-  lcdInit(0x9342,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
-#endif
-
-#ifdef ILI9481
-  SCREEN_WIDTH = 320;
-  SCREEN_HEIGHT = 480;
-  strcpy(DRIVER_NAME,"ILI9481");
-  lcdInit(0x9481,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
 #ifdef S6D1121
@@ -436,24 +426,8 @@ if(_DEBUG_)printf("dpath=%s\n",dpath);
   lcdInit(0x1121,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
-#ifdef ST7781
-  SCREEN_WIDTH = 240;
-  SCREEN_HEIGHT = 320;
-  strcpy(DRIVER_NAME,"ST7781");
-  lcdInit(0x7781,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
-#endif
-
-#ifdef R61509V
-  SCREEN_WIDTH = 240;
-  SCREEN_HEIGHT = 400;
-  strcpy(DRIVER_NAME,"R61509V");
-  lcdInit(0xB509,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
-#endif
-
   printf("Your TFT controller is %s.\n",DRIVER_NAME);
   printf("TFT resolution is %d x %d.\n",SCREEN_WIDTH, SCREEN_HEIGHT);
-  //lcdReset();
-  //lcdSetup();
 
   char buf[64];
   cmd_t cmd;

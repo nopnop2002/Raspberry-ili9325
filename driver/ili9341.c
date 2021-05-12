@@ -57,11 +57,11 @@ void ili9341_lcdDrawPixel(TFT_t *dev, uint16_t x, uint16_t y, uint16_t color) {
 	uint16_t _y = y + dev->_offsety;
 
 	lcdWriteCommandByte(dev, 0x2A); // set column(x) address
-	lcdWriteDataWord(dev, x);
-	lcdWriteDataWord(dev, x);
+	lcdWriteDataWord(dev, _x);
+	lcdWriteDataWord(dev, _x);
 	lcdWriteCommandByte(dev, 0x2B); // set Page(y) address
-	lcdWriteDataWord(dev, y);
-	lcdWriteDataWord(dev, y);
+	lcdWriteDataWord(dev, _y);
+	lcdWriteDataWord(dev, _y);
 	lcdWriteCommandByte(dev, 0x2C); // Memory Write
 #ifndef P16BIT
 	lcdWriteDataWord(dev, color);
@@ -77,7 +77,6 @@ void ili9341_lcdDrawPixel(TFT_t *dev, uint16_t x, uint16_t y, uint16_t color) {
 // y2:End Y coordinate
 // color:color
 void ili9341_lcdDrawFillRect(TFT_t *dev, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color){
-	int i,j;
 	if (x1 >= dev->_width) return;
 	if (x2 >= dev->_width) x2 = dev->_width-1;
 	if (y1 >= dev->_height) return;
@@ -89,15 +88,15 @@ void ili9341_lcdDrawFillRect(TFT_t *dev, uint16_t x1, uint16_t y1, uint16_t x2, 
 	uint16_t _y2 = y2 + dev->_offsety;
 
 	lcdWriteCommandByte(dev, 0x2A); // set column(x) address
-	lcdWriteDataWord(dev, x1);
-	lcdWriteDataWord(dev, x2);
+	lcdWriteDataWord(dev, _x1);
+	lcdWriteDataWord(dev, _x2);
 	lcdWriteCommandByte(dev, 0x2B); // set Page(y) address
-	lcdWriteDataWord(dev, y1);
-	lcdWriteDataWord(dev, y2);
+	lcdWriteDataWord(dev, _y1);
+	lcdWriteDataWord(dev, _y2);
 	lcdWriteCommandByte(dev, 0x2C); // Memory Write
 
-	for(i=x1;i<=x2;i++){
-		for(j=y1;j<=y2;j++){
+	for(int i=_x1;i<=_x2;i++){
+		for(int j=_y1;j<=_y2;j++){
 #ifndef P16BIT
 			lcdWriteDataWord(dev, color);
 #else

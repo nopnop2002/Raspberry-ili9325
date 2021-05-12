@@ -180,11 +180,17 @@ time_t AddressTest(TFT_t * dev, int width, int height, uint16_t color) {
 	lcdDrawFillRect(dev, 40, 40, 59, 59, BLUE);
 	lcdDrawFillRect(dev, 60, 60, 79, 79, ~color);
 
-	sleep(2);
-	lcdInversionOn(dev);
-
+#ifdef INVERT
 	sleep(2);
 	lcdInversionOff(dev);
+	sleep(2);
+	lcdInversionOn(dev);
+#else
+	sleep(2);
+	lcdInversionOn(dev);
+	sleep(2);
+	lcdInversionOff(dev);
+#endif
 
 	gettimeofday(&endTime, NULL);
 	time_t diff = elapsedTime(startTime, endTime);
@@ -646,6 +652,10 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
   lcdInterface(&dev, ppath);
   lcdReset(&dev);
   INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
+
+#ifdef INVERT
+  lcdInversionOn(dev);
+#endif
 
 #ifdef ILI9327
   SCREEN_WIDTH = 240;
