@@ -141,7 +141,7 @@ cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796
 
 ----
 
-# How to get your TFT controller CHIP_ID   
+# How to find the TFT driver name   
 ![](https://img.shields.io/badge/_IMPORTANT-important)  
 The information provided by sellers on Ebay or AliExpress is largely incorrect.   
 You waste time if you don't choose the right driver.   
