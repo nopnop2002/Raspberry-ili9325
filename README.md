@@ -84,8 +84,8 @@ Pin define is "pin.conf".
 # Build   
 
 - for ILI9320   
-cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
-cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320   
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
 
 - for ILI9325   
 cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325   
