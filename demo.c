@@ -654,7 +654,7 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
   INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
 
 #ifdef INVERT
-  lcdInversionOn(dev);
+  lcdInversionOn(&dev);
 #endif
 
 #ifdef ILI9327
