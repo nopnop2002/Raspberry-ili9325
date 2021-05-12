@@ -20,6 +20,7 @@ This may works with other boards like OrangePi/NanoPi.
 - ILI9342(240x320)      
 - ILI9481(320x480)      
 - ILI9486(320x480)      
+- ILI9488(320x480)      
 - SPFD5408(240x320 Same as ILI9320)      
 - R61505(240x320 Same as ILI9320)      
 - R61509(240x400)      
