@@ -61,7 +61,9 @@ These are OPEN-SMART 16Pin-Parallel Products.
 	- WiringPi for OrangePi   
 	- WiringPi for OrangePi Zero   
 	- WiringPi for OrangePi3   
+	- WiringPi for BananaPi   
 	- WiringPi for NanoPi   
+	- WiringPi for Pine-64   
 
 ----
 
