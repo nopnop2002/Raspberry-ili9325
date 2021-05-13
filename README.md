@@ -35,7 +35,7 @@ This may works with other boards like OrangePi/NanoPi.
 
 ## OPEN-SMART Products
 - OPEN-SMART S6D1121 16Pin-Parallel(240x320)   
-- OPEN-SMART ST7775 16Pin-Parallel(175x220 Same as ILI9225)   
+- OPEN-SMART ST7775 16Pin-Parallel(176x220 Same as ILI9225)   
 - OPEN-SMART ST7783 16Pin-Parallel(240x320)   
 - OPEN-SMART R61509V 16Pin-Parallel(240x400)   
 - OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion Color)
