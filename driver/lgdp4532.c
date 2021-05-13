@@ -62,7 +62,7 @@ void lgdp4532_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offset
 	DrawFillRect = ili9325_lcdDrawFillRect;
 	DisplayOff = ili9325_lcdDisplayOff;
 	DisplayOn = ili9325_lcdDisplayOn;
-    InversionOff = ili9325_lcdInversionOff;
-    InversionOn = ili9325_lcdInversionOn;
+	InversionOff = ili9325_lcdInversionOff;
+	InversionOn = ili9325_lcdInversionOn;
 }
 

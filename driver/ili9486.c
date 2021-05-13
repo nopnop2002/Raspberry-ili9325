@@ -44,7 +44,7 @@ void ili9486_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety
 	lcdInitTable(dev, regValues, sizeof(regValues));
 	lcdInitTable(dev, wake_on, sizeof(wake_on));
 
-	// ili9481 custom function
+	// ili9486 custom function
 	DrawPixel = ili9341_lcdDrawPixel;
 	DrawFillRect = ili9341_lcdDrawFillRect;
 	DisplayOff = ili9341_lcdDisplayOff;

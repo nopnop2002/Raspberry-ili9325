@@ -14,8 +14,8 @@
 #ifdef ILI9225
 #include "driver/ili9225.h"
 #define DRIVER_NAME "ILI9225"
-#define SCREEN_WIDTH  240
-#define SCREEN_HEIGHT 320
+#define SCREEN_WIDTH  176
+#define SCREEN_HEIGHT 220
 #define OFFSET_X 0
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9225_lcdInit(a, b, c, d, e)
@@ -37,6 +37,24 @@
 #define OFFSET_X 0
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9325_lcdInit(a, b, c, d, e)
+
+#elif ILI9327
+#include "driver/ili9327.h"
+#define DRIVER_NAME "ILI9327"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 400
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9327_lcdInit(a, b, c, d, e)
+
+#elif ILI9340
+#include "driver/ili9341.h"
+#define DRIVER_NAME "ILI9340"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9341_lcdInit(a, b, c, d, e)
 
 #elif ILI9341
 #include "driver/ili9341.h"
@@ -682,13 +700,6 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
 
 #ifdef INVERT
   lcdInversionOn(&dev);
-#endif
-
-#ifdef ILI9327
-  SCREEN_WIDTH = 240;
-  SCREEN_HEIGHT = 400;
-  strcpy(model,"ILI9327");
-  lcdInit(0x9327,SCREEN_WIDTH,SCREEN_HEIGHT,ppath);
 #endif
 
   printf("Your TFT controller is %s.\n",DRIVER_NAME); 

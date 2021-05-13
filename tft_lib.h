@@ -87,7 +87,6 @@ void lcdInit(TFT_t *dev, uint16_t model, int width, int height, int offsetx, int
 void lcdReset(TFT_t *dev);
 void lcdInitTable(TFT_t *dev, const void *table, int16_t size);
 void lcdInitTable16(TFT_t *dev, const void *table, int16_t size);
-void lcdSetup(TFT_t *dev, int width, int height, int offsetx, int offsety);
 void lcdDrawPixel(TFT_t *dev, uint16_t x, uint16_t y, uint16_t color);
 void lcdDrawFillRect(TFT_t * dev, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 void lcdDisplayOff(TFT_t *dev);

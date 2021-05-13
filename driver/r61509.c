@@ -7,7 +7,7 @@
 void r61509_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety) {
 	lcdInit(dev, 0x1509, width, height, offsetx, offsety);
 
-	static const uint16_t R61509_regValues[] = {
+	static const uint16_t regValues[] = {
 		//0x0400, 0x6200,
 		0x0008, 0x0808,
 		0x0010, 0x0016,		 //69.5Hz		  0016
@@ -45,7 +45,7 @@ void r61509_lcdInit(TFT_t *dev, int width, int height, int offsetx, int offsety)
 		0x0200, 0x0000,
 		0x0201, 0x0000,
 	};
-	lcdInitTable16(dev, R61509_regValues, sizeof(R61509_regValues));
+	lcdInitTable16(dev, regValues, sizeof(regValues));
 
 	// r61509 custom function
 	DrawPixel = r61509_lcdDrawPixel;
@@ -111,10 +111,12 @@ void r61509_lcdDisplayOn(TFT_t *dev) {
 
 // Display Inversion OFF
 void r61509_lcdInversionOff(TFT_t * dev) {
+	// I can't find register
 	//lcdWriteRegisterWord(dev, 0x0003, 0x1030);	// Display Control 1
 }
 
 // Display Inversion ON
 void r61509_lcdInversionOn(TFT_t * dev) {
+	// I can't find register
 	//lcdWriteRegisterWord(dev, 0x0003, 0x0030);	// Display Control 1
 }

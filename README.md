@@ -14,7 +14,6 @@ This may works with other boards like OrangePi/NanoPi.
 # Supported TFT controllers:   
 
 ## Generic 8bit Sheild
-- ILI9225(240x320)      
 - ILI9320(240x320)      
 - ILI9325(240x320)      
 - ILI9341(240x320)      
@@ -34,11 +33,23 @@ This may works with other boards like OrangePi/NanoPi.
 - ILI9341(240x320)   
 
 ## OPEN-SMART Products
+- OPEN-SMART ILI9225 TFT-Shield(176x220)      
+- OPEN-SMART ILI9327 TFT-Shield(240x400)      
+- OPEN-SMART ILI9340 TFT-Shield(240x320)   
 - OPEN-SMART S6D1121 16Pin-Parallel(240x320)   
 - OPEN-SMART ST7775 16Pin-Parallel(176x220 Same as ILI9225)   
 - OPEN-SMART ST7783 16Pin-Parallel(240x320)   
 - OPEN-SMART R61509V 16Pin-Parallel(240x400)   
 - OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion Color)
+
+These are all 2.4 inch, 320x240 TFTs.
+![TFT-SHIELD-2](https://user-images.githubusercontent.com/6020549/104244320-873a1600-54a5-11eb-93c0-9fad671fdfed.JPG)
+
+3.95 inches is almost twice as large as 2.4 inches.
+![TFT-SHIELD-3](https://user-images.githubusercontent.com/6020549/104244328-8903d980-54a5-11eb-8c9a-d26408e04f92.JPG)
+
+These are OPEN-SMART 16Pin-Parallel Products.
+![OPEN-SMART-16Pin](https://user-images.githubusercontent.com/6020549/110071604-ad9e7280-7dbf-11eb-8e09-a9ebfacfd795.JPG)
 
 ----
 
@@ -101,6 +112,10 @@ Pin define is "pin.conf".
 - for ILI9325   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325`   
 `cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325`   
+
+- for ILI9327   
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9327`   
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9327`   
 
 - for ILI9341   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341`   
