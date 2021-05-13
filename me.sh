@@ -64,7 +64,7 @@ _echo "DrawFillRect,${x1},${y1},${x2},${y2},${color}"
 #_echo "SetFontUnderLine,${color}"
 _echo "DrawUTF8String,G24,${xs},${ys},wlan0 IP Address,${color}"
 #_echo "UnsetFontUnderLine"
-IpAddr=`ifconfig wlan0 |grep "inet " |awk {'print $2'}`
+IpAddr=`ifconfig wlan0 | grep "inet " | awk {'print $2'}`
 xs=$((xs+20))
 _echo "SetFontUnderLine,${color}"
 if [ -n "$IpAddr" ]; then
@@ -81,7 +81,7 @@ x2=$((x1+10))
 xs=$((xs+30))
 _echo "DrawFillRect,${x1},${y1},${x2},${y2},${color}"
 _echo "DrawUTF8String,G24,${xs},${ys},eth0 IP Address,${color}"
-IpAddr=`ifconfig eth0 |grep "inet " |awk {'print $2'}`
+IpAddr=`ifconfig eth0 | grep "inet " | awk {'print $2'}`
 xs=$((xs+20))
 _echo "SetFontUnderLine,${color}"
 if [ -n "$IpAddr" ]; then
