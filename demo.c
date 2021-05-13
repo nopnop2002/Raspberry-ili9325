@@ -11,7 +11,16 @@
 
 #include "tft_lib.h"
 
-#ifdef ILI9320
+#ifdef ILI9225
+#include "driver/ili9225.h"
+#define DRIVER_NAME "ILI9225"
+#define SCREEN_WIDTH  240
+#define SCREEN_HEIGHT 320
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9225_lcdInit(a, b, c, d, e)
+
+#elif ILI9320
 #include "driver/ili9320.h"
 #define DRIVER_NAME "ILI9320"
 #define SCREEN_WIDTH  240
@@ -29,7 +38,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9325_lcdInit(a, b, c, d, e)
 
-#elif defined ILI9341
+#elif ILI9341
 #include "driver/ili9341.h"
 #ifndef P16BIT
 #define DRIVER_NAME "ILI9341"
@@ -42,7 +51,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9341_lcdInit(a, b, c, d, e)
 
-#elif defined ILI9342
+#elif ILI9342
 #include "driver/ili9342.h"
 #define DRIVER_NAME "ILI9342"
 #define SCREEN_WIDTH  240
@@ -51,7 +60,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9342_lcdInit(a, b, c, d, e)
 
-#elif defined ILI9481
+#elif ILI9481
 #include "driver/ili9481.h"
 #define DRIVER_NAME "ILI9481"
 #define SCREEN_WIDTH  320
@@ -60,7 +69,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9481_lcdInit(a, b, c, d, e)
 
-#elif defined ILI9486
+#elif ILI9486
 #include "driver/ili9486.h"
 #define DRIVER_NAME "ILI9486"
 #define SCREEN_WIDTH  320
@@ -69,7 +78,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9486_lcdInit(a, b, c, d, e)
 
-#elif defined ILI9488
+#elif ILI9488
 #include "driver/ili9488.h"
 #define DRIVER_NAME "ILI9488"
 #define SCREEN_WIDTH  320
@@ -78,7 +87,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9488_lcdInit(a, b, c, d, e)
 
-#elif defined SPFD5408
+#elif SPFD5408
 #include "driver/ili9320.h"
 #define DRIVER_NAME "SPFD5408"
 #define SCREEN_WIDTH  240
@@ -87,7 +96,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9320_lcdInit(a, b, c, d, e)
 
-#elif defined R61505U
+#elif R61505U
 #include "driver/ili9320.h"
 #define DRIVER_NAME "R61505U"
 #define SCREEN_WIDTH  240
@@ -96,7 +105,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) ili9320_lcdInit(a, b, c, d, e)
 
-#elif defined R61509V
+#elif R61509V
 #include "driver/r61509.h"
 #define DRIVER_NAME "R61509V"
 #define SCREEN_WIDTH  240
@@ -105,7 +114,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) r61509_lcdInit(a, b, c, d, e)
 
-#elif defined S6D1121
+#elif S6D1121
 #include "driver/s6d1121.h"
 #define DRIVER_NAME "S6D1121"
 #define SCREEN_WIDTH  240
@@ -114,7 +123,16 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) s6d1121_lcdInit(a, b, c, d, e)
 
-#elif defined ST7781
+#elif ST7775
+#include "driver/ili9225.h"
+#define DRIVER_NAME "ST7775"
+#define SCREEN_WIDTH  176
+#define SCREEN_HEIGHT 220
+#define OFFSET_X 0
+#define OFFSET_Y 0
+#define INIT_FUNCTION(a, b, c, d, e) ili9225_lcdInit(a, b, c, d, e)
+
+#elif ST7781
 #include "driver/st7781.h"
 #define DRIVER_NAME "ST7781"
 #define SCREEN_WIDTH  240
@@ -123,7 +141,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) st7781_lcdInit(a, b, c, d, e)
 
-#elif defined ST7783
+#elif ST7783
 #include "driver/st7781.h"
 #define DRIVER_NAME "ST7783"
 #define SCREEN_WIDTH  240
@@ -132,7 +150,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) st7781_lcdInit(a, b, c, d, e)
 
-#elif defined ST7793
+#elif ST7793
 #include "driver/r61509.h"
 #define DRIVER_NAME "ST7793"
 #define SCREEN_WIDTH  240
@@ -141,7 +159,7 @@
 #define OFFSET_Y 0
 #define INIT_FUNCTION(a, b, c, d, e) r61509_lcdInit(a, b, c, d, e)
 
-#elif defined ST7796
+#elif ST7796
 #include "driver/ili9486.h"
 #define DRIVER_NAME "ST7796"
 #define SCREEN_WIDTH  320

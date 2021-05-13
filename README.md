@@ -14,6 +14,7 @@ This may works with other boards like OrangePi/NanoPi.
 # Supported TFT controllers:   
 
 ## Generic 8bit Sheild
+- ILI9225(240x320)      
 - ILI9320(240x320)      
 - ILI9325(240x320)      
 - ILI9341(240x320)      
@@ -34,6 +35,7 @@ This may works with other boards like OrangePi/NanoPi.
 
 ## OPEN-SMART Products
 - OPEN-SMART S6D1121 16Pin-Parallel(240x320)   
+- OPEN-SMART ST7775 16Pin-Parallel(175x220 Same as ILI9225)   
 - OPEN-SMART ST7783 16Pin-Parallel(240x320)   
 - OPEN-SMART R61509V 16Pin-Parallel(240x400)   
 - OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion Color)
@@ -88,6 +90,10 @@ Pin define is "pin.conf".
 
 # Build   
 
+- for ILI9225   
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9225`   
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9225`   
+
 - for ILI9320   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
 `cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
@@ -135,6 +141,10 @@ Pin define is "pin.conf".
 - for S6D1121   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
 `cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
+
+- for ST7775   
+`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7775`   
+`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7775`   
 
 - for ST7781   
 `cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781`   
