@@ -219,7 +219,7 @@ __Never believe the seller's information.__
 
 You can change draw1.txt & draw2.txt & me.sh   
 
-![me_sh](https://user-images.githubusercontent.com/6020549/42207927-f32ae206-7ee5-11e8-80a0-f5cb81d76747.JPG)
+![me_sh](https://user-images.githubusercontent.com/6020549/118217481-8398b900-b4b0-11eb-91b7-1d7e14ef6ab8.JPG)
 
 ----
 
