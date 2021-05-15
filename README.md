@@ -301,13 +301,13 @@ And you can operate Pi using touch sensor.
 ---
 
 # JPEG Decoder   
-This project uses [this](http://elm-chan.org/fsw/tjpgd/00index.html) JPEG library.
+This project uses [this](http://elm-chan.org/fsw/tjpgd/00index.html) JPEG library.   
 This can reduce the image to 1/2 1/4 1/8.   
 
 ---
 
 # PNG Decoder   
-This project uses [this](https://github.com/kikuchan/pngle) PNG library.
+I ported the pngle library from [here](https://github.com/kikuchan/pngle).   
 This can reduce the image to any size.   
 
 ---
