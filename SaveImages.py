@@ -4,6 +4,7 @@ import os.path
 import sys
 import datetime
 import shutil
+import inspect
 
 #python2
 #import urllib2
@@ -22,7 +23,9 @@ from PIL import Image, ImageFilter
 DEBUG = 0
 
 def downloadImage(url, savename):
-	if DEBUG: print("<downloadImage> url savename={}".format(url,savename))
+	function_name = inspect.currentframe().f_code.co_name
+	if DEBUG: print("{} url={} savename={}".format(function_name,url,savename))
+	print("download image from {}".format(url))
 	#img = urllib.urlopen(url)
 	img = urllib.request.urlopen(url)
 	localfile = open(savename, 'wb')
@@ -31,8 +34,9 @@ def downloadImage(url, savename):
 	localfile.close()
 
 def rotateImage(filename):
+	function_name = inspect.currentframe().f_code.co_name
 	tmpfile = os.path.join(os.getcwd(), "__temp.jpeg")
-	if DEBUG: print("tmpfile={}".format(tmpfile))
+	if DEBUG: print("{} tmpfile={}".format(function_name,tmpfile))
 	shutil.copyfile(filename, tmpfile)
 	im = Image.open(tmpfile)
 	im_rotate = im.rotate(90, expand=True)
@@ -116,14 +120,15 @@ if __name__ == "__main__":
 	f.close()
 
 	number_url = []
+	if(DEBUG): print("len_url={}".format(len_url))
 
 	for i in range(0,(len_url-1)):
 		number_url.append(row_url[i])
 
-	#print("len_url={}".format(len_url))
 	rcode = 1
 	for j in range(0,(len_url-1)):
 		url = number_url[j]
+		if DEBUG: print("url={}".format(url))
 		if not "user_photo.php" in url:
 		   continue
 
