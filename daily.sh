@@ -11,6 +11,7 @@ function _echo () {
   echo $1 >> $DrawFile
 }
 
+# download image from https://www.365calendar.net/
 imageFile="images/dailyImage.jpeg"
 python SaveImages.py images/dailyImage.jpeg 1131
 
