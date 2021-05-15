@@ -202,6 +202,7 @@ PNG file
 `./draw draw1.txt`   
 `./draw draw2.txt`   
 `bash ./me.sh`   
+`bash ./daily.sh`   
 
 You can change draw1.txt & draw2.txt & me.sh   
 

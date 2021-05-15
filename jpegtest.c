@@ -133,8 +133,9 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
 
 
   char file[64];
-  strcpy(file, "./images/RaspberryPi_logo.jpeg");
+  //strcpy(file, "./images/RaspberryPi_logo.jpeg");
   //strcpy(file, "./images/Ubuntu_log.jpeg");
+  strcpy(file, "./images/dailyImage.jpeg");
   JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
   sleep(5);
 

@@ -82,14 +82,18 @@ static int outfunc(JDEC *decoder, void *bitmap, JRECT *rect) {
 uint8_t getScale(uint16_t screenWidth, uint16_t screenHeight, uint16_t imageWidth, uint16_t imageHeight) {
 	if (screenWidth >= imageWidth && screenHeight >= imageHeight)  return 0;
 
+	if (_DEBUG_) printf("screenWidth=%d imageWidth=%d\n", screenWidth, imageWidth);
+	if (_DEBUG_) printf("screenHeight=%d imageHeight=%d\n", screenHeight, imageHeight);
 	double scaleWidth = (double)imageWidth / (double)screenWidth;
 	double scaleHeight = (double)imageHeight / (double)screenHeight;
 	if (_DEBUG_) printf("scaleWidth=%f scaleHeight=%f\n", scaleWidth, scaleHeight);
 	double scale = scaleWidth;
 	if (scaleWidth < scaleHeight) scale = scaleHeight;
 	if (_DEBUG_) printf("scale=%f\n", scale);
-	if (scale < 2.0) return 1;
-	if (scale < 4.0) return 2;
+	//if (scale < 2.0) return 1;
+	//if (scale < 4.0) return 2;
+	if (scale <= 2.0) return 1;
+	if (scale <= 4.0) return 2;
 	return 3;
 
 }

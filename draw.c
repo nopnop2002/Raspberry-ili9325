@@ -10,6 +10,12 @@
 
 #include "tft_lib.h"
 
+#include "tjpgd2/tjpgd.h"
+#include "tjpgd2/decode_jpeg.h"
+
+#include "pngle/pngle.h"
+#include "pngle/decode_png.h"
+
 #ifdef ILI9225
 #include "driver/ili9225.h"
 #define DRIVER_NAME "ILI9225"
@@ -182,6 +188,7 @@
 typedef struct {
   char name[32];
   char font[32];
+  char file[64];
   unsigned char utf[32];
   uint16_t x1;
   uint16_t y1;
@@ -306,6 +313,15 @@ int cmdParse(char * buf, cmd_t * hoge) {
 			 strcmp(wk[0],"UnsetFontUnderLine") == 0) {
 	strcpy(hoge->name,wk[0]);
 	return 1;
+
+  } else if (strcmp(wk[0],"JPEG") == 0) {
+	strcpy(hoge->name,wk[0]);
+	strcpy(hoge->file,wk[1]);
+
+  } else if (strcmp(wk[0],"PNG") == 0) {
+	strcpy(hoge->name,wk[0]);
+	strcpy(hoge->file,wk[1]);
+
   } else {
 	return 0;
   }
@@ -314,7 +330,8 @@ int cmdParse(char * buf, cmd_t * hoge) {
 
 void cmdDump(cmd_t hoge) {
   printf("name=%s\n",hoge.name);
-  printf("font=%s ",hoge.font);
+  printf("font=[%s] ",hoge.font);
+  printf("file=[%s] ",hoge.file);
   printf("x1=%d ",hoge.x1);
   printf("y1=%d ",hoge.y1);
   printf("x2=%d ",hoge.x2);
@@ -326,7 +343,161 @@ void cmdDump(cmd_t hoge) {
   printf("color=%x\n",hoge.color);
 }
 
+int JPEGTest(TFT_t * dev, char * file, int width, int height) {
+	//struct timeval startTime, endTime;
+	//gettimeofday(&startTime, NULL);
 
+	//lcdFillScreen(dev, BLACK);
+
+	int _width = width;
+	if (width > 240) _width = 240;
+	int _height = height;
+	if (height > 320) _height = 320;
+
+	pixel_s **pixels;
+	uint16_t imageWidth;
+	uint16_t imageHeight;
+	uint16_t err = decode_image(&pixels, file, width, height, &imageWidth, &imageHeight);
+	if (err == ESP_OK) {
+		//printf("imageWidth=%d imageHeight=%d\n", imageWidth, imageHeight);
+
+		uint16_t jpegWidth = width;
+		uint16_t offsetX = 0;
+		if (width > imageWidth) {
+			jpegWidth = imageWidth;
+			offsetX = (width - imageWidth) / 2;
+		}
+		//printf("jpegWidth=%d offsetX=%d\n", jpegWidth, offsetX);
+
+		uint16_t jpegHeight = height;
+		uint16_t offsetY = 0;
+		if (height > imageHeight) {
+			jpegHeight = imageHeight;
+			offsetY = (height - imageHeight) / 2;
+		}
+		//printf("jpegHeight=%d offsetY=%d\n", jpegHeight, offsetY);
+		uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * jpegWidth);
+
+		int ypos = (height-1) - offsetY;
+		for(int y = 0; y < jpegHeight; y++){
+			for(int x = 0;x < jpegWidth; x++){
+				pixel_s pixel = pixels[y][x];
+				uint16_t color = rgb565_conv(pixel.red, pixel.green, pixel.blue);
+				//lcdDrawPixel(dev, x+offsetX, y+offsetY, color);
+				lcdDrawPixel(dev, x+offsetX, ypos, color);
+			}
+			ypos--;
+		}
+
+		free(colors);
+		release_image(&pixels, _width, _height);
+		//printf("Finish\n");
+	} else {
+		printf("decode_image err=%d imageWidth=%d imageHeight=%d\n", err, imageWidth, imageHeight);
+	}
+
+	//gettimeofday(&endTime, NULL);
+	//time_t diff = elapsedTime(startTime, endTime);
+	//printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	//return diff;
+	return 0;
+}
+
+
+int PNGTest(TFT_t * dev, char * file, int width, int height) {
+	//struct timeval startTime, endTime;
+	//gettimeofday(&startTime, NULL);
+
+	//lcdFillScreen(dev, BLACK);
+
+	int _width = width;
+	if (width > 240) _width = 240;
+	int _height = height;
+	if (height > 320) _height = 320;
+
+	// open PNG file
+	FILE* fp = fopen(file, "rb");
+	if (fp == NULL) {
+		printf("File not found [%s]\n", file);
+		return 0;
+	}
+
+	char buf[1024];
+	size_t remain = 0;
+	int len;
+
+	pngle_t *pngle = pngle_new(_width, _height);
+
+	pngle_set_init_callback(pngle, png_init);
+	pngle_set_draw_callback(pngle, png_draw);
+	pngle_set_done_callback(pngle, png_finish);
+
+	double display_gamma = 2.2;
+	pngle_set_display_gamma(pngle, display_gamma);
+
+
+	while (!feof(fp)) {
+		if (remain >= sizeof(buf)) {
+			printf("Buffer exceeded\n");
+			return 0;
+		}
+
+		len = fread(buf + remain, 1, sizeof(buf) - remain, fp);
+		if (len <= 0) {
+			//printf("EOF\n");
+			break;
+		}
+
+		int fed = pngle_feed(pngle, buf, remain + len);
+		if (fed < 0) {
+			printf("ERROR; %s\n", pngle_error(pngle));
+			return 0;
+		}
+
+		remain = remain + len - fed;
+		if (remain > 0) memmove(buf, buf + fed, remain);
+	}
+
+	fclose(fp);
+
+	uint16_t pngWidth = width;
+	uint16_t offsetX = 0;
+	if (width > pngle->imageWidth) {
+		pngWidth = pngle->imageWidth;
+		offsetX = (width - pngle->imageWidth) / 2;
+	}
+	printf("pngWidth=%d offsetX=%d", pngWidth, offsetX);
+
+	uint16_t pngHeight = height;
+	uint16_t offsetY = 0;
+	if (height > pngle->imageHeight) {
+		pngHeight = pngle->imageHeight;
+		offsetY = (height - pngle->imageHeight) / 2;
+	}
+	printf("pngHeight=%d offsetY=%d\n", pngHeight, offsetY);
+	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * pngWidth);
+
+	int ypos = (height-1) - offsetY;
+	for(int y = 0; y < pngHeight; y++){
+		for(int x = 0;x < pngWidth; x++){
+			pixel_png pixel = pngle->pixels[y][x];
+			uint16_t color = rgb565_conv(pixel.red, pixel.green, pixel.blue);
+			//lcdDrawPixel(dev, x+offsetX, y+offsetY, color);
+			lcdDrawPixel(dev, x+offsetX, ypos, color);
+		}
+		ypos--;
+	}
+
+
+	free(colors);
+	pngle_destroy(pngle, _width, _height);
+
+	//gettimeofday(&endTime, NULL);
+	//time_t diff = elapsedTime(startTime, endTime);
+	//printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	//return diff;
+	return 0;
+}
 
 /*
  Width inquiry
@@ -348,16 +519,16 @@ if(_DEBUG_)printf("argc=%d\n",argc);
   }
 
   if (argc == 2) {
-    if (strcmp(argv[1],"width") == 0) {
-      printf("%d\n", SCREEN_WIDTH);
-      return 0;
-    } else if (strcmp(argv[1],"height") == 0) {
-      printf("%d\n", SCREEN_HEIGHT);
-      return 0;
-    } else if (strcmp(argv[1],"driver") == 0) {
-      printf("%s\n", DRIVER_NAME);
-      return 0;
-    }
+	if (strcmp(argv[1],"width") == 0) {
+	  printf("%d\n", SCREEN_WIDTH);
+	  return 0;
+	} else if (strcmp(argv[1],"height") == 0) {
+	  printf("%d\n", SCREEN_HEIGHT);
+	  return 0;
+	} else if (strcmp(argv[1],"driver") == 0) {
+	  printf("%s\n", DRIVER_NAME);
+	  return 0;
+	}
   }
 
   if(wiringPiSetup() == -1) {
@@ -508,18 +679,18 @@ if(_DEBUG_)cmdDump(cmd);
 	  lcdDrawFillArrow(&dev, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.t, cmd.color);
 	} else if (strcmp(cmd.name,"DrawUTF8String") == 0) {
 	  if (strcmp(cmd.font,"G32") == 0)
-	    lcdDrawUTF8String(&dev, fxG32, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxG32, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 	  if (strcmp(cmd.font,"G24") == 0)
-	    lcdDrawUTF8String(&dev, fxG24, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxG24, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 	  if (strcmp(cmd.font,"G16") == 0)
-	    lcdDrawUTF8String(&dev, fxG16, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxG16, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 
 	  if (strcmp(cmd.font,"M32") == 0)
-  	    lcdDrawUTF8String(&dev, fxM32, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxM32, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 	  if (strcmp(cmd.font,"M24") == 0)
-	    lcdDrawUTF8String(&dev, fxM24, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxM24, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 	  if (strcmp(cmd.font,"M16") == 0)
-	    lcdDrawUTF8String(&dev, fxM16, cmd.x1, cmd.y1, cmd.utf, cmd.color);
+		lcdDrawUTF8String(&dev, fxM16, cmd.x1, cmd.y1, cmd.utf, cmd.color);
 	} else if (strcmp(cmd.name,"SetFontDirection") == 0) {
 	  lcdSetFontDirection(&dev, cmd.dir);
 	} else if (strcmp(cmd.name,"SetFontFill") == 0) {
@@ -530,6 +701,10 @@ if(_DEBUG_)cmdDump(cmd);
 	  lcdSetFontUnderLine(&dev, cmd.color);
 	} else if (strcmp(cmd.name,"UnsetFontUnderLine") == 0) {
 	  lcdUnsetFontUnderLine(&dev);
+	} else if (strcmp(cmd.name,"JPEG") == 0) {
+	  JPEGTest(&dev, cmd.file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	} else if (strcmp(cmd.name,"PNG") == 0) {
+	  PNGTest(&dev, cmd.file, SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
   }

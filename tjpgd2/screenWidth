@@ -1,0 +1,107 @@
+decode_jpeg.c:	if (_DEBUG_) printf("infunc len=%d fp=%p\n", len, jd->fp);
+decode_jpeg.c:		rlen = fread(buf, 1, len, jd->fp);
+decode_jpeg.c:		fseek(jd->fp, len, SEEK_CUR);
+decode_jpeg.c:	if (_DEBUG_) printf("jd->screenWidth=%d jd->screenHeight=%d\n", jd->screenWidth, jd->screenHeight);
+decode_jpeg.c:			if (y < jd->screenHeight && x < jd->screenWidth) {
+decode_jpeg.c:				jd->outData[y][x].red = in[0];
+decode_jpeg.c:				jd->outData[y][x].green = in[1];
+decode_jpeg.c:				jd->outData[y][x].blue = in[2];
+tjpgd.c:	if (jd->sz_pool >= ndata) {
+tjpgd.c:		jd->sz_pool -= ndata;
+tjpgd.c:		rp = (char*)jd->pool;			/* Get start of available memory pool */
+tjpgd.c:		jd->pool = (void*)(rp + ndata);	/* Allocate requierd bytes */
+tjpgd.c:		jd->qttbl[i] = pb;						/* Register the table */
+tjpgd.c:		jd->huffbits[num][cls] = pb;
+tjpgd.c:		jd->huffcode[num][cls] = ph;
+tjpgd.c:		jd->huffdata[num][cls] = pd;
+tjpgd.c:	msk = jd->dmsk; dc = jd->dctr; dp = jd->dptr;	/* Bit mask, number of data available, read ptr */
+tjpgd.c:				dp = jd->inbuf;	/* Top of input buffer */
+tjpgd.c:				dc = jd->infunc(jd, dp, JD_SZBUF);
+tjpgd.c:	jd->dmsk = msk; jd->dctr = dc; jd->dptr = dp;
+tjpgd.c:	msk = jd->dmsk; dc = jd->dctr; dp = jd->dptr;	/* Bit mask, number of data available, read ptr */
+tjpgd.c:				dp = jd->inbuf;	/* Top of input buffer */
+tjpgd.c:				dc = jd->infunc(jd, dp, JD_SZBUF);
+tjpgd.c:				jd->dmsk = msk; jd->dctr = dc; jd->dptr = dp;
+tjpgd.c:	int32_t *tmp = (int32_t*)jd->workbuf;	/* Block working buffer for de-quantize and IDCT */
+tjpgd.c:	nby = jd->msx * jd->msy;	/* Number of Y blocks (1, 2 or 4) */
+tjpgd.c:	bp = jd->mcubuf;			/* Pointer to the first block of MCU */
+tjpgd.c:		if (cmp && jd->ncomp != 3) {		/* Clear C blocks if not exist (monochrome image) */
+tjpgd.c:			hb = jd->huffbits[id][0];				/* Huffman table for the DC element */
+tjpgd.c:			hc = jd->huffcode[id][0];
+tjpgd.c:			hd = jd->huffdata[id][0];
+tjpgd.c:			d = jd->dcv[cmp];						/* DC value of previous block */
+tjpgd.c:				jd->dcv[cmp] = (int16_t)d;			/* Save current DC value for next block */
+tjpgd.c:			dqf = jd->qttbl[jd->qtid[cmp]];			/* De-quantizer table ID for this component */
+tjpgd.c:			hb = jd->huffbits[id][1];				/* Huffman table for the AC elements */
+tjpgd.c:			hc = jd->huffcode[id][1];
+tjpgd.c:			hd = jd->huffdata[id][1];
+tjpgd.c:			if (JD_USE_SCALE && jd->scale == 3) {
+tjpgd.c:	mx = jd->msx * 8; my = jd->msy * 8;					/* MCU size (pixel) */
+tjpgd.c:	rx = (x + mx <= jd->width) ? mx : jd->width - x;	/* Output rectangular size (it may be clipped at right/bottom end of image) */
+tjpgd.c:	ry = (y + my <= jd->height) ? my : jd->height - y;
+tjpgd.c:		rx >>= jd->scale; ry >>= jd->scale;
+tjpgd.c:		x >>= jd->scale; y >>= jd->scale;
+tjpgd.c:	if (!JD_USE_SCALE || jd->scale != 3) {	/* Not for 1/8 scaling */
+tjpgd.c:		pix = (uint8_t*)jd->workbuf;
+tjpgd.c:				py = jd->mcubuf + iy * 8;
+tjpgd.c:				pc = jd->mcubuf;
+tjpgd.c:				py = jd->mcubuf + iy * 8;
+tjpgd.c:		if (JD_USE_SCALE && jd->scale) {
+tjpgd.c:			s = jd->scale * 2;	/* Number of shifts for averaging */
+tjpgd.c:			w = 1 << jd->scale;	/* Width of square */
+tjpgd.c:			op = (uint8_t*)jd->workbuf;
+tjpgd.c:					pix = (uint8_t*)jd->workbuf + (iy * mx + ix) * (JD_FORMAT != 2 ? 3 : 1);
+tjpgd.c:		pix = (uint8_t*)jd->workbuf;
+tjpgd.c:		pc = jd->mcubuf + mx * my;
+tjpgd.c:			py = jd->mcubuf;
+tjpgd.c:	mx >>= jd->scale;
+tjpgd.c:		s = d = (uint8_t*)jd->workbuf;
+tjpgd.c:		uint8_t *s = (uint8_t*)jd->workbuf;
+tjpgd.c:	return outfunc(jd, jd->workbuf, &rect) ? JDR_OK : JDR_INTR; 
+tjpgd.c:	dp = jd->dptr; dc = jd->dctr;
+tjpgd.c:			dp = jd->inbuf;
+tjpgd.c:			dc = jd->infunc(jd, dp, JD_SZBUF);
+tjpgd.c:	jd->dptr = dp; jd->dctr = dc; jd->dmsk = 0;
+tjpgd.c:	jd->dcv[2] = jd->dcv[1] = jd->dcv[0] = 0;
+tjpgd.c:	jd->pool = pool;		/* Work memroy */
+tjpgd.c:	jd->sz_pool = sz_pool;	/* Size of given work memory */
+tjpgd.c:	jd->infunc = infunc;	/* Stream input function */
+tjpgd.c:	jd->device = dev;		/* I/O device identifier */
+tjpgd.c:	jd->nrst = 0;			/* No restart interval (default) */
+tjpgd.c:	jd->inbuf = seg = alloc_pool(jd, JD_SZBUF);		/* Allocate stream input buffer */
+tjpgd.c:		if (jd->infunc(jd, seg, 1) != 1) return JDR_INP;	/* Err: SOI was not detected */
+tjpgd.c:		if (jd->infunc(jd, seg, 4) != 4) return JDR_INP;
+tjpgd.c:			if (jd->infunc(jd, seg, len) != len) return JDR_INP;	/* Load segment data */
+tjpgd.c:			jd->width = LDB_WORD(&seg[3]);		/* Image width in unit of pixel */
+tjpgd.c:			jd->height = LDB_WORD(&seg[1]);		/* Image height in unit of pixel */
+tjpgd.c:			jd->ncomp = seg[5];					/* Number of color components */
+tjpgd.c:			if (jd->ncomp != 3 && jd->ncomp != 1) return JDR_FMT3;	/* Err: Supports only Grayscale and Y/Cb/Cr */
+tjpgd.c:			for (i = 0; i < jd->ncomp; i++) {
+tjpgd.c:					jd->msx = b >> 4; jd->msy = b & 15;		/* Size of MCU [blocks] */
+tjpgd.c:				jd->qtid[i] = seg[8 + 3 * i];				/* Get dequantizer table ID for this component */
+tjpgd.c:				if (jd->qtid[i] > 3) return JDR_FMT3;		/* Err: Invalid ID */
+tjpgd.c:			if (jd->infunc(jd, seg, len) != len) return JDR_INP;	/* Load segment data */
+tjpgd.c:			jd->nrst = LDB_WORD(seg);
+tjpgd.c:			if (jd->infunc(jd, seg, len) != len) return JDR_INP;	/* Load segment data */
+tjpgd.c:			if (jd->infunc(jd, seg, len) != len) return JDR_INP;	/* Load segment data */
+tjpgd.c:			if (jd->infunc(jd, seg, len) != len) return JDR_INP;	/* Load segment data */
+tjpgd.c:			if (!jd->width || !jd->height) return JDR_FMT1;	/* Err: Invalid image size */
+tjpgd.c:			if (seg[0] != jd->ncomp) return JDR_FMT3;		/* Err: Wrong color components */
+tjpgd.c:			for (i = 0; i < jd->ncomp; i++) {
+tjpgd.c:				if (!jd->huffbits[n][0] || !jd->huffbits[n][1]) {	/* Check huffman table for this component */
+tjpgd.c:				if (!jd->qttbl[jd->qtid[i]]) {			/* Check dequantizer table for this component */
+tjpgd.c:			n = jd->msy * jd->msx;						/* Number of Y blocks in the MCU */
+tjpgd.c:			jd->workbuf = alloc_pool(jd, len);			/* and it may occupy a part of following MCU working buffer for RGB output */
+tjpgd.c:			if (!jd->workbuf) return JDR_MEM1;			/* Err: not enough memory */
+tjpgd.c:			jd->mcubuf = alloc_pool(jd, (n + 2) * 64);	/* Allocate MCU working buffer */
+tjpgd.c:			if (!jd->mcubuf) return JDR_MEM1;			/* Err: not enough memory */
+tjpgd.c:			jd->dptr = seg; jd->dctr = 0; jd->dmsk = 0;	/* Prepare to read bit stream */
+tjpgd.c:				jd->dctr = jd->infunc(jd, seg + ofs, (size_t)(JD_SZBUF - ofs));
+tjpgd.c:				jd->dptr = seg + ofs - 1;
+tjpgd.c:			if (jd->infunc(jd, 0, len) != len) return JDR_INP;
+tjpgd.c:	jd->scale = scale;
+tjpgd.c:	mx = jd->msx * 8; my = jd->msy * 8;			/* Size of the MCU (pixel) */
+tjpgd.c:	jd->dcv[2] = jd->dcv[1] = jd->dcv[0] = 0;	/* Initialize DC values */
+tjpgd.c:	for (y = 0; y < jd->height; y += my) {		/* Vertical loop of MCUs */
+tjpgd.c:		for (x = 0; x < jd->width; x += mx) {	/* Horizontal loop of MCUs */
+tjpgd.c:			if (jd->nrst && rst++ == jd->nrst) {	/* Process restart interval if enabled */
