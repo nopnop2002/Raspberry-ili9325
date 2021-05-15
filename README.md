@@ -208,6 +208,9 @@ You can change draw1.txt & draw2.txt & me.sh
 
 ![me_sh](https://user-images.githubusercontent.com/6020549/118217481-8398b900-b4b0-11eb-91b7-1d7e14ef6ab8.JPG)
 
+![daily](https://user-images.githubusercontent.com/6020549/118349774-b8c70900-b58d-11eb-8e94-4a4e181bfa2c.JPG)
+
+
 ----
 
 # Wirering for 16Bit Parallel   
