@@ -102,80 +102,61 @@ Pin define is "pin.conf".
 # Build   
 
 - for ILI9225   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9225`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9225`   
+`make ILI9225`   
 
 - for ILI9320   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9320`   
+`make ILI9320`   
 
 - for ILI9325   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9325`   
+`make LI9325`   
 
 - for ILI9327   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9327`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9327`   
+`make ILI9327`   
 
 - for ILI9341   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9341`   
+`make ILI9341`   
 
 - for ILI9342   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9342`   
+`make ILI9342`   
 
 - for ILI9481   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9481`   
+`make ILI9481`   
 
 - for ILI9486   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9486`   
+`make ILI9486`   
 
 - for ILI9488   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488`   
+`make ILI9488`   
 
 - for ILI9488 Inversion Color    
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488 -DINVERT`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DILI9488 -DINVERT`   
+`make ILI9488-INVERT`   
 
 - for SPFD5408   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DSPFD5408`   
+`make SPFD5408`   
 
 - for R61505U   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U`  
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61505U`  
+`make R61505U`  
 
 - for R61509V   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V`  
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DR61509V`  
+`make R61509V`  
 
 - for S6D1121   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DS6D1121`  
+`make S6D1121`  
 
 - for ST7775   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7775`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7775`   
+`make ST7775`   
 
 - for ST7781   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7781`   
+`make ST7781`   
 
 - for ST7783   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7783`   
+`make ST7783`   
 
 - for ST7793   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7793`   
+`make ST7793`   
 
 - for ST7796   
-`cc -o demo demo.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796`   
-`cc -o draw draw.c fontx.c tft_lib.c driver/*.c -lwiringPi -lm -lpthread -DST7796`   
+`make ST7796`   
 
 ----
 
@@ -191,31 +172,35 @@ __Never believe the seller's information.__
 
 ----
 
-# Graphic support
+# Graphic support   
 ![ILI9341-10](https://user-images.githubusercontent.com/6020549/59558184-52df4900-9027-11e9-8e80-7c85fdb4213c.JPG)
 ![ILI9341-12](https://user-images.githubusercontent.com/6020549/59558186-5377df80-9027-11e9-88a8-4c8c4df9a830.JPG)
 ![ILI9341-13](https://user-images.githubusercontent.com/6020549/59558187-5377df80-9027-11e9-8f72-a7ebbbe57c0b.JPG)
 ![ILI9341-14](https://user-images.githubusercontent.com/6020549/59558188-5377df80-9027-11e9-99f7-de3c8b1878dd.JPG)
 ![ILI9341-18](https://user-images.githubusercontent.com/6020549/59558192-54107600-9027-11e9-946c-39443ae83053.JPG)
 
-# Fonts support
+# Fonts support   
 ![ILI9341-11](https://user-images.githubusercontent.com/6020549/59558185-52df4900-9027-11e9-84d6-cf6e69051ce8.JPG)
 ![ILI9341-15](https://user-images.githubusercontent.com/6020549/59558189-54107600-9027-11e9-89eb-39e8f2cbeab2.JPG)
 ![ILI9341-16](https://user-images.githubusercontent.com/6020549/59558190-54107600-9027-11e9-9d23-d71c3997a3d0.JPG)
 ![ILI9341-17](https://user-images.githubusercontent.com/6020549/59558191-54107600-9027-11e9-888c-a1485758e943.JPG)
 ![ILI9341-19](https://user-images.githubusercontent.com/6020549/59558183-52df4900-9027-11e9-9a79-8969d47f902e.JPG)
 
-# Start Auto Demo   
-./demo   
+# Image support   
+JPEG file      
+![ILI9341-JPEG](https://user-images.githubusercontent.com/6020549/118343557-c2884680-b564-11eb-9009-cd29ff6c0bdb.JPG)
+PNG file   
+![ILI9341-PNG](https://user-images.githubusercontent.com/6020549/118343563-cddb7200-b564-11eb-983f-8d09fc5c52cd.JPG)
 
 ----
+
+# Start Auto Demo   
+./demo   
 
 # Start Interpreter mode   
 
 `./draw draw1.txt`   
 `./draw draw2.txt`   
-
-`cc -o rgb2color rgb2color.c`   
 `bash ./me.sh`   
 
 You can change draw1.txt & draw2.txt & me.sh   

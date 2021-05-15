@@ -276,13 +276,21 @@ void lcdFillScreen(TFT_t *dev, uint16_t color) {
 // Fadeout screen
 // color:color
 void lcdFadeout(TFT_t *dev, int direction, uint16_t color) {
-  if (direction == 0) {
+  if (direction == DIRECTION0) {
 	for (int x=0;x<dev->_width-1;x++) {
 	  lcdDrawFillRect(dev, x, 0, x+1, dev->_height-1, color);
+    }
+  } else if (direction == DIRECTION90) {
+	for (int y=dev->_height-1;y>0;y--) {
+	  lcdDrawFillRect(dev, 0, y-1, dev->_width-1, y, color);
 	}
-  } else {
+  } else if (direction == DIRECTION180) {
 	for (int x=dev->_width-1;x>0;x--) {
 	  lcdDrawFillRect(dev, x-1, 0, x, dev->_height-1, color);
+    }
+  } else if (direction == DIRECTION270) {
+	for (int y=0;y<dev->_height-1;y++) {
+	  lcdDrawFillRect(dev, 0, y, dev->_width-1, y+1, color);
 	}
   }
 }

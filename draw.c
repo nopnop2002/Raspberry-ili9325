@@ -328,13 +328,36 @@ void cmdDump(cmd_t hoge) {
 
 
 
+/*
+ Width inquiry
+   draw width
+ Height inquiry
+   draw height
+ Driver inquiry
+   draw driver
+ Execute draw
+   draw file filename
+*/
 int main(int argc, char **argv){
   int i;
 
 if(_DEBUG_)printf("argc=%d\n",argc);
-  if (argc != 2) {
+  if (argc < 2) {
 	printf("%s draw_file_name\n",argv[0]);
 	return 1;
+  }
+
+  if (argc == 2) {
+    if (strcmp(argv[1],"width") == 0) {
+      printf("%d\n", SCREEN_WIDTH);
+      return 0;
+    } else if (strcmp(argv[1],"height") == 0) {
+      printf("%d\n", SCREEN_HEIGHT);
+      return 0;
+    } else if (strcmp(argv[1],"driver") == 0) {
+      printf("%s\n", DRIVER_NAME);
+      return 0;
+    }
   }
 
   if(wiringPiSetup() == -1) {
