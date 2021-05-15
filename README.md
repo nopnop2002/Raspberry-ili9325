@@ -4,9 +4,7 @@ This is library for RaspberryPi.
 You can use a TFT Shield for UNO R3.   
 This library can show a chart to TFT Shield.   
 
-![2 4tft-1](https://cloud.githubusercontent.com/assets/6020549/24932714/bff42314-1f4d-11e7-8c13-28a6c4652992.JPG)
-
-![2 4tft-2](https://cloud.githubusercontent.com/assets/6020549/24932732/d45d7080-1f4d-11e7-95d8-a34c0cb901b3.JPG)
+![TFT-Shield](https://user-images.githubusercontent.com/6020549/104253960-10a71380-54b9-11eb-8789-a12c2c769ab4.JPG)
 
 Primarily, these TFT Shiled is the one for Arduino.   
 This may works with other boards like OrangePi/NanoPi.   
@@ -193,19 +191,22 @@ __Never believe the seller's information.__
 
 ----
 
-# Start Auto Demo   
-./demo   
-
+# Graphic support
 ![ILI9341-10](https://user-images.githubusercontent.com/6020549/59558184-52df4900-9027-11e9-8e80-7c85fdb4213c.JPG)
-![ILI9341-11](https://user-images.githubusercontent.com/6020549/59558185-52df4900-9027-11e9-84d6-cf6e69051ce8.JPG)
 ![ILI9341-12](https://user-images.githubusercontent.com/6020549/59558186-5377df80-9027-11e9-88a8-4c8c4df9a830.JPG)
 ![ILI9341-13](https://user-images.githubusercontent.com/6020549/59558187-5377df80-9027-11e9-8f72-a7ebbbe57c0b.JPG)
 ![ILI9341-14](https://user-images.githubusercontent.com/6020549/59558188-5377df80-9027-11e9-99f7-de3c8b1878dd.JPG)
+![ILI9341-18](https://user-images.githubusercontent.com/6020549/59558192-54107600-9027-11e9-946c-39443ae83053.JPG)
+
+# Fonts support
+![ILI9341-11](https://user-images.githubusercontent.com/6020549/59558185-52df4900-9027-11e9-84d6-cf6e69051ce8.JPG)
 ![ILI9341-15](https://user-images.githubusercontent.com/6020549/59558189-54107600-9027-11e9-89eb-39e8f2cbeab2.JPG)
 ![ILI9341-16](https://user-images.githubusercontent.com/6020549/59558190-54107600-9027-11e9-9d23-d71c3997a3d0.JPG)
 ![ILI9341-17](https://user-images.githubusercontent.com/6020549/59558191-54107600-9027-11e9-888c-a1485758e943.JPG)
-![ILI9341-18](https://user-images.githubusercontent.com/6020549/59558192-54107600-9027-11e9-946c-39443ae83053.JPG)
 ![ILI9341-19](https://user-images.githubusercontent.com/6020549/59558183-52df4900-9027-11e9-9a79-8969d47f902e.JPG)
+
+# Start Auto Demo   
+./demo   
 
 ----
 
