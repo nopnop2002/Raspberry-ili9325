@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Software requirment
+# sudo apt install imagemagick
+#
+
 #set -x
 
 #for debug
@@ -12,8 +17,8 @@ function _echo () {
 }
 
 # download image from https://blog.atwork.at/post/Use-the-Daily-Bing-picture-in-Teams-calls
-imageFile="images/dailyImage.jpeg"
-python bing_wallpaper.py ${imageFile}
+ImageFile="images/dailyImage.jpeg"
+python bing_wallpaper.py ${ImageFile}
 
 DrawFile="./draw.txt"
 if [ -f ${DrawFile} ]; then
@@ -31,8 +36,14 @@ echo -n ${screen_width}
 echo -n "x"
 echo ${screen_height}
 
+#resize image using convert
+finalImageFile="images/dailyImage2.jpeg"
+cp ${ImageFile} ${finalImageFile}
+convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}
+echo "convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}"
+
 #Black(0x000000)
 _echo "FillScrren,0x0000"
-_echo "JPEG,${imageFile}"
+_echo "JPEG,${finalImageFile}"
 
 ./draw $DrawFile > /dev/null
