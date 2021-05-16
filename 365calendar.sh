@@ -13,7 +13,7 @@ function _echo () {
 
 # download image from https://www.365calendar.net/
 imageFile="images/dailyImage.jpeg"
-python SaveImages.py ${imageFile} 1131
+python 365calendar.py ${imageFile} 1131
 
 DrawFile="./draw.txt"
 if [ -f ${DrawFile} ]; then
