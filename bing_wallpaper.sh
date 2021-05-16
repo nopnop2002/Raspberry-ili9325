@@ -39,8 +39,11 @@ echo ${screen_height}
 #resize image using convert
 finalImageFile="images/dailyImage2.jpeg"
 cp ${ImageFile} ${finalImageFile}
+install=`which convert | grep -c convert`
+if [ $install = 1 ]; then
 convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}
 echo "convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}"
+fi
 
 #Black(0x000000)
 _echo "FillScrren,0x0000"
