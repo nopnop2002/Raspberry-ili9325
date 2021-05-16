@@ -88,8 +88,7 @@ if __name__ == "__main__":
 
 	NowDate = datetime.datetime.now()
 	#print("{:04d} {:02d} {:02d}".format(NowDate.year, NowDate.month, NowDate.day))
-	#input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={0:s}&target={1:%Y%m%d}".format(id,NowDate)
-	input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={:s}&target=2020{:02d}{:02d}".format(id, NowDate.month,NowDate.day)
+	input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={0:s}&target={1:%Y%m%d}".format(id,NowDate)
 	if DEBUG: print("input_url={}".format(input_url))
 	serch_url = input_url
 	#htmldata = urllib2.urlopen(serch_url)
