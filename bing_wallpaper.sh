@@ -11,15 +11,9 @@ function _echo () {
   echo $1 >> $DrawFile
 }
 
-# download image from https://www.365calendar.net/
-# List is here https://www.365calendar.net/calendar/list.html#dogBlock
-# id = 1126 : 2020 pekingese
-# id = 1131 : 2020 miniaturepinscher
-# id = 1132 : 2020 yorkshireterrier
-# id = 1134 : 2020 nihonken
-# id = 1135 : 2020 mix
+# download image from https://blog.atwork.at/post/Use-the-Daily-Bing-picture-in-Teams-calls
 imageFile="images/dailyImage.jpeg"
-python 365calendar.py ${imageFile} 1131
+python bing_wallpaper.py ${imageFile}
 
 DrawFile="./draw.txt"
 if [ -f ${DrawFile} ]; then

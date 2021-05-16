@@ -25,7 +25,7 @@ DEBUG = 0
 def downloadImage(url, savename):
 	function_name = inspect.currentframe().f_code.co_name
 	if DEBUG: print("{} url={} savename={}".format(function_name,url,savename))
-	print("download image from {}".format(url))
+	print("Downloading from {}".format(url))
 	#img = urllib.urlopen(url)
 	img = urllib.request.urlopen(url)
 	localfile = open(savename, 'wb')

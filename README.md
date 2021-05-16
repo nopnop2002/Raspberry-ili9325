@@ -203,6 +203,7 @@ PNG file
 `./draw draw2.txt`   
 `bash ./me.sh`   
 `bash ./365calendar.sh`   
+`bash ./bing_wallpaper.sh`
 
 You can change draw1.txt & draw2.txt & me.sh   
 
