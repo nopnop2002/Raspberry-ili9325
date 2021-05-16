@@ -731,7 +731,7 @@ time_t PNGTest(TFT_t * dev, char * file, int width, int height) {
         pngWidth = pngle->imageWidth;
         offsetX = (width - pngle->imageWidth) / 2;
     }
-    printf("pngWidth=%d offsetX=%d", pngWidth, offsetX);
+    //printf("pngWidth=%d offsetX=%d\n", pngWidth, offsetX);
 
     uint16_t pngHeight = height;
     uint16_t offsetY = 0;
@@ -739,7 +739,7 @@ time_t PNGTest(TFT_t * dev, char * file, int width, int height) {
         pngHeight = pngle->imageHeight;
         offsetY = (height - pngle->imageHeight) / 2;
     }
-    printf("pngHeight=%d offsetY=%d\n", pngHeight, offsetY);
+    //printf("pngHeight=%d offsetY=%d\n", pngHeight, offsetY);
     uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * pngWidth);
 
     int ypos = (height-1) - offsetY;
