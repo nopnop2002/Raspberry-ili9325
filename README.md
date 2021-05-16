@@ -202,7 +202,7 @@ PNG file
 `./draw draw1.txt`   
 `./draw draw2.txt`   
 `bash ./me.sh`   
-`bash ./daily.sh`   
+`bash ./365calendar.sh`   
 
 You can change draw1.txt & draw2.txt & me.sh   
 
