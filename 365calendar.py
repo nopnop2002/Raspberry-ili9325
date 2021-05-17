@@ -76,19 +76,20 @@ if __name__ == "__main__":
 	argvs = sys.argv
 	argc = len(argvs)
 	if argc == 1:
-		print("{0:s} SaveFileName [id]".format(argvs[0]))
+		print("{0:s} SaveFileName id year".format(argvs[0]))
 		sys.exit(1)
 
 	savefile = argvs[1]
-	id = "935"
-	if (argc == 3):
-		id = argvs[2]
+	id = argvs[2]
+	year = argvs[3]
+	#print("id={:s} year={:s}{}".format(id, year, type(year)))
 	date_file = os.path.dirname(savefile) + "/date.gif"
 	month_file = os.path.dirname(savefile) + "/month.gif"
 
 	NowDate = datetime.datetime.now()
 	#print("{:04d} {:02d} {:02d}".format(NowDate.year, NowDate.month, NowDate.day))
-	input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={0:s}&target={1:%Y%m%d}".format(id,NowDate)
+	#input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={0:s}&target={1:%Y%m%d}".format(id,NowDate)
+	input_url = "http://www.365calendar.net/index?action=user_calendar_detail&calendar_id={:s}&target={:s}{:02d}{:02d}".format(id,year,NowDate.month,NowDate.day)
 	if DEBUG: print("input_url={}".format(input_url))
 	serch_url = input_url
 	#htmldata = urllib2.urlopen(serch_url)

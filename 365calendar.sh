@@ -31,25 +31,25 @@ imageFile="images/dailyImage.jpeg"
 second=`date "+%S"`
 second=$((second%10))
 if [ $second = 0 ]; then
-	python 365calendar.py ${imageFile} 1166
+	python 365calendar.py ${imageFile} 1166 2021
 elif [ $second = 1 ]; then
-	python 365calendar.py ${imageFile} 1167
+	python 365calendar.py ${imageFile} 1167 2021
 elif [ $second = 2 ]; then
-	python 365calendar.py ${imageFile} 1168
+	python 365calendar.py ${imageFile} 1168 2021
 elif [ $second = 3 ]; then
-	python 365calendar.py ${imageFile} 1170
+	python 365calendar.py ${imageFile} 1170 2021
 elif [ $second = 4 ]; then
-	python 365calendar.py ${imageFile} 1172
+	python 365calendar.py ${imageFile} 1172 2021
 elif [ $second = 5 ]; then
-	python 365calendar.py ${imageFile} 1173
+	python 365calendar.py ${imageFile} 1173 2021
 elif [ $second = 6 ]; then
-	python 365calendar.py ${imageFile} 1175
+	python 365calendar.py ${imageFile} 1175 2021
 elif [ $second = 7 ]; then
-	python 365calendar.py ${imageFile} 1178
+	python 365calendar.py ${imageFile} 1178 2021
 elif [ $second = 8 ]; then
-	python 365calendar.py ${imageFile} 1185
+	python 365calendar.py ${imageFile} 1185 2021
 elif [ $second = 9 ]; then
-	python 365calendar.py ${imageFile} 1191
+	python 365calendar.py ${imageFile} 1191 2021
 fi
 
 DrawFile="./draw.txt"
