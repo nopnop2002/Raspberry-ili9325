@@ -43,6 +43,8 @@ install=`which convert | grep -c convert`
 if [ $install = 1 ]; then
 convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}
 echo "convert -resize ${screen_width}x${screen_height} ${ImageFile} ${finalImageFile}"
+else
+echo "imagemagick not install. sudo apt install imagemagick"
 fi
 
 #Black(0x000000)
