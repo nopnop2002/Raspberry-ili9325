@@ -219,7 +219,7 @@ CipherString = DEFAULT@SECLEVEL=1
 $ bash ./365calendar.sh
 ```
 
-![daily](https://user-images.githubusercontent.com/6020549/118349774-b8c70900-b58d-11eb-8e94-4a4e181bfa2c.JPG)
+![365calendar](https://user-images.githubusercontent.com/6020549/130392539-d335b6ee-c335-4305-8830-887833b2e61d.JPG)
 
 ## Take wallpaper from bing and display   
 To use this, you need python3 and imagemagick.   
@@ -228,8 +228,7 @@ $ sudo apt install imagemagick
 $ bash ./bing_wallpaper.sh
 ```
 
-
-
+![bing_wallpaper](https://user-images.githubusercontent.com/6020549/130392570-7da882dc-a357-4370-8c24-5b238456066a.JPG)
 
 ----
 
