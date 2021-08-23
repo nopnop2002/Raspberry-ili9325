@@ -198,18 +198,37 @@ PNG file
 ./demo   
 
 # Start Interpreter mode   
+You can change draw1.txt & draw2.txt & me.sh   
 
 `./draw draw1.txt`   
 `./draw draw2.txt`   
 `bash ./me.sh`   
-`bash ./365calendar.sh`   
-`bash ./bing_wallpaper.sh`
-
-You can change draw1.txt & draw2.txt & me.sh   
 
 ![me_sh](https://user-images.githubusercontent.com/6020549/118217481-8398b900-b4b0-11eb-91b7-1d7e14ef6ab8.JPG)
 
+## Take animal picture from www.365calendar.net and display.   
+To use this, you need python3 and Pillow.   
+And reduce the security level of OpenSSL encryption.   
+```
+$ sudo apt install libtiff5 libopenjp2-7
+$ python -m pip install -U Pillow
+$ sudo cp /usr/lib/ssl/openssl.cnf /usr/lib/ssl/openssl.cnf.old
+$ sudo vi /usr/lib/ssl/openssl.cnf
+#CipherString = DEFAULT@SECLEVEL=2
+CipherString = DEFAULT@SECLEVEL=1
+bash ./365calendar.sh
+```
+
 ![daily](https://user-images.githubusercontent.com/6020549/118349774-b8c70900-b58d-11eb-8e94-4a4e181bfa2c.JPG)
+
+## Take wallpaper from bing and display   
+To use this, you need python3 and imagemagick.   
+```
+sudo apt install imagemagick
+bash ./bing_wallpaper.sh
+```
+
+
 
 
 ----
