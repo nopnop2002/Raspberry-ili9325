@@ -216,7 +216,7 @@ $ sudo cp /usr/lib/ssl/openssl.cnf /usr/lib/ssl/openssl.cnf.old
 $ sudo vi /usr/lib/ssl/openssl.cnf
 #CipherString = DEFAULT@SECLEVEL=2
 CipherString = DEFAULT@SECLEVEL=1
-bash ./365calendar.sh
+$ bash ./365calendar.sh
 ```
 
 ![daily](https://user-images.githubusercontent.com/6020549/118349774-b8c70900-b58d-11eb-8e94-4a4e181bfa2c.JPG)
@@ -224,8 +224,8 @@ bash ./365calendar.sh
 ## Take wallpaper from bing and display   
 To use this, you need python3 and imagemagick.   
 ```
-sudo apt install imagemagick
-bash ./bing_wallpaper.sh
+$ sudo apt install imagemagick
+$ bash ./bing_wallpaper.sh
 ```
 
 
