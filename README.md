@@ -38,7 +38,7 @@ This may works with other boards like OrangePi/NanoPi.
 - OPEN-SMART ST7775 16Pin-Parallel(176x220 Same as ILI9225)   
 - OPEN-SMART ST7783 16Pin-Parallel(240x320)   
 - OPEN-SMART R61509V 16Pin-Parallel(240x400)   
-- OPEN-SMART ILI9488 16Pin-Parallel(320x400 Inversion Color)
+- OPEN-SMART ILI9488 16Pin-Parallel(320x400 Color inversion)
 
 These are all 2.4 inch, 320x240 TFTs.
 ![TFT-SHIELD-2](https://user-images.githubusercontent.com/6020549/104244320-873a1600-54a5-11eb-93c0-9fad671fdfed.JPG)
