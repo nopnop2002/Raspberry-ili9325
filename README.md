@@ -328,7 +328,7 @@ sudo ./touch
 ----
 
 # Analog Touch Sensor   
-OPEN SMART products have an analog touch sensor, but they cannot be used with Pi because Pi cannot input analog.
+OPEN SMART products have an analog touch sensor, but Pi cannot use an analog touch sensor because Pi cannot input analog.
 
 ---
 
