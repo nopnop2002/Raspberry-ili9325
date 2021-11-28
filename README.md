@@ -327,8 +327,8 @@ sudo ./touch
 
 ----
 
-# Analog Touch Sensor   
-OPEN SMART products have an analog touch sensor, but Pi cannot use an analog touch sensor because Pi cannot input analog.
+# 4-wire resistive touch screen   
+OPEN SMART products have 4-wire resistive touch screen, but Pi cannot use this because Pi cannot input analog.
 
 ---
 
