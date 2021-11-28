@@ -284,7 +284,9 @@ Pin define is "pin.conf".
 
 ----
 
-This module has SPI-Touch Sensor.   
+# SPI Touch Sensor   
+![ili9341-16bit-2](https://user-images.githubusercontent.com/6020549/42122960-c92f25e2-7c84-11e8-970b-11f0f08a88cd.JPG)
+This module has SPI Touch Sensor.   
 So you can read touch position.   
 Please make SPI effective first.
 
@@ -322,6 +324,11 @@ sudo ./touch
 
 
 ![touch-2](https://user-images.githubusercontent.com/6020549/42130606-8b7c0ed6-7d24-11e8-97e8-41f7cf18d4bc.JPG)
+
+----
+
+# Analog Touch Sensor   
+OPEN SMART product has an analog touch sensor, but the RaspBerry Pi can't use it because it can't input analog.
 
 ---
 
