@@ -866,19 +866,19 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
 	printf("TFT resolution is %d x %d.\n",SCREEN_WIDTH, SCREEN_HEIGHT); 
 
 #if 0
-while (1) {
-	ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
-	WAIT;
+	while (1) {
+		ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
+		WAIT;
 
-	char file[64];
-	strcpy(file, "./images/RaspberryPi_logo.jpeg");
-	JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-	WAIT;
+		char file[64];
+		strcpy(file, "./images/RaspberryPi_logo.jpeg");
+		JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+		WAIT;
 
-	strcpy(file, "./images/Ubuntu_log.png");
-	PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-	WAIT;
-}
+		strcpy(file, "./images/Ubuntu_log.png");
+		PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+		WAIT;
+	}
 #endif
 
 	AddressTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
