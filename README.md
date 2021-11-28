@@ -306,17 +306,19 @@ Wirering for SPI-Touch sensor
 
 \*\*\*Can't change   
 
-
-`cc -o xpt xpt.c xpt2046.c -lwiringPi -lm -lpthread`   
-`sudo ./xpt`   
+```
+cc -o xpt xpt.c xpt2046.c -lwiringPi -lm -lpthread
+sudo ./xpt
+```   
 
 ![touch-1](https://user-images.githubusercontent.com/6020549/42130602-8710a000-7d24-11e8-9b8e-b1819301bc0f.jpg)
 
 
 And you can operate Pi using touch sensor.  
-
-`cc -o touch touch.c fontx.c tft_lib.c driver/ili9341.c xpt2046.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT`
-`sudo ./touch`   
+```
+cc -o touch touch.c fontx.c tft_lib.c driver/ili9341.c xpt2046.c -lwiringPi -lm -lpthread -DILI9341 -DP16BIT
+sudo ./touch
+```   
 
 
 ![touch-2](https://user-images.githubusercontent.com/6020549/42130606-8b7c0ed6-7d24-11e8-97e8-41f7cf18d4bc.JPG)

@@ -15,7 +15,7 @@
 
 #include "driver/ili9341.h"
 #define DRIVER_NAME "ILI9341"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -133,42 +133,42 @@ time_t PNGTest(TFT_t * dev, char * file, int width, int height) {
 
 int main(int argc, char **argv){
 
-  if(wiringPiSetup() == -1) {
-	printf("wiringPiSetup Fail\n");
-	return 1;
-  }
-
-  int i;
-  char base[128];
-  strcpy(base, argv[0]);
-  for(i=strlen(base);i>0;i--) {
-	if (base[i-1] == '/') {
-	  base[i] = 0;
-	  break;
+	if(wiringPiSetup() == -1) {
+		printf("wiringPiSetup Fail\n");
+		return 1;
 	}
-  }
+
+	int i;
+	char base[128];
+	strcpy(base, argv[0]);
+	for(i=strlen(base);i>0;i--) {
+		if (base[i-1] == '/') {
+			base[i] = 0;
+			break;
+		}
+	}
 if(_DEBUG_)printf("base=%s\n",base);
 
-  char ppath[128];
-  strcpy(ppath,base);
-  strcat(ppath,"pin.conf");
+	char ppath[128];
+	strcpy(ppath,base);
+	strcat(ppath,"pin.conf");
 if(_DEBUG_)printf("ppath=%s\n",ppath);
-  struct stat buffer;
-  if (stat(ppath, &buffer) != 0) {
-	printf("pin.conf [%s] not found\n",ppath);
-	return 1;
-  }
+	struct stat buffer;
+	if (stat(ppath, &buffer) != 0) {
+		printf("pin.conf [%s] not found\n",ppath);
+		return 1;
+	}
 
-  TFT_t dev;
-  lcdInterface(&dev, ppath);
-  lcdReset(&dev);
-  INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
+	TFT_t dev;
+	lcdInterface(&dev, ppath);
+	lcdReset(&dev);
+	INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
 
 
-  char file[64];
-  strcpy(file, "./images/Ubuntu_log.png");
-  PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-  sleep(5);
+	char file[64];
+	strcpy(file, "./images/Ubuntu_log.png");
+	PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	sleep(5);
 
-  //lcdFadeout(&dev, DIRECTION90, BLACK);
+	//lcdFadeout(&dev, DIRECTION90, BLACK);
 }

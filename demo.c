@@ -20,7 +20,7 @@
 #ifdef ILI9225
 #include "driver/ili9225.h"
 #define DRIVER_NAME "ILI9225"
-#define SCREEN_WIDTH  176
+#define SCREEN_WIDTH	176
 #define SCREEN_HEIGHT 220
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -29,7 +29,7 @@
 #elif ILI9320
 #include "driver/ili9320.h"
 #define DRIVER_NAME "ILI9320"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -38,7 +38,7 @@
 #elif ILI9325
 #include "driver/ili9325.h"
 #define DRIVER_NAME "ILI9325"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -47,7 +47,7 @@
 #elif ILI9327
 #include "driver/ili9327.h"
 #define DRIVER_NAME "ILI9327"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 400
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -56,7 +56,7 @@
 #elif ILI9340
 #include "driver/ili9341.h"
 #define DRIVER_NAME "ILI9340"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -69,7 +69,7 @@
 #else
 #define DRIVER_NAME "ILI9341(16Bit)"
 #endif
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -78,7 +78,7 @@
 #elif ILI9342
 #include "driver/ili9342.h"
 #define DRIVER_NAME "ILI9342"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -87,7 +87,7 @@
 #elif ILI9481
 #include "driver/ili9481.h"
 #define DRIVER_NAME "ILI9481"
-#define SCREEN_WIDTH  320
+#define SCREEN_WIDTH	320
 #define SCREEN_HEIGHT 480
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -96,7 +96,7 @@
 #elif ILI9486
 #include "driver/ili9486.h"
 #define DRIVER_NAME "ILI9486"
-#define SCREEN_WIDTH  320
+#define SCREEN_WIDTH	320
 #define SCREEN_HEIGHT 480
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -105,7 +105,7 @@
 #elif ILI9488
 #include "driver/ili9488.h"
 #define DRIVER_NAME "ILI9488"
-#define SCREEN_WIDTH  320
+#define SCREEN_WIDTH	320
 #define SCREEN_HEIGHT 480
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -114,7 +114,7 @@
 #elif SPFD5408
 #include "driver/ili9320.h"
 #define DRIVER_NAME "SPFD5408"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -123,7 +123,7 @@
 #elif R61505U
 #include "driver/ili9320.h"
 #define DRIVER_NAME "R61505U"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -132,7 +132,7 @@
 #elif R61509V
 #include "driver/r61509.h"
 #define DRIVER_NAME "R61509V"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 400
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -141,7 +141,7 @@
 #elif S6D1121
 #include "driver/s6d1121.h"
 #define DRIVER_NAME "S6D1121"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -150,7 +150,7 @@
 #elif ST7775
 #include "driver/ili9225.h"
 #define DRIVER_NAME "ST7775"
-#define SCREEN_WIDTH  176
+#define SCREEN_WIDTH	176
 #define SCREEN_HEIGHT 220
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -159,7 +159,7 @@
 #elif ST7781
 #include "driver/st7781.h"
 #define DRIVER_NAME "ST7781"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -168,7 +168,7 @@
 #elif ST7783
 #include "driver/st7781.h"
 #define DRIVER_NAME "ST7783"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 320
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -177,7 +177,7 @@
 #elif ST7793
 #include "driver/r61509.h"
 #define DRIVER_NAME "ST7793"
-#define SCREEN_WIDTH  240
+#define SCREEN_WIDTH	240
 #define SCREEN_HEIGHT 400
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -186,7 +186,7 @@
 #elif ST7796
 #include "driver/ili9486.h"
 #define DRIVER_NAME "ST7796"
-#define SCREEN_WIDTH  320
+#define SCREEN_WIDTH	320
 #define SCREEN_HEIGHT 480
 #define OFFSET_X 0
 #define OFFSET_Y 0
@@ -203,9 +203,9 @@
 #define WAIT sleep(5)
 
 void inputKey() {
-  char ch;
-  printf("Hit any key");
-  scanf("%c",&ch);
+	char ch;
+	printf("Hit any key");
+	scanf("%c",&ch);
 }
 
 time_t elapsedTime(struct timeval startTime, struct timeval endTime) {
@@ -670,302 +670,302 @@ time_t JPEGTest(TFT_t * dev, char * file, int width, int height) {
 }
 
 time_t PNGTest(TFT_t * dev, char * file, int width, int height) {
-    struct timeval startTime, endTime;
-    gettimeofday(&startTime, NULL);
+	struct timeval startTime, endTime;
+	gettimeofday(&startTime, NULL);
 
-    lcdFillScreen(dev, BLACK);
+	lcdFillScreen(dev, BLACK);
 
-    int _width = width;
-    if (width > 240) _width = 240;
-    int _height = height;
-    if (height > 320) _height = 320;
+	int _width = width;
+	if (width > 240) _width = 240;
+	int _height = height;
+	if (height > 320) _height = 320;
 
-    // open PNG file
-    FILE* fp = fopen(file, "rb");
-    if (fp == NULL) {
-        printf("File not found [%s]\n", file);
-        return 0;
-    }
+	// open PNG file
+	FILE* fp = fopen(file, "rb");
+	if (fp == NULL) {
+		printf("File not found [%s]\n", file);
+		return 0;
+	}
 
-    char buf[1024];
-    size_t remain = 0;
-    int len;
+	char buf[1024];
+	size_t remain = 0;
+	int len;
 
-    pngle_t *pngle = pngle_new(_width, _height);
+	pngle_t *pngle = pngle_new(_width, _height);
 
-    pngle_set_init_callback(pngle, png_init);
-    pngle_set_draw_callback(pngle, png_draw);
-    pngle_set_done_callback(pngle, png_finish);
+	pngle_set_init_callback(pngle, png_init);
+	pngle_set_draw_callback(pngle, png_draw);
+	pngle_set_done_callback(pngle, png_finish);
 
-    double display_gamma = 2.2;
-    pngle_set_display_gamma(pngle, display_gamma);
-
-
-    while (!feof(fp)) {
-        if (remain >= sizeof(buf)) {
-            printf("Buffer exceeded\n");
-            return 0;
-        }
-
-        len = fread(buf + remain, 1, sizeof(buf) - remain, fp);
-        if (len <= 0) {
-            //printf("EOF\n");
-            break;
-        }
-
-        int fed = pngle_feed(pngle, buf, remain + len);
-        if (fed < 0) {
-            printf("ERROR; %s\n", pngle_error(pngle));
-            return 0;
-        }
-
-        remain = remain + len - fed;
-        if (remain > 0) memmove(buf, buf + fed, remain);
-    }
-
-    fclose(fp);
-
-    uint16_t pngWidth = width;
-    uint16_t offsetX = 0;
-    if (width > pngle->imageWidth) {
-        pngWidth = pngle->imageWidth;
-        offsetX = (width - pngle->imageWidth) / 2;
-    }
-    //printf("pngWidth=%d offsetX=%d\n", pngWidth, offsetX);
-
-    uint16_t pngHeight = height;
-    uint16_t offsetY = 0;
-    if (height > pngle->imageHeight) {
-        pngHeight = pngle->imageHeight;
-        offsetY = (height - pngle->imageHeight) / 2;
-    }
-    //printf("pngHeight=%d offsetY=%d\n", pngHeight, offsetY);
-    uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * pngWidth);
-
-    int ypos = (height-1) - offsetY;
-    for(int y = 0; y < pngHeight; y++){
-        for(int x = 0;x < pngWidth; x++){
-            pixel_png pixel = pngle->pixels[y][x];
-            uint16_t color = rgb565_conv(pixel.red, pixel.green, pixel.blue);
-            //lcdDrawPixel(dev, x+offsetX, y+offsetY, color);
-            lcdDrawPixel(dev, x+offsetX, ypos, color);
-        }
-        ypos--;
-    }
+	double display_gamma = 2.2;
+	pngle_set_display_gamma(pngle, display_gamma);
 
 
-    free(colors);
-    pngle_destroy(pngle, _width, _height);
+	while (!feof(fp)) {
+		if (remain >= sizeof(buf)) {
+			printf("Buffer exceeded\n");
+			return 0;
+		}
 
-    gettimeofday(&endTime, NULL);
-    time_t diff = elapsedTime(startTime, endTime);
-    printf("%s elapsed time[ms]=%ld\n",__func__, diff);
-    return diff;
+		len = fread(buf + remain, 1, sizeof(buf) - remain, fp);
+		if (len <= 0) {
+			//printf("EOF\n");
+			break;
+		}
+
+		int fed = pngle_feed(pngle, buf, remain + len);
+		if (fed < 0) {
+			printf("ERROR; %s\n", pngle_error(pngle));
+			return 0;
+		}
+
+		remain = remain + len - fed;
+		if (remain > 0) memmove(buf, buf + fed, remain);
+	}
+
+	fclose(fp);
+
+	uint16_t pngWidth = width;
+	uint16_t offsetX = 0;
+	if (width > pngle->imageWidth) {
+		pngWidth = pngle->imageWidth;
+		offsetX = (width - pngle->imageWidth) / 2;
+	}
+	//printf("pngWidth=%d offsetX=%d\n", pngWidth, offsetX);
+
+	uint16_t pngHeight = height;
+	uint16_t offsetY = 0;
+	if (height > pngle->imageHeight) {
+		pngHeight = pngle->imageHeight;
+		offsetY = (height - pngle->imageHeight) / 2;
+	}
+	//printf("pngHeight=%d offsetY=%d\n", pngHeight, offsetY);
+	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * pngWidth);
+
+	int ypos = (height-1) - offsetY;
+	for(int y = 0; y < pngHeight; y++){
+		for(int x = 0;x < pngWidth; x++){
+			pixel_png pixel = pngle->pixels[y][x];
+			uint16_t color = rgb565_conv(pixel.red, pixel.green, pixel.blue);
+			//lcdDrawPixel(dev, x+offsetX, y+offsetY, color);
+			lcdDrawPixel(dev, x+offsetX, ypos, color);
+		}
+		ypos--;
+	}
+
+
+	free(colors);
+	pngle_destroy(pngle, _width, _height);
+
+	gettimeofday(&endTime, NULL);
+	time_t diff = elapsedTime(startTime, endTime);
+	printf("%s elapsed time[ms]=%ld\n",__func__, diff);
+	return diff;
 }
 
 int main(int argc, char **argv){
 
-  if(wiringPiSetup() == -1) {
-	printf("wiringPiSetup Fail\n");
-	return 1;
-  }
-
-  int i;
-  char base[128];
-  strcpy(base, argv[0]);
-  for(i=strlen(base);i>0;i--) {
-	if (base[i-1] == '/') {
-	  base[i] = 0;
-	  break;
+	if(wiringPiSetup() == -1) {
+		printf("wiringPiSetup Fail\n");
+		return 1;
 	}
-  }
+
+	int i;
+	char base[128];
+	strcpy(base, argv[0]);
+	for(i=strlen(base);i>0;i--) {
+		if (base[i-1] == '/') {
+			base[i] = 0;
+			break;
+		}
+	}
 if(_DEBUG_)printf("base=%s\n",base);
 
-  // You can change font file
-  // 32Dot Gothic
-  char G32[2][128];
-  strcpy(G32[0],base);
-  strcpy(G32[1],base);
-  strcat(G32[0],"fontx/ILGH32XB.FNT");
-  strcat(G32[1],"fontx/ILGZ32XB.FNT");
-  FontxFile fx32G[2];
-  Fontx_init(fx32G,G32[0],G32[1]);
+	// You can change font file
+	// 32Dot Gothic
+	char G32[2][128];
+	strcpy(G32[0],base);
+	strcpy(G32[1],base);
+	strcat(G32[0],"fontx/ILGH32XB.FNT");
+	strcat(G32[1],"fontx/ILGZ32XB.FNT");
+	FontxFile fx32G[2];
+	Fontx_init(fx32G,G32[0],G32[1]);
 
-  // 32Dot Mincho
-  char M32[2][128];
-  strcpy(M32[0],base);
-  strcpy(M32[1],base);
-  strcat(M32[0],"fontx/ILMH32XF.FNT");
-  strcat(M32[1],"fontx/ILMZ32XF.FNT");
-  FontxFile fx32M[2];
-  Fontx_init(fx32M,M32[0],M32[1]);
+	// 32Dot Mincho
+	char M32[2][128];
+	strcpy(M32[0],base);
+	strcpy(M32[1],base);
+	strcat(M32[0],"fontx/ILMH32XF.FNT");
+	strcat(M32[1],"fontx/ILMZ32XF.FNT");
+	FontxFile fx32M[2];
+	Fontx_init(fx32M,M32[0],M32[1]);
 
-  // 24Dot Gothic
-  char G24[2][128];
-  strcpy(G24[0],base);
-  strcpy(G24[1],base);
-  strcat(G24[0],"fontx/ILGH24XB.FNT");
-  strcat(G24[1],"fontx/ILGZ24XB.FNT");
-  FontxFile fx24G[2];
-  Fontx_init(fx24G,G24[0],G24[1]);
+	// 24Dot Gothic
+	char G24[2][128];
+	strcpy(G24[0],base);
+	strcpy(G24[1],base);
+	strcat(G24[0],"fontx/ILGH24XB.FNT");
+	strcat(G24[1],"fontx/ILGZ24XB.FNT");
+	FontxFile fx24G[2];
+	Fontx_init(fx24G,G24[0],G24[1]);
 
-  // 24Dot Mincho
-  char M24[2][128];
-  strcpy(M24[0],base);
-  strcpy(M24[1],base);
-  strcat(M24[0],"fontx/ILMH24XF.FNT");
-  strcat(M24[1],"fontx/ILMZ24XF.FNT");
-  FontxFile fx24M[2];
-  Fontx_init(fx24M,M24[0],M24[1]);
+	// 24Dot Mincho
+	char M24[2][128];
+	strcpy(M24[0],base);
+	strcpy(M24[1],base);
+	strcat(M24[0],"fontx/ILMH24XF.FNT");
+	strcat(M24[1],"fontx/ILMZ24XF.FNT");
+	FontxFile fx24M[2];
+	Fontx_init(fx24M,M24[0],M24[1]);
 
-  // 16Dot Gothic
-  char G16[2][128];
-  strcpy(G16[0],base);
-  strcpy(G16[1],base);
-  strcat(G16[0],"fontx/ILGH16XB.FNT");
-  strcat(G16[1],"fontx/ILGZ16XB.FNT");
-  FontxFile fx16G[2];
-  Fontx_init(fx16G,G16[0],G16[1]);
+	// 16Dot Gothic
+	char G16[2][128];
+	strcpy(G16[0],base);
+	strcpy(G16[1],base);
+	strcat(G16[0],"fontx/ILGH16XB.FNT");
+	strcat(G16[1],"fontx/ILGZ16XB.FNT");
+	FontxFile fx16G[2];
+	Fontx_init(fx16G,G16[0],G16[1]);
 
-  // 16Dot Mincho
-  char M16[2][128];
-  strcpy(M16[0],base);
-  strcpy(M16[1],base);
-  strcat(M16[0],"fontx/ILMH16XB.FNT");
-  strcat(M16[1],"fontx/ILMZ16XB.FNT");
-  FontxFile fx16M[2];
-  Fontx_init(fx16M,M16[0],M16[1]);
+	// 16Dot Mincho
+	char M16[2][128];
+	strcpy(M16[0],base);
+	strcpy(M16[1],base);
+	strcat(M16[0],"fontx/ILMH16XB.FNT");
+	strcat(M16[1],"fontx/ILMZ16XB.FNT");
+	FontxFile fx16M[2];
+	Fontx_init(fx16M,M16[0],M16[1]);
 
 #if 0
-  Fontx_dump(fx32G);
-  Fontx_dump(fx24G);
-  Fontx_dump(fx32M);
-  Fontx_dump(fx24M);
+	Fontx_dump(fx32G);
+	Fontx_dump(fx24G);
+	Fontx_dump(fx32M);
+	Fontx_dump(fx24M);
 #endif
 
-  char ppath[128];
-  strcpy(ppath,base);
-  strcat(ppath,"pin.conf");
+	char ppath[128];
+	strcpy(ppath,base);
+	strcat(ppath,"pin.conf");
 if(_DEBUG_)printf("ppath=%s\n",ppath);
-  struct stat buffer;
-  if (stat(ppath, &buffer) != 0) {
-	printf("pin.conf [%s] not found\n",ppath);
-	return 1;
-  }
+	struct stat buffer;
+	if (stat(ppath, &buffer) != 0) {
+		printf("pin.conf [%s] not found\n",ppath);
+		return 1;
+	}
 
-  TFT_t dev;
-  lcdInterface(&dev, ppath);
-  lcdReset(&dev);
-  INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
+	TFT_t dev;
+	lcdInterface(&dev, ppath);
+	lcdReset(&dev);
+	INIT_FUNCTION(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, OFFSET_X, OFFSET_Y);
 
 #ifdef INVERT
-  lcdInversionOn(&dev);
+	lcdInversionOn(&dev);
 #endif
 
-  printf("Your TFT controller is %s.\n",DRIVER_NAME); 
-  printf("TFT resolution is %d x %d.\n",SCREEN_WIDTH, SCREEN_HEIGHT); 
+	printf("Your TFT controller is %s.\n",DRIVER_NAME); 
+	printf("TFT resolution is %d x %d.\n",SCREEN_WIDTH, SCREEN_HEIGHT); 
 
 #if 0
 while (1) {
-  ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  char file[64];
-  strcpy(file, "./images/RaspberryPi_logo.jpeg");
-  JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	char file[64];
+	strcpy(file, "./images/RaspberryPi_logo.jpeg");
+	JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  strcpy(file, "./images/Ubuntu_log.png");
-  PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	strcpy(file, "./images/Ubuntu_log.png");
+	PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 }
 #endif
 
-  AddressTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
-  WAIT;
+	AddressTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
+	WAIT;
 
-  ColorBarTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	ColorBarTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	ArrowTest(&dev, fx32G, DRIVER_NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  LineTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	LineTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  CircleTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	CircleTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  RoundRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	RoundRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  DirectionTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	DirectionTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  HorizontalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	HorizontalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  VerticalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	VerticalTest(&dev, fx24G, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  FillRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	FillRectTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  ColorTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	ColorTest(&dev, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  char file[64];
-  strcpy(file, "./images/RaspberryPi_logo.jpeg");
-  JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	char file[64];
+	strcpy(file, "./images/RaspberryPi_logo.jpeg");
+	JPEGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  strcpy(file, "./images/Ubuntu_log.png");
-  PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
-  WAIT;
+	strcpy(file, "./images/Ubuntu_log.png");
+	PNGTest(&dev, file, SCREEN_WIDTH, SCREEN_HEIGHT);
+	WAIT;
 
-  //draw multi font
-  unsigned char utf[64];
-  uint16_t xpos,ypos;
-  uint16_t color;
+	//draw multi font
+	unsigned char utf[64];
+	uint16_t xpos,ypos;
+	uint16_t color;
 
-  lcdFillScreen(&dev, CYAN);
-  lcdSetFontDirection(&dev, DIRECTION90);
+	lcdFillScreen(&dev, CYAN);
+	lcdSetFontDirection(&dev, DIRECTION90);
 
-  xpos = SCREEN_WIDTH - 32 - 1;
-  ypos = SCREEN_HEIGHT - 1;
-  color = BLACK;
-  strcpy((char *)utf,"32Dot Gothic");
-  lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
+	xpos = SCREEN_WIDTH - 32 - 1;
+	ypos = SCREEN_HEIGHT - 1;
+	color = BLACK;
+	strcpy((char *)utf,"32Dot Gothic");
+	lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
 
-  xpos = xpos - 32;
-  strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
+	xpos = xpos - 32;
+	strcpy((char *)utf,"ABCDEFGabcdefg");
+	lcdDrawUTF8String(&dev, fx32G, xpos, ypos, utf, color);
 
-  xpos = xpos - 32;
-  strcpy((char *)utf,"32Dot Mincho");
-  lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
+	xpos = xpos - 32;
+	strcpy((char *)utf,"32Dot Mincho");
+	lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
 
-  xpos = xpos - 32;
-  strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
+	xpos = xpos - 32;
+	strcpy((char *)utf,"ABCDEFGabcdefg");
+	lcdDrawUTF8String(&dev, fx32M, xpos, ypos, utf, color);
 
-  xpos = xpos - 32;
-  strcpy((char *)utf,"24Dot Gothic");
-  lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
+	xpos = xpos - 32;
+	strcpy((char *)utf,"24Dot Gothic");
+	lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
 
-  xpos = xpos - 24;
-  strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
+	xpos = xpos - 24;
+	strcpy((char *)utf,"ABCDEFGabcdefg");
+	lcdDrawUTF8String(&dev, fx24G, xpos, ypos, utf, color);
 
-  xpos = xpos - 24;
-  strcpy((char *)utf,"24Dot Mincho");
-  lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
+	xpos = xpos - 24;
+	strcpy((char *)utf,"24Dot Mincho");
+	lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
 
-  xpos = xpos - 24;
-  strcpy((char *)utf,"ABCDEFGabcdefg");
-  lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
-  WAIT;
+	xpos = xpos - 24;
+	strcpy((char *)utf,"ABCDEFGabcdefg");
+	lcdDrawUTF8String(&dev, fx24M, xpos, ypos, utf, color);
+	WAIT;
 
-  lcdFadeout(&dev, DIRECTION180, BLACK);
-  return 0;
+	lcdFadeout(&dev, DIRECTION180, BLACK);
+	return 0;
 }
