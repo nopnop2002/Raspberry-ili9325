@@ -208,122 +208,122 @@ int cmdParse(char * buf, cmd_t * hoge) {
 	int i;
 	char wk[10][64];
 	for(i=0;i<strlen(buf);i++) {
-	if (buf[i] == ',') {
-		//printf("wk=%s\n",wk[index]);
-		pos = 0;
-		index++;
-	} else {
-		if (pos < 63) {
-		wk[index][pos++] = buf[i];
-		wk[index][pos] = 0;
+		if (buf[i] == ',') {
+			//printf("wk=%s\n",wk[index]);
+			pos = 0;
+			index++;
+		} else {
+			if (pos < 63) {
+				wk[index][pos++] = buf[i];
+				wk[index][pos] = 0;
+			}
 		}
-	}
-	}
+	} // end for
 	if (pos != 0) index++;
  
 #if 0
 	printf("index=%d\n",index);
 	for(i=0;i<index;i++) {
-	printf("wk[%d]=%s\n",i,wk[i]);
+		printf("wk[%d]=%s\n",i,wk[i]);
 	}
 #endif
 
 	if (strcmp(wk[0],"DrawPixel") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->color = strtol(wk[3],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->color = strtol(wk[3],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawRect") == 0 ||
-			 strcmp(wk[0],"DrawFillRect") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->x2 = strtol(wk[3],NULL,0);
-	hoge->y2 = strtol(wk[4],NULL,0);
-	hoge->color = strtol(wk[5],NULL,0);
-	return 1;
+		strcmp(wk[0],"DrawFillRect") == 0) {
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->x2 = strtol(wk[3],NULL,0);
+		hoge->y2 = strtol(wk[4],NULL,0);
+		hoge->color = strtol(wk[5],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawRoundRect") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->x2 = strtol(wk[3],NULL,0);
-	hoge->y2 = strtol(wk[4],NULL,0);
-	hoge->r = strtol(wk[5],NULL,0);
-	hoge->color = strtol(wk[6],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->x2 = strtol(wk[3],NULL,0);
+		hoge->y2 = strtol(wk[4],NULL,0);
+		hoge->r = strtol(wk[5],NULL,0);
+		hoge->color = strtol(wk[6],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"FillScrren") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->color = strtol(wk[1],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->color = strtol(wk[1],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawLine") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->x2 = strtol(wk[3],NULL,0);
-	hoge->y2 = strtol(wk[4],NULL,0);
-	hoge->color = strtol(wk[5],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->x2 = strtol(wk[3],NULL,0);
+		hoge->y2 = strtol(wk[4],NULL,0);
+		hoge->color = strtol(wk[5],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawCircle") == 0 || 
 			 strcmp(wk[0],"DrawFillCircle") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->r = strtol(wk[3],NULL,0);
-	hoge->color = strtol(wk[4],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->r = strtol(wk[3],NULL,0);
+		hoge->color = strtol(wk[4],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawArrow") == 0 ||
 			 strcmp(wk[0],"DrawFillArrow") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->x1 = strtol(wk[1],NULL,0);
-	hoge->y1 = strtol(wk[2],NULL,0);
-	hoge->x2 = strtol(wk[3],NULL,0);
-	hoge->y2 = strtol(wk[4],NULL,0);
-	hoge->t = strtol(wk[5],NULL,0);
-	hoge->color = strtol(wk[6],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->x1 = strtol(wk[1],NULL,0);
+		hoge->y1 = strtol(wk[2],NULL,0);
+		hoge->x2 = strtol(wk[3],NULL,0);
+		hoge->y2 = strtol(wk[4],NULL,0);
+		hoge->t = strtol(wk[5],NULL,0);
+		hoge->color = strtol(wk[6],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"DrawUTF8String") == 0) {
-	strcpy(hoge->name,wk[0]);
-	strcpy(hoge->font,wk[1]);
-	hoge->x1 = strtol(wk[2],NULL,0);
-	hoge->y1 = strtol(wk[3],NULL,0);
-	strcpy((char *)hoge->utf,wk[4]);
-	hoge->color = strtol(wk[5],NULL,0);
-	return 1;
-
+		strcpy(hoge->name,wk[0]);
+		strcpy(hoge->font,wk[1]);
+		hoge->x1 = strtol(wk[2],NULL,0);
+		hoge->y1 = strtol(wk[3],NULL,0);
+		strcpy((char *)hoge->utf,wk[4]);
+		hoge->color = strtol(wk[5],NULL,0);
+		return 1;
+	
 	} else if (strcmp(wk[0],"SetFontDirection") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->dir = strtol(wk[1],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->dir = strtol(wk[1],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"SetFontFill") == 0 ||
 			 strcmp(wk[0],"SetFontUnderLine") == 0) {
-	strcpy(hoge->name,wk[0]);
-	hoge->color = strtol(wk[1],NULL,0);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		hoge->color = strtol(wk[1],NULL,0);
+		return 1;
 
 	} else if (strcmp(wk[0],"UnsetFontFill") == 0 ||
 			 strcmp(wk[0],"UnsetFontUnderLine") == 0) {
-	strcpy(hoge->name,wk[0]);
-	return 1;
+		strcpy(hoge->name,wk[0]);
+		return 1;
 
 	} else if (strcmp(wk[0],"JPEG") == 0) {
-	strcpy(hoge->name,wk[0]);
-	strcpy(hoge->file,wk[1]);
+		strcpy(hoge->name,wk[0]);
+		strcpy(hoge->file,wk[1]);
 
 	} else if (strcmp(wk[0],"PNG") == 0) {
-	strcpy(hoge->name,wk[0]);
-	strcpy(hoge->file,wk[1]);
+		strcpy(hoge->name,wk[0]);
+		strcpy(hoge->file,wk[1]);
 
 	} else {
-	return 0;
+		return 0;
 	}
 }
 
@@ -500,49 +500,45 @@ int PNGTest(TFT_t * dev, char * file, int width, int height) {
 }
 
 /*
- Width inquiry
-	 draw width
- Height inquiry
-	 draw height
- Driver inquiry
-	 draw driver
- Execute draw
-	 draw file filename
+ Width inquiry : draw width
+ Height inquiry : draw height
+ Driver inquiry : draw driver
+ Execute draw : draw file filename
 */
 int main(int argc, char **argv){
 	int i;
 
 if(_DEBUG_)printf("argc=%d\n",argc);
 	if (argc < 2) {
-	printf("%s draw_file_name\n",argv[0]);
-	return 1;
+		printf("%s draw_file_name\n",argv[0]);
+		return 1;
 	}
 
 	if (argc == 2) {
-	if (strcmp(argv[1],"width") == 0) {
-		printf("%d\n", SCREEN_WIDTH);
-		return 0;
-	} else if (strcmp(argv[1],"height") == 0) {
-		printf("%d\n", SCREEN_HEIGHT);
-		return 0;
-	} else if (strcmp(argv[1],"driver") == 0) {
-		printf("%s\n", DRIVER_NAME);
-		return 0;
-	}
+		if (strcmp(argv[1],"width") == 0) {
+			printf("%d\n", SCREEN_WIDTH);
+			return 0;
+		} else if (strcmp(argv[1],"height") == 0) {
+			printf("%d\n", SCREEN_HEIGHT);
+			return 0;
+		} else if (strcmp(argv[1],"driver") == 0) {
+			printf("%s\n", DRIVER_NAME);
+			return 0;
+		}
 	}
 
 	if(wiringPiSetup() == -1) {
-	printf("Setup Fail\n");
-	return 1;
+		printf("Setup Fail\n");
+		return 1;
 	}
 
 	char base[128];
 	strcpy(base, argv[0]);
 	for(i=strlen(base);i>0;i--) {
-	if (base[i-1] == '/') {
-		base[i] = 0;
-		break;
-	}
+		if (base[i-1] == '/') {
+			base[i] = 0;
+			break;
+		}
 	}
 if(_DEBUG_)printf("base=%s\n",base);
 
@@ -619,8 +615,8 @@ if(_DEBUG_)printf("base=%s\n",base);
 if(_DEBUG_)printf("ppath=%s\n",ppath);
 	struct stat buffer;
 	if (stat(ppath, &buffer) != 0) {
-	printf("pin.conf [%s] not found\n",ppath);
-	return 1;
+		printf("pin.conf [%s] not found\n",ppath);
+		return 1;
 	}
 
 	// set full path of draw file
@@ -630,8 +626,8 @@ if(_DEBUG_)printf("ppath=%s\n",ppath);
 	strcat(dpath,argv[1]);
 if(_DEBUG_)printf("dpath=%s\n",dpath);
 	if ((fp = fopen(dpath, "r")) == NULL) {
-	printf("draw file [%s] not found\n",dpath);
-	return 1;
+		printf("draw file [%s] not found\n",dpath);
+		return 1;
 	}
 
 	TFT_t dev;
