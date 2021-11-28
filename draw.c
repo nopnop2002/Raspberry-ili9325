@@ -270,7 +270,7 @@ int cmdParse(char * buf, cmd_t * hoge) {
 		return 1;
 
 	} else if (strcmp(wk[0],"DrawCircle") == 0 || 
-			 strcmp(wk[0],"DrawFillCircle") == 0) {
+		strcmp(wk[0],"DrawFillCircle") == 0) {
 		strcpy(hoge->name,wk[0]);
 		hoge->x1 = strtol(wk[1],NULL,0);
 		hoge->y1 = strtol(wk[2],NULL,0);
@@ -279,7 +279,7 @@ int cmdParse(char * buf, cmd_t * hoge) {
 		return 1;
 
 	} else if (strcmp(wk[0],"DrawArrow") == 0 ||
-			 strcmp(wk[0],"DrawFillArrow") == 0) {
+		strcmp(wk[0],"DrawFillArrow") == 0) {
 		strcpy(hoge->name,wk[0]);
 		hoge->x1 = strtol(wk[1],NULL,0);
 		hoge->y1 = strtol(wk[2],NULL,0);
@@ -304,13 +304,13 @@ int cmdParse(char * buf, cmd_t * hoge) {
 		return 1;
 
 	} else if (strcmp(wk[0],"SetFontFill") == 0 ||
-			 strcmp(wk[0],"SetFontUnderLine") == 0) {
+		strcmp(wk[0],"SetFontUnderLine") == 0) {
 		strcpy(hoge->name,wk[0]);
 		hoge->color = strtol(wk[1],NULL,0);
 		return 1;
 
 	} else if (strcmp(wk[0],"UnsetFontFill") == 0 ||
-			 strcmp(wk[0],"UnsetFontUnderLine") == 0) {
+		strcmp(wk[0],"UnsetFontUnderLine") == 0) {
 		strcpy(hoge->name,wk[0]);
 		return 1;
 
