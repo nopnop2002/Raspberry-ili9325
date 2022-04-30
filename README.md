@@ -96,9 +96,7 @@ Normally, a TFT with a regulator works at 5V, but my R61509V doesn't work unless
 __NOTE__   
 You can change any pin.   
 Pin define is "pin.conf".   
-
-__NOTE__   
-You can use pin.conf.26pin instead of pin.conf.   
+If you use a 26-pin header, you can use "pin.conf.26pin" instead of "pin.conf".   
 
 ----
 
