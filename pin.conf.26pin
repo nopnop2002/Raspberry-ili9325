@@ -1,0 +1,25 @@
+#for 26pin header
+#Number is WiringPi Number(NOT GPIO Number)
+RST=7 ; Pin#7
+CS=8  ; Pin#3
+RS=9  ; Pin#5
+WR=11 ; Pin#26
+RD=15 ; Pin#8
+D0=16 ; Pin#10
+D1=0  ; Pin#11
+D2=1  ; Pin#12
+D3=2  ; Pin#13
+D4=3  ; Pin#15
+D5=4  ; Pin#16
+D6=5  ; Pin#18
+D7=6  ; Pin#22
+#If your TFT is 8 bit Parallel,A definition after this isn't used.
+D8=2
+D9=3
+D10=4
+D11=5
+D12=15
+D13=16
+D14=29
+D15=30
+

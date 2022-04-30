@@ -731,14 +731,26 @@ int ReadPinConfig(GPIO_t *pin, char *path) {
   FILE *fp;
   char buff[128];
 
-//	printf("path=%s\n",path);
+  //printf("path=%s\n",path);
   fp = fopen(path,"r");
   if(fp == NULL) return 0;
   while (fgets(buff,128,fp) != NULL) {
-//	  printf("buf=%s\n",buff);
-//	  printf("buff[0]=%x\n",buff[0]);
-	if (buff[0] == '#') continue;
-	if (buff[0] == 0x0a) continue;
+	//printf("buf=[%s]\n",buff);
+	//printf("buff[0]=%x\n",buff[0]);
+
+	int buffLen = strlen(buff);
+	for (int index=0;index<strlen(buff);index++) {
+	  //printf("buff[%d]=%x\n", index, buff[index]);
+	  if (buff[index] == '#') buff[index] = 0;
+	  if (buff[index] == ';') buff[index] = 0;
+	  if (buff[index] == 0x0d) buff[index] = 0;
+	  if (buff[index] == 0x0a) buff[index] = 0;
+ 	}
+	//printf("buf=%d [%s]\n",strlen(buff), buff);
+	if (strlen(buff) == 0) continue;
+
+	//if (buff[0] == '#') continue;
+	//if (buff[0] == 0x0a) continue;
 	if (strncmp(buff,"RST=",4) == 0) {
 	  sscanf(buff, "RST=%d", &(pin->rst));
 	} else if (strncmp(buff,"RS=",3) == 0) {

@@ -1,0 +1,24 @@
+#Number is WiringPi Number(NOT GPIO Number)
+RST=7
+CS=8
+RS=9
+WR=11
+RD=31
+D0=21
+D1=22
+D2=23
+D3=24
+D4=25
+D5=26
+D6=27
+D7=28
+#If your TFT is 8 bit Parallel,A definition after this isn't used.
+D8=2
+D9=3
+D10=4
+D11=5
+D12=15
+D13=16
+D14=29
+D15=30
+

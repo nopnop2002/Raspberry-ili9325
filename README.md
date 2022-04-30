@@ -97,6 +97,9 @@ __NOTE__
 You can change any pin.   
 Pin define is "pin.conf".   
 
+__NOTE__   
+You can use pin.conf.26pin instead of pin.conf.   
+
 ----
 
 # Build   
