@@ -1,3 +1,5 @@
+#define __TFT_LIB_C__
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
