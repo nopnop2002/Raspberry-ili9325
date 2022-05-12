@@ -76,13 +76,13 @@ typedef struct {
 } TFT_t;
 
 // Driver dependent function
-void (*DrawPixel)(TFT_t * dev, uint16_t x, uint16_t y, uint16_t color);
-void (*DrawMultiPixels)(TFT_t * dev, uint16_t x, uint16_t y, uint16_t size, uint16_t * colors);
-void (*DrawFillRect)(TFT_t * dev, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void (*DisplayOff)(TFT_t * dev);
-void (*DisplayOn)(TFT_t * dev);
-void (*InversionOff)(TFT_t * dev);
-void (*InversionOn)(TFT_t * dev);
+DECLARE void (*DrawPixel)(TFT_t * dev, uint16_t x, uint16_t y, uint16_t color);
+DECLARE void (*DrawMultiPixels)(TFT_t * dev, uint16_t x, uint16_t y, uint16_t size, uint16_t * colors);
+DECLARE void (*DrawFillRect)(TFT_t * dev, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+DECLARE void (*DisplayOff)(TFT_t * dev);
+DECLARE void (*DisplayOn)(TFT_t * dev);
+DECLARE void (*InversionOff)(TFT_t * dev);
+DECLARE void (*InversionOn)(TFT_t * dev);
 
 // Global function
 void lcdDelay(int ms);
