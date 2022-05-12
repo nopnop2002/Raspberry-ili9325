@@ -5,7 +5,7 @@
 // There was a change in behaviour about global variables between GCC 8.3.0 and GCC 10.2.1.
 // In C you are supposed to only define a global variable in one translation unit,
 // other translation unit that want to access the variable should declare it as "extern".
-// GCC 8.3.0 haves“cooperative definition.
+// GCC 8.3.0 haves cooperative definition.
 // But GCC 10.2.1 don't have cooperative definition.
 
 #ifndef __TFT_LIB_C__
