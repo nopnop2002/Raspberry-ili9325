@@ -4,6 +4,8 @@
 #include <string.h>
 #include <math.h>
 #include <wiringPi.h>
+
+#define __TFT_LIB_C__
 #include "tft_lib.h"
 
 #define _DEBUG_ 0

@@ -1,6 +1,19 @@
 #ifndef __TFT_LIB_H__
 #define __TFT_LIB_H__
 
+// #Multiple definition of" on GCC 10.2.1 but not GCC 8.3.0
+// There was a change in behaviour about global variables between GCC 8.3.0 and GCC 10.2.1.
+// In C you are supposed to only define a global variable in one translation unit,
+// other translation unit that want to access the variable should declare it as "extern".
+// GCC 8.3.0 haves“cooperative definition.
+// But GCC 10.2.1 don't have cooperative definition.
+
+#ifndef __TFT_LIB_C__
+    #define DECLARE extern
+#else
+    #define DECLARE
+#endif
+
 #include "fontx.h"
 
 #define RED				0xf800
