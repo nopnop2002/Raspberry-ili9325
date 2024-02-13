@@ -109,7 +109,7 @@ If you use a 26-pin header, you can use "pin.conf.26pin" instead of "pin.conf".
 `make ILI9320`   
 
 - for ILI9325   
-`make LI9325`   
+`make ILI9325`   
 
 - for ILI9327   
 `make ILI9327`   
